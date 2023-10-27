@@ -1,0 +1,18 @@
+  /* Estilos para el contenedor del círculo ovalado */
+  .oval-container {
+    width: 400px; /* Ancho del contenedor */
+    height: 50px; /* Altura del contenedor */
+    background-color: black; /* Fondo transparente */
+    border: 4px solid black; /* Borde azul */
+    border-radius: 50%; /* Radio del borde para crear un círculo ovalado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para el texto dentro del círculo ovalado */
+.oval-text {
+    text-align: center;
+    font-size: 18px;
+    margin: 0; /* Elimina el margen predeterminado del título */
+}
