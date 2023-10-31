@@ -1,0 +1,4 @@
+/* Agregar espacio entre las letras */
+.letter-spacing {
+letter-spacing: 25px;
+}

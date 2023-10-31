@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/Productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <!-- buscador -->
+        <div class="row bg-secondary p-2">
+            <!-- buscador (visible en pantallas grandes) -->
+            <div class="col-8 d-md-block d-none d-flex align-content-center">
+                <div class="input-group my-2 d-flex justify-content-end align-items-center">
+                    <input type="search" class="form-control" style="max-width: 300px;" placeholder="BUSQUEDA">
+                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <!-- inicio de sesión (visible en pantallas grandes) -->
+            <div class="col-2 d-md-block d-none d-flex justify-content-end align-items-center">
+                <div class="d-flex flex-column mx-2">
+                    <i class="fa-regular fa-circle-user" style="height: 25px;"></i>
+                    <button class="btn btn-light text-dark">Iniciar Sesión</button>
+                </div>
+            </div>
+
+            <!-- carrito (visible en pantallas grandes) -->
+            <div class="col-2 d-md-block d-none d-flex justify-content-end align-items-center">
+                <div class="d-flex flex-column">
+                    <i class="fa-solid fa-cart-shopping" style="height: 25px;"></i>
+                    <button class="btn btn-light text-dark">Carrito</button>
+                </div>
+            </div>
+
+            <!-- elementos para pantallas pequeñas -->
+            <div class="col-12 d-md-none d-flex flex-column align-items-center justify-content-center">
+                <!-- Buscador (visible en pantallas pequeñas) -->
+                <div class="input-group my-2 mb-2 d-flex justify-content-center">
+                    <input type="search" class="form-control" style="max-width: 300px;" placeholder="BUSQUEDA">
+                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
+                </div>
+
+                <!-- inicio de sesión (visible en pantallas pequeñas) -->
+                <div class="d-flex flex-column mx-2 mb-2">
+                    <i class="fa-regular fa-circle-user" style="height: 25px;"></i>
+                    <button class="btn btn-light text-dark">Iniciar Sesión</button>
+                </div>
+
+                <!-- carrito (visible en pantallas pequeñas) -->
+                <div class="d-flex flex-column mb-2">
+                    <i class="fa-solid fa-cart-shopping" style="height: 25px;"></i>
+                    <button class="btn btn-light text-dark">Carrito</button>
+                </div>
+            </div>
+        </div>
+        <!-- navbar -->
+        <nav class="row navbar navbar-expand-md navbar-light bg-primary">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white mr-3" href="/">INICIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white mr-3" href="#">PRODUCTOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white mr-3" href="#">TIENDAS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white mr-3" href="#">NOSOTROS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">BLOG</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- categorias -->
+        <div class="row bg-black">
+            <h1 class="text-center text-white">NUESTRAS CATEGORIAS</h1>
+            <div class="d-flex flex-wrap justify-content-around">
+                <div class="card m-2" style="width: 18rem;">
+                    <img src="img/llanta.jpg" class="card-img-top custom-image" alt="...">
+                    <a href="" class="text-black" style="text-decoration: none;">
+                        <h3 class="text-center">AMORTIGUADORES</h3>
+                    </a>
+                </div>
+                <div class="card m-2" style="width: 18rem;">
+                    <img src="img/llanta.jpg" class="card-img-top" alt="...">
+                    <a href="" class="text-black" style="text-decoration: none;">
+                        <h3 class="text-center">LLANTAS</h3>
+                    </a>
+                </div>
+                <div class="card m-2" style="width: 18rem;">
+                    <img src="img/llanta.jpg" class="card-img-top" alt="...">
+                    <a href="" class="text-black" style="text-decoration: none;">
+                        <h3 class="text-center">LUBRICANTES</h3>
+                    </a>
+                </div>
+                <div class="card m-2" style="width: 18rem;">
+                    <img src="img/llanta.jpg" class="card-img-top" alt="...">
+                    <a href="" class="text-black" style="text-decoration: none;">
+                        <h3 class="text-center">MOTOR</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- franja azul -->
+        <div class="row bg-primary" style="height:15px;">
+        </div>
+
+        <!-- titulo de productos -->
+        <div class="row mt-4">
+            <div class="col-8">
+                <div class="border border-primary text-center p-4">
+                    <h1 class="text-black letter-spacing" style="font-weight: 700;">
+                        A C E I T E S
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- filtro por orden -->
+        <div class="row m-4">
+            <div class="col d-flex justify-content-end">
+                <h5 class="d-inline">ORDENAR POR :</h5>
+                <div class="btn-group d-inline ml-2">
+                    <button type="button" class="btn btn-primary dropdown-toggle dropup" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu bg-primary">
+                        <li><a class="dropdown-item">MAYOR $$$</a></li>
+                        <li><a class="dropdown-item">RECOMENDADOS</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de filtro con los productos -->
+        <div class="row mt-3">
+            <div class="col-4 d-flex flex-column justify-content-center border border-primary border-5" style="background-color: rgb(209, 206, 206);">
+                <div class="text-center">
+                    <h3>FILTROS</h3>
+                    <div class="bg-primary" style="height: 20px;"></div>
+                </div>
+                <div class="text-center mt-5">
+                    <h3>MARCA :</h3>
+                    <div class="d-flex flex-column" style="font-weight: bold;">
+                        <a class="btn text-white">J H F Y O P L</a>
+                        <a class="btn text-white">J H F Y O P L</a>
+                        <a class="btn text-white">J H F Y O P L</a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3>Precio :</h3>
+                    <div class="d-flex flex-column" style="font-weight: bold;">
+                        <a class="btn text-white">Desde $20.000 a $100.000</a>
+                        <a class="btn text-white">Desde $20.000 a $100.000</a>
+                        <a class="btn text-white">Desde $20.000 a $100.000</a>
+                    </div>
+                </div>
+                <div class="text-center d-flex flex-column align-items-center">
+                    <h5>MINIMO</h5>
+                    <input type="text" class="form-control">
+                    <h5>MÁXIMO</h5>
+                    <input type="text" class="form-control">
+                </div>
+            </div>            
+            <div class="col-8 bg-dark d-flex justify-content-center align-items-center flex-column">
+                <div class="card mb-3 mt-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="..." class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">llANTA PIRELLI ANGEL CITY</h5>
+                          <p class="card-text text-primary">Medidas 110-10-90</p>
+                          <h3>Precio : $150.000</h3>
+                          <div class="d-flex" style="flex-direction: row;">
+                            <a href="/detalle" class="btn btn-dark">SABER MÁS</a>
+                            <a class="btn btn-primary">COMPRAR</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="..." class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">llANTA PIRELLI ANGEL CITY</h5>
+                          <p class="card-text text-primary">Medidas 110-10-90</p>
+                          <h3>Precio : $150.000</h3>
+                          <div class="d-flex" style="flex-direction: row;">
+                            <a href="/detalle" class="btn btn-dark">SABER MÁS</a>
+                            <a class="btn btn-primary">COMPRAR</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="..." class="img-fluid rounded-start" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">llANTA PIRELLI ANGEL CITY</h5>
+                          <p class="card-text text-primary">Medidas 110-10-90</p>
+                          <h3>Precio : $150.000</h3>
+                          <div class="d-flex" style="flex-direction: row;">
+                            <a href="/detalle" class="btn btn-dark">SABER MÁS</a>
+                            <a class="btn btn-primary">COMPRAR</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+        <!-- paginacion -->
+        <div class="row mt-4">
+            <div class="col d-flex justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-lg">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="">1</a></li>
+                        <li class="page-item"><a class="page-link" href="">2</a></li>
+                        <li class="page-item"><a class="page-link" href="">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- marcas alidas -->
+        <div class="row mt-4 bg-black text-white">
+            <h1 class="text-center">MARCAS ALIADAS</h1>
+            <div class="d-flex justify-content-around">
+                <img src="img/yamaha.png" width="20%" height="50%">
+                <img src="img/suzuki.png" width="20%" height="50%">
+                <img src="img/kawazaki.png" width="20%" height="50%">
+            </div>
+        </div>
+
+        <!-- franja azul -->
+        <div class="row bg-primary" style="height:15px;">
+        </div>
+
+        <!-- footer -->
+        <div class="row mt-5 bg-black text-white">
+            <div class="col-lg-4 col-12 mt-3 mb-3">
+                <h3>Información de Contacto</h3>
+                <p>Teléfono: +123456789</p>
+                <p>Email: info@example.com</p>
+                <p>Dirección: 123 Calle Principal</p>
+            </div>
+            <div class="col-lg-4 col-12 mt-3 mb-3">
+                <h3>Redes Sociales</h3>
+                <ul>
+                    <li><a href="https://web.facebook.com/profile.php?id=100041777677632"
+                            style="text-decoration: none;">Facebook</a></li>
+                    <li><a href="#" style="text-decoration: none;">Twitter</a></li>
+                    <li><a href="https://www.instagram.com/jaime_montoya08/"
+                            style="text-decoration: none;">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-12 mt-3 mb-3">
+                <h3>Quejas y Reclamaciones</h3>
+                <p>Estamos aquí para ayudarte. Si tienes alguna queja o reclamación, por favor, déjanos saber a través
+                    de este formulario:</p>
+                <form class="d-flex align-content-center">
+                    <input class="m-2" placeholder="Escribe tu queja o reclamación"></input>
+                    <button class="btn btn-primary m-2" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
