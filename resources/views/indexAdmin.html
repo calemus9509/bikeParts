@@ -8,9 +8,18 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>BikeParts Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="..\css\datatables.css" rel="stylesheet" />
+    <link href="..\css\all.css" rel="stylesheet" />
+    <link href="..\css\estilo.css" rel="stylesheet" />
+    <link href="..\css\alertify.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="..\js\axios.min.js"></script>
+    <script src="..\js\productoIndex.js"></script>
+    <script src="..\js\all.js"></script>
+    <script src="..\js\jquery-3.6.0.js"></script>
+    <script src="..\js\datatables.js"></script>
+    <script src="..\js\alertify.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
@@ -156,32 +165,33 @@
                         <div class="col-xl-6">
                         </div>
                     </div>
-                    <div class="card mb-4">
+                    <div class="card">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             Tabla de Inventario
                         </div>
-                        <div class="card-body">
-                            <table id="datatablesSimple">
+                        <div class="card">
+                            <table class="table" id="tablaIndex">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>Nombre</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Motos</th>
+                                        <th>Marca</th>
+                                        <th>Categoria</th>
+                                        <th>Medidas</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody id="tableBodyIndex">
+                                    <!-- <tr>
                                         <td>Tiger Nixon</td>
                                         <td>System Architect</td>
                                         <td>Edinburgh</td>
                                         <td>61</td>
                                         <td>2011/04/25</td>
                                         <td>$320,800</td>
-                                    </tr>
+                                    </tr> -->
 
                                 </tbody>
                             </table>
@@ -206,12 +216,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
     <script src="js/scripts.js"></script>
+    <!-- aqui iban los script chart-area los 3 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-        crossorigin="anonymous"></script>
-    <script src="js/datatables-simple-demo.js"></script>
 </body>
 
 </html>

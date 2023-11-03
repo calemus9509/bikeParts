@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\TipoMotosController;
+use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//rutas de las vistas
 Route::get('/indexAdmin', function () {
     return view('indexAdmin');
 })->name('indexAdmin');
@@ -37,8 +43,19 @@ Route::get('/registro', function () {
     return view('registro');
 })->name('registro');
 
-
-
 Route::get('/inventario', function () {
     return view('inventario');
 })->name('inventario');
+
+Route::get('/formularioIn', function () {
+    return view('formularioIn');
+})->name('formularioIn');
+
+
+
+//rutas de los metodos del CRUD
+Route::resource('/producto', ProductoController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('/ventas', VentasController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('/compras', ComprasController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('/categoria', CategoriaController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('/tipoMotos', TipoMotosController::class)->only(['index', 'store', 'update', 'destroy']);
