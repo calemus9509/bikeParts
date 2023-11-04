@@ -22,3 +22,12 @@ Route::get('/productos', function () {
 Route::get('/detalle', function () {
     return view('DetalleProducto');
 });
+Route::get('/carrito', function () {
+    return view('Carrito');
+});
+Route::get('/nosotros', function () {
+    return view('Nosotros');
+});
+Route::get('/login', function () {
+    return view('Login');
+});

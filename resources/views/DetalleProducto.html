@@ -15,81 +15,43 @@
 <body>
 
     <div class="container-fluid">
-        <!-- buscador -->
-        <div class="row bg-secondary p-2">
-            <!-- buscador (visible en pantallas grandes) -->
-            <div class="col-8 d-md-block d-none d-flex align-content-center">
-                <div class="input-group my-2 d-flex justify-content-end align-items-center">
-                    <input type="search" class="form-control" style="max-width: 300px;" placeholder="BUSQUEDA">
-                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-
-            <!-- inicio de sesión (visible en pantallas grandes) -->
-            <div class="col-2 d-md-block d-none d-flex justify-content-end align-items-center">
-                <div class="d-flex flex-column mx-2">
-                    <i class="fa-regular fa-circle-user" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Iniciar Sesión</button>
-                </div>
-            </div>
-
-            <!-- carrito (visible en pantallas grandes) -->
-            <div class="col-2 d-md-block d-none d-flex justify-content-end align-items-center">
-                <div class="d-flex flex-column">
-                    <i class="fa-solid fa-cart-shopping" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Carrito</button>
-                </div>
-            </div>
-
-            <!-- elementos para pantallas pequeñas -->
-            <div class="col-12 d-md-none d-flex flex-column align-items-center justify-content-center">
-                <!-- Buscador (visible en pantallas pequeñas) -->
-                <div class="input-group my-2 mb-2 d-flex justify-content-center">
-                    <input type="search" class="form-control" style="max-width: 300px;" placeholder="BUSQUEDA">
-                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
-                </div>
-
-                <!-- inicio de sesión (visible en pantallas pequeñas) -->
-                <div class="d-flex flex-column mx-2 mb-2">
-                    <i class="fa-regular fa-circle-user" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Iniciar Sesión</button>
-                </div>
-
-                <!-- carrito (visible en pantallas pequeñas) -->
-                <div class="d-flex flex-column mb-2">
-                    <i class="fa-solid fa-cart-shopping" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Carrito</button>
-                </div>
-            </div>
+       <!-- buscador -->
+       <div class="row">
+        <div class="col-2 d-flex justify-content-end">
+            <img src="img/bikeParts.png" alt="" class="img-responsive">
         </div>
-        <!-- navbar -->
-        <nav class="row navbar navbar-expand-md navbar-light bg-primary">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="/">INICIO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="productos">PRODUCTOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="#">TIENDAS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="#">NOSOTROS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">BLOG</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div class="col-8 d-flex justify-content-center p-4">
+            <input class="form-control me-2" type="search" placeholder="SEARCH" aria-label="Search"
+                style="width: 500px;">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+                SEARCH</button>
+        </div>
+        <div class="col-2 d-flex justify-content-center align-items-center">
+            <a href="login" class="text-black"><i class="fa-regular fa-circle-user"
+                    style="height: 40px;cursor: pointer;"></i></a>
+            <hr class="vertical-line text-primary" />
+            <a href="carrito" class="text-black"><i class="fa-solid fa-cart-shopping"
+                    style="height: 35px;cursor: pointer;"></i></a>
+        </div>
+    </div>
+    <!-- navbar -->
+    <div class="row bg-primary text-uppercase">
+        <div class="col-4 text-center">
+            <a href="/" class="text-white" style="text-decoration: none;">
+                <h2>inicio</h2>
+            </a>
+        </div>
+        <div class="col-4 text-center">
+            <a href="productos" class="text-white" style="text-decoration: none;">
+                <h2>productos</h2>
+            </a>
+        </div>
+        <div class="col-4 text-center">
+            <a href="nosotros" class="text-white" style="text-decoration: none;">
+                <h2>nosotros</h2>
+            </a>
+        </div>
+    </div>
 
         <!-- detalles -->
         <div class="row mt-5 m-2 rounded" style="background-color: rgb(209, 206, 206);">
@@ -135,13 +97,13 @@
         </div>
 
         <!-- descripcion -->
-        <div class="row bg-primary mt-4" style="height: 20px;">
+        <div class="container bg-primary mt-4" style="height: 20px;">
 
         </div>
         <div class="row text-center">
             <h1 class="letter-spacing">DESCRIPCION</h1>
         </div>
-        <div class="row bg-primary" style="height: 20px;">
+        <div class="container bg-primary" style="height: 20px;">
 
         </div>
         <div class="row text-center m-5">

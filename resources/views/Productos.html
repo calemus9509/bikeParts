@@ -16,86 +16,52 @@
 
     <div class="container-fluid">
         <!-- buscador -->
-        <div class="row bg-secondary p-2">
-            <!-- buscador (visible en pantallas grandes) -->
-            <div class="col-8 d-md-block d-none d-flex align-content-center">
-                <div class="input-group my-2 d-flex justify-content-end align-items-center">
-                    <input type="search" class="form-control" style="max-width: 300px;" placeholder="BUSQUEDA">
-                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
-                </div>
+        <div class="row">
+            <div class="col-2 d-flex justify-content-end">
+                <img src="img/bikeParts.png" alt="" class="img-responsive">
             </div>
-
-            <!-- inicio de sesión (visible en pantallas grandes) -->
-            <div class="col-2 d-md-block d-none d-flex justify-content-end align-items-center">
-                <div class="d-flex flex-column mx-2">
-                    <i class="fa-regular fa-circle-user" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Iniciar Sesión</button>
-                </div>
+            <div class="col-8 d-flex justify-content-center p-4">
+                <input class="form-control me-2" type="search" placeholder="SEARCH" aria-label="Search"
+                    style="width: 500px;">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+                    SEARCH</button>
             </div>
-
-            <!-- carrito (visible en pantallas grandes) -->
-            <div class="col-2 d-md-block d-none d-flex justify-content-end align-items-center">
-                <div class="d-flex flex-column">
-                    <i class="fa-solid fa-cart-shopping" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Carrito</button>
-                </div>
-            </div>
-
-            <!-- elementos para pantallas pequeñas -->
-            <div class="col-12 d-md-none d-flex flex-column align-items-center justify-content-center">
-                <!-- Buscador (visible en pantallas pequeñas) -->
-                <div class="input-group my-2 mb-2 d-flex justify-content-center">
-                    <input type="search" class="form-control" style="max-width: 300px;" placeholder="BUSQUEDA">
-                    <button class="btn btn-dark" type="button"><i class="fas fa-search"></i></button>
-                </div>
-
-                <!-- inicio de sesión (visible en pantallas pequeñas) -->
-                <div class="d-flex flex-column mx-2 mb-2">
-                    <i class="fa-regular fa-circle-user" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Iniciar Sesión</button>
-                </div>
-
-                <!-- carrito (visible en pantallas pequeñas) -->
-                <div class="d-flex flex-column mb-2">
-                    <i class="fa-solid fa-cart-shopping" style="height: 25px;"></i>
-                    <button class="btn btn-light text-dark">Carrito</button>
-                </div>
+            <div class="col-2 d-flex justify-content-center align-items-center">
+                <a href="login" class="text-black"><i class="fa-regular fa-circle-user"
+                        style="height: 40px;cursor: pointer;"></i></a>
+                <hr class="vertical-line text-primary" />
+                <a href="carrito" class="text-black"><i class="fa-solid fa-cart-shopping"
+                        style="height: 35px;cursor: pointer;"></i></a>
             </div>
         </div>
         <!-- navbar -->
-        <nav class="row navbar navbar-expand-md navbar-light bg-primary">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="/">INICIO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="#">PRODUCTOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="#">TIENDAS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white mr-3" href="#">NOSOTROS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="#">BLOG</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="row bg-primary text-uppercase">
+            <div class="col-4 text-center">
+                <a href="/" class="text-white" style="text-decoration: none;">
+                    <h2>inicio</h2>
+                </a>
             </div>
-        </nav>
+            <div class="col-4 text-center">
+                <a href="productos" class="text-white" style="text-decoration: none;">
+                    <h2>productos</h2>
+                </a>
+            </div>
+            <div class="col-4 text-center">
+                <a href="nosotros" class="text-white" style="text-decoration: none;">
+                    <h2>nosotros</h2>
+                </a>
+            </div>
+        </div>
 
+        <!-- lines azul sin sentido -->
+        <div class="row mt-3">
+            <div class="bg-black" style="height: 40px;"></div>
+        </div>
 
         <!-- categorias -->
         <div class="row bg-black">
-            <h1 class="text-center text-white">NUESTRAS CATEGORIAS</h1>
-            <div class="d-flex flex-wrap justify-content-around">
+            <h1 class="bg-primary text-center text-white">NUESTRAS CATEGORIAS</h1>
+            <div class="d-flex flex-wrap justify-content-around mt-5 mb-5">
                 <div class="card m-2" style="width: 18rem;">
                     <img src="img/llanta.jpg" class="card-img-top custom-image" alt="...">
                     <a href="" class="text-black" style="text-decoration: none;">
@@ -130,9 +96,9 @@
         <!-- titulo de productos -->
         <div class="row mt-4">
             <div class="col-8">
-                <div class="border border-primary text-center p-4">
+                <div class="border border-primary border-4 text-center p-3" style="background-color: rgb(212, 212, 212);">
                     <h1 class="text-black letter-spacing" style="font-weight: 700;">
-                        A C E I T E S
+                        P R O D U C T O S
                     </h1>
                 </div>
             </div>
@@ -143,11 +109,11 @@
             <div class="col d-flex justify-content-end">
                 <h5 class="d-inline">ORDENAR POR :</h5>
                 <div class="btn-group d-inline ml-2">
-                    <button type="button" class="btn btn-primary dropdown-toggle dropup" data-bs-toggle="dropdown"
+                    <button type="button" class="btn dropdown-toggle dropup" style="background-color: rgb(212, 212, 212);" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Action
                     </button>
-                    <ul class="dropdown-menu bg-primary">
+                    <ul class="dropdown-menu" style="background-color: rgb(212, 212, 212);">
                         <li><a class="dropdown-item">MAYOR $$$</a></li>
                         <li><a class="dropdown-item">RECOMENDADOS</a></li>
                     </ul>
@@ -156,8 +122,8 @@
         </div>
 
         <!-- Sección de filtro con los productos -->
-        <div class="row mt-3">
-            <div class="col-4 d-flex flex-column justify-content-center border border-primary border-5" style="background-color: rgb(209, 206, 206);">
+        <div class="row mt-3 ms-3">
+            <div class="col-4 d-flex flex-column justify-content-center border border-primary border-5 rounded-4" style="background-color: rgb(209, 206, 206);">
                 <div class="text-center">
                     <h3>FILTROS</h3>
                     <div class="bg-primary" style="height: 20px;"></div>
@@ -165,17 +131,17 @@
                 <div class="text-center mt-5">
                     <h3>MARCA :</h3>
                     <div class="d-flex flex-column" style="font-weight: bold;">
-                        <a class="btn text-white">J H F Y O P L</a>
-                        <a class="btn text-white">J H F Y O P L</a>
-                        <a class="btn text-white">J H F Y O P L</a>
+                        <a class="btn">J H F Y O P L</a>
+                        <a class="btn">J H F Y O P L</a>
+                        <a class="btn">J H F Y O P L</a>
                     </div>
                 </div>
                 <div class="text-center">
                     <h3>Precio :</h3>
                     <div class="d-flex flex-column" style="font-weight: bold;">
-                        <a class="btn text-white">Desde $20.000 a $100.000</a>
-                        <a class="btn text-white">Desde $20.000 a $100.000</a>
-                        <a class="btn text-white">Desde $20.000 a $100.000</a>
+                        <a class="btn">Desde $20.000 a $100.000</a>
+                        <a class="btn">Desde $20.000 a $100.000</a>
+                        <a class="btn">Desde $20.000 a $100.000</a>
                     </div>
                 </div>
                 <div class="text-center d-flex flex-column align-items-center">
@@ -185,11 +151,11 @@
                     <input type="text" class="form-control">
                 </div>
             </div>            
-            <div class="col-8 bg-dark d-flex justify-content-center align-items-center flex-column">
+            <div class="col-8 d-flex justify-content-center align-items-center flex-column">
                 <div class="card mb-3 mt-3" style="max-width: 540px;">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
+                        <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 250px;object-position: center center;">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -207,7 +173,7 @@
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
+                        <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 250px;object-position: center center;">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -225,7 +191,7 @@
                   <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
+                        <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 250px;object-position: center center;">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
@@ -266,22 +232,22 @@
             </div>
         </div>
         
-        <!-- marcas alidas -->
-        <div class="row mt-4 bg-black text-white">
-            <h1 class="text-center">MARCAS ALIADAS</h1>
-            <div class="d-flex justify-content-around">
-                <img src="img/yamaha.png" width="20%" height="50%">
-                <img src="img/suzuki.png" width="20%" height="50%">
-                <img src="img/kawazaki.png" width="20%" height="50%">
+        <!-- marcas aliadas-->
+        <div class="row" style="margin-top: 75px;">
+            <div class="text-center">
+                <h2 style="color: white; -webkit-text-stroke: 2px black;">MARCAS ALIADAS</h2>
+            </div>
+            <div style="height: 270px;">
+
             </div>
         </div>
-
-        <!-- franja azul -->
-        <div class="row bg-primary" style="height:15px;">
+        <!-- lines azul sin sentido -->
+        <div class="row">
+            <div class="bg-primary" style="height: 20px;"></div>
         </div>
 
         <!-- footer -->
-        <div class="row mt-5 bg-black text-white">
+        <div class="row mt-4 bg-black text-white">
             <div class="col-lg-4 col-12 mt-3 mb-3">
                 <h3>Información de Contacto</h3>
                 <p>Teléfono: +123456789</p>
