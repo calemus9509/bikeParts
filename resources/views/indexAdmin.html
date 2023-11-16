@@ -14,12 +14,13 @@
     <link href="..\css\estilo.css" rel="stylesheet" />
     <link href="..\css\alertify.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="..\js\axios.min.js"></script>
-    <script src="..\js\productoIndex.js"></script>
-    <script src="..\js\all.js"></script>
     <script src="..\js\jquery-3.6.0.js"></script>
     <script src="..\js\datatables.js"></script>
     <script src="..\js\alertify.js"></script>
+    <script src="..\js\axios.min.js"></script>
+    <script src="..\js\all.js"></script>
+    <script src="..\js\productoIndex.js"></script>
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -32,7 +33,7 @@
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                <input class="form-control" type="text" placeholder="Buscar..." aria-label="Search for..."
                     aria-describedby="btnNavbarSearch" />
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
                         class="fas fa-search"></i></button>
@@ -176,22 +177,21 @@
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Cantidad</th>
+                                        <th>Descripcion</th>
                                         <th>Precio</th>
-                                        <th>Motos</th>
                                         <th>Marca</th>
                                         <th>Categoria</th>
-                                        <th>Medidas</th>
+                                        <th>Imagen</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBodyIndex">
-                                    <!-- <tr>
-                                        <td>Tiger Nixon</td>
+                                    <!-- <td>Tiger Nixon</td>
                                         <td>System Architect</td>
                                         <td>Edinburgh</td>
                                         <td>61</td>
                                         <td>2011/04/25</td>
                                         <td>$320,800</td>
-                                    </tr> -->
+                                        <td>$320,800</td> -->
 
                                 </tbody>
                             </table>

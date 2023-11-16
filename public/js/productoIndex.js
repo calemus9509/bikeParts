@@ -1,66 +1,69 @@
-function read(url = "producto") {
+function readI(url = "producto") {
   axios
     .get(url)
     .then(function (response) {
-      let productos = "";
-      response.data.forEach((element, index) => {
-        productos += `<tr>`;
-        productos += `<td>${element.nombre} </td>`;
-        productos += `<td>${element.cantidad}</td>`;
-        productos += `<td>${element.marca}</td>`;
-        productos += `<td>${element.descripcion}</td>`;
-        productos += `<td>${element.precio}</td>`;
-        productos += `<td>${element.categoria}</td>`;
-        productos += `</tr>`;
+      let producto = "";
+      response.data.forEach((element) => {
+        producto += `<tr>`;
+        producto += `<td>${element.nombre} </td>`;
+        producto += `<td>${element.cantidad}</td>`;
+        producto += `<td>${element.descripcion}</td>`;
+        producto += `<td>${element.precio}</td>`;
+        producto += `<td>${element.marca}</td>`;
+        producto += `<td>${element.categoria}</td>`;
+        producto += `<td>${element.imagenUno}</td>`;
+        producto += `</tr>`;
       });
-      tableBodyIndex.innerHTML = productos;
+
+      // Limpiar el cuerpo de la tabla antes de actualizar
+      $("#tablaIndex tbody").empty();
+
+      // Agregar nuevas filas a la tabla
+      $("#tablaIndex tbody").append(producto);
+
+      // Inicializar DataTables después de cargar los datos
+      $("#tablaIndex").DataTable({
+        retrieve: true,
+        language: {
+          url: "./json/es.json",
+        },
+        dom: "Bfrtip",
+        buttons: [
+          {
+            extend: "colvis",
+            text: "<i class='fa-solid fa-filter fa-beat'></i>",
+            titleAttr: "Filtrar",
+            className: "filtro",
+          },
+          {
+            extend: "print",
+            text: "<i class='fa-solid fa-print fa-bounce'></i>",
+            titleAttr: "Imprimir",
+            className: "imprimir",
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+          },
+          {
+            download: "open",
+            extend: "pdf",
+            text: "<i class='fa-solid fa-file-pdf fa-bounce'></i>",
+            titleAttr: "PDF",
+            className: "pdf",
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+          },
+          {
+            extend: "copy",
+            text: "<i class='fa-solid fa-copy fa-bounce'></i>",
+            titleAttr: "Copiar",
+            className: "copy",
+            exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+          },
+        ],
+      });
     })
     .catch(function (error) {
       console.log(error);
     });
-
-  new DataTable("#tablaIndex", {
-    retrieve: true,
-    language: {
-      url: "./json/es.json",
-    },
-    dom: "Bfrtip",
-    buttons: [
-      {
-        extend: "colvis",
-        text: "<i class='fa-solid fa-filter fa-beat'></i>",
-        titleAttr: "Filtrar",
-        className: "filtro",
-      },
-      {
-        extend: "excel",
-        text: "<i class='fa-solid fa-file-excel fa-bounce'></i>",
-        titleAttr: "Excel",
-        className: "excel",
-        exportOptions: { columns: [0, 1, 2] },
-      },
-      {
-        extend: "print",
-        text: "<i class='fa-solid fa-print fa-bounce'></i>",
-        titleAttr: "Imprimir",
-        className: "imprimir",
-        exportOptions: { columns: [0, 1, 2] },
-      },
-      {
-        download: "open",
-        extend: "pdf",
-        text: "<i class='fa-solid fa-file-pdf fa-bounce'></i>",
-        titleAttr: "PDF",
-        className: "pdf",
-        exportOptions: { columns: [0, 1, 2] },
-      },
-      {
-        extend: "copy",
-        text: "<i class='fa-solid fa-copy fa-bounce'></i>",
-        titleAttr: "Copiar",
-        className: "copy",
-        exportOptions: { columns: [0, 1, 2] },
-      },
-    ],
-  });
 }
+
+// Llamada a la función
+readI();

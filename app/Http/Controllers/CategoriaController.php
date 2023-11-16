@@ -17,6 +17,8 @@ class CategoriaController extends Controller
         return Categoria::all();
     }
 
+    /**
+  
 
     /**
      * Store a newly created resource in storage.
@@ -26,8 +28,6 @@ class CategoriaController extends Controller
         //
         Categoria::create($request->all());
     }
-
-
 
 
 

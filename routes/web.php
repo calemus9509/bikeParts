@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\JefeBodegaController;
+use App\Http\Controllers\MarcaMotoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\TipoMotosController;
 use App\Http\Controllers\VentasController;
@@ -57,5 +59,4 @@ Route::get('/formularioIn', function () {
 Route::resource('/producto', ProductoController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/ventas', VentasController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/compras', ComprasController::class)->only(['index', 'store', 'update', 'destroy']);
-Route::resource('/categoria', CategoriaController::class)->only(['index', 'store', 'update', 'destroy']);
-Route::resource('/tipoMotos', TipoMotosController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('/categorias', CategoriaController::class)->only(['index', 'store', 'update', 'destroy']);

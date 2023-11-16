@@ -9,17 +9,16 @@ class Producto extends Model
 {
     use HasFactory;
 
+    protected $table = 'productos';
+
     protected $fillable = [
-        'nombre',
-        'cantidad',
-        'marca',
-        'descripcion',
-        'precio',
-        'estado'
+        'nombre', 'descripcion', 'precio', 'cantidad',
+        'categoria', 'marca', 'imagenUno',
     ];
+
 
     protected $hidden = [
         'created_at',
-        'update_at'
+        'updated_at'
     ];
 }
