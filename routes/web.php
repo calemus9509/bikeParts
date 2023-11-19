@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmpresaController;
+use App\Http\Resources\Empresa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/nuevo', function () {
+    return view('niuevo');
+});
+
+Route::get('/empresa', function () {
+    return view('CrudEmpresas');
+});
+
+Route::get('/lasmejoresTiendas', function () {
+    return view('/lasmejoresTiendas');
+});
+
+
+Route::resource('/empresas', EmpresaController::class)->only(["index","store","update","destroy"]);
+
