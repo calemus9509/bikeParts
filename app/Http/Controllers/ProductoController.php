@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 // class ProductoController extends Controller
 // {
@@ -136,7 +137,14 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        return Producto::all()->where('estado', 'A');
+        // return Producto::all()->where('estado', 'A');
+        $productos = DB::table('productos')
+            ->join('categorias', 'productos.categoriaF', '=', 'categorias.idcategorias')
+            ->select('productos.*', 'categorias.nombre as nombreCategoria')
+            ->where('productos.estado', '=', 'A')
+            ->get();
+
+        return response()->json($productos);
     }
 
     /**
@@ -144,36 +152,45 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'imagenUno' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imagenDos' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imagenTres' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imagenCuatro' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $producto = Producto::create($request->all());
 
-        $imagenes = [];
-
-        $imagenes['imagenUno'] = $this->guardarImagen($request->file('imagenUno'));
-        $imagenes['imagenDos'] = $this->guardarImagen($request->file('imagenDos'));
-        $imagenes['imagenTres'] = $this->guardarImagen($request->file('imagenTres'));
-        $imagenes['imagenCuatro'] = $this->guardarImagen($request->file('imagenCuatro'));
-
-        $producto = new Producto([
-            'nombre' => $request->input('nombre'),
-            'descripcion' => $request->input('descripcion'),
-            'cantidad' => $request->input('cantidad'),
-            'precio' => $request->input('precio'),
-            'marca' => $request->input('marca'),
-            'categoria' => $request->input('categoria'),
-            'imagenUno' => $imagenes['imagenUno'],
-            'imagenDos' => $imagenes['imagenDos'],
-            'imagenTres' => $imagenes['imagenTres'],
-            'imagenCuatro' => $imagenes['imagenCuatro'],
-        ]);
-
+        // Asociar el producto a la categoría existente
+        $categoria = Categoria::findOrFail($request->categoriaF);
+        $producto->categoria()->associate($categoria);
         $producto->save();
 
-        return response()->json(['mensaje' => 'Producto guardado con éxito']);
+        return response()->json($producto, 201);
+
+        // $request->validate([
+        //     'imagenUno' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'imagenDos' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'imagenTres' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'imagenCuatro' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        // $imagenes = [];
+
+        // $imagenes['imagenUno'] = $this->guardarImagen($request->file('imagenUno'));
+        // $imagenes['imagenDos'] = $this->guardarImagen($request->file('imagenDos'));
+        // $imagenes['imagenTres'] = $this->guardarImagen($request->file('imagenTres'));
+        // $imagenes['imagenCuatro'] = $this->guardarImagen($request->file('imagenCuatro'));
+
+        // $producto = new Producto([
+        //     'nombre' => $request->input('nombre'),
+        //     'descripcion' => $request->input('descripcion'),
+        //     'cantidad' => $request->input('cantidad'),
+        //     'precio' => $request->input('precio'),
+        //     'marca' => $request->input('marca'),
+        //     'categoriaf' => $request->input('categoriaf'),
+        //     'imagenUno' => $imagenes['imagenUno'],
+        //     'imagenDos' => $imagenes['imagenDos'],
+        //     'imagenTres' => $imagenes['imagenTres'],
+        //     'imagenCuatro' => $imagenes['imagenCuatro'],
+        // ]);
+
+        // $producto->save();
+
+        // return response()->json(['mensaje' => 'Producto guardado con éxito']);
     }
 
     /**
@@ -181,34 +198,37 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        $request->validate([
-            'imagenUno' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imagenDos' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imagenTres' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imagenCuatro' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        Producto::findOrFail($request->idproducto)->update($request->all());
 
-        $imagenes = [];
+        // $request->validate([
+        //     'imagenUno' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'imagenDos' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'imagenTres' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        //     'imagenCuatro' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
 
-        $imagenes['imagenUno'] = $this->guardarImagen($request->file('imagenUno'));
-        $imagenes['imagenDos'] = $this->guardarImagen($request->file('imagenDos'));
-        $imagenes['imagenTres'] = $this->guardarImagen($request->file('imagenTres'));
-        $imagenes['imagenCuatro'] = $this->guardarImagen($request->file('imagenCuatro'));
+        // $imagenes = [];
 
-        $producto->update([
-            'nombre' => $request->input('nombre'),
-            'descripcion' => $request->input('descripcion'),
-            'cantidad' => $request->input('cantidad'),
-            'precio' => $request->input('precio'),
-            'marca' => $request->input('marca'),
-            'categoria' => $request->input('categoria'),
-            'imagenUno' => $imagenes['imagenUno'],
-            'imagenDos' => $imagenes['imagenDos'],
-            'imagenTres' => $imagenes['imagenTres'],
-            'imagenCuatro' => $imagenes['imagenCuatro'],
-        ]);
+        // $imagenes['imagenUno'] = $this->guardarImagen($request->file('imagenUno'));
+        // $imagenes['imagenDos'] = $this->guardarImagen($request->file('imagenDos'));
+        // $imagenes['imagenTres'] = $this->guardarImagen($request->file('imagenTres'));
+        // $imagenes['imagenCuatro'] = $this->guardarImagen($request->file('imagenCuatro'));
 
-        return response()->json(['mensaje' => 'Producto actualizado con éxito']);
+        // $producto->update([
+        //     'nombre' => $request->input('nombre'),
+        //     'descripcion' => $request->input('descripcion'),
+        //     'cantidad' => $request->input('cantidad'),
+        //     'precio' => $request->input('precio'),
+        //     'marca' => $request->input('marca'),
+        //     'categoria' => $request->input('categoria'),
+        //     'imagenUno' => $imagenes['imagenUno'],
+        //     'imagenDos' => $imagenes['imagenDos'],
+        //     'imagenTres' => $imagenes['imagenTres'],
+        //     'imagenCuatro' => $imagenes['imagenCuatro'],
+        // ]);
+
+        // return response()->json(['mensaje' => 'Producto actualizado con éxito']);
+
     }
 
     /**
@@ -216,18 +236,19 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $producto = Producto::findOrFail($producto->idproducto);
         $producto->estado = 'I';
         $producto->save();
 
-        return response()->json(['mensaje' => 'Producto eliminado con éxito']);
+        // return response()->json(['mensaje' => 'Producto eliminado con éxito']);
     }
 
-    private function guardarImagen($imagen)
-    {
-        if ($imagen) {
-            $rutaImagen = $imagen->store('public/imagenes');
-            return asset('storage/imagenes/' . basename($rutaImagen));
-        }
-        return null;
-    }
+    // private function guardarImagen($imagen)
+    // {
+    //     if ($imagen) {
+    //         $rutaImagen = $imagen->store('public/imagenes');
+    //         return asset('storage/imagenes/' . basename($rutaImagen));
+    //     }
+    //     return null;
+    // }
 }

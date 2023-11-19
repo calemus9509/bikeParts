@@ -1,53 +1,69 @@
 function registrar() {
-  // Crea un objeto FormData para enviar archivos
-  const formData = new FormData();
-  formData.append("nombre", txtNombre.value);
-  formData.append("cantidad", txtCantidad.value);
-  formData.append("categoria", txtCategoria.value);
-  formData.append("descripcion", txtDescripcion.value);
-  formData.append("precio", txtPrecio.value);
-  formData.append("marca", txtMarca.value);
-
-  // Agrega los archivos de imagen al FormData
-  addFileToFormData("imagenUno", txtImagen1, formData);
-  addFileToFormData("imagenDos", txtImagen2, formData);
-  addFileToFormData("imagenTres", txtImagen3, formData);
-  addFileToFormData("imagenCuatro", txtImagen4, formData);
-
-  // Realiza la solicitud POST usando Axios
   axios
-    .post("producto", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    .post("producto", {
+      nombre: txtNombre.value,
+      cantidad: txtCantidad.value,
+      descripcion: txtDescripcion.value,
+      precio: txtPrecio.value,
+      marca: txtMarca.value,
+      categoriaF: txtCategoria.value,
+      imagenUno: txtImagen1.value,
     })
     .then(function (response) {
       console.log(response);
 
-      // Recupera las rutas de las imágenes guardadas
-      const data = response.data;
-      const rutaImagenUno = data.rutaImagenUno;
-      const rutaImagenDos = data.rutaImagenDos;
-      const rutaImagenTres = data.rutaImagenTres;
-      const rutaImagenCuatro = data.rutaImagenCuatro;
-
-      // Puedes utilizar las rutas de las imágenes como sea necesario
-
-      alert("Su producto ha sido Registrado");
-      alertify.success(data);
+      clear();
     })
     .catch(function (error) {
-      if (error.response) {
-        // El servidor respondió con un código de error
-        console.log("Error de respuesta del servidor:", error.response.data);
-      } else if (error.request) {
-        // La solicitud fue hecha pero no se recibió respuesta
-        console.log("Error sin respuesta del servidor:", error.request);
-      } else {
-        // Algo sucedió en la configuración de la solicitud que causó el error
-        console.log("Error de configuración:", error.message);
-      }
+      console.log(error);
     });
+
+  alert("Producto Creado!");
+
+  // Crea un objeto FormData para enviar archivos
+  // const formData = new FormData();
+  // formData.append("nombre", txtNombre.value);
+  // formData.append("cantidad", txtCantidad.value);
+  // formData.append("categoriaF", txtCategoria.value);
+  // formData.append("descripcion", txtDescripcion.value);
+  // formData.append("precio", txtPrecio.value);
+  // formData.append("marca", txtMarca.value);
+  // // Agrega los archivos de imagen al FormData
+  // addFileToFormData("imagenUno", txtImagen1, formData);
+  // addFileToFormData("imagenDos", txtImagen2, formData);
+  // addFileToFormData("imagenTres", txtImagen3, formData);
+  // addFileToFormData("imagenCuatro", txtImagen4, formData);
+  // // Realiza la solicitud POST usando Axios
+  // axios
+  //   .post("producto", formData, {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   })
+  //   .then(function (response) {
+  //     console.log(response);
+  //     // Recupera las rutas de las imágenes guardadas
+  //     const data = response.data;
+  //     const rutaImagenUno = data.rutaImagenUno;
+  //     const rutaImagenDos = data.rutaImagenDos;
+  //     const rutaImagenTres = data.rutaImagenTres;
+  //     const rutaImagenCuatro = data.rutaImagenCuatro;
+  //     // Puedes utilizar las rutas de las imágenes como sea necesario
+  //     alert("Su producto ha sido Registrado");
+  //     alertify.success(data);
+  //   })
+  //   .catch(function (error) {
+  //     if (error.response) {
+  //       // El servidor respondió con un código de error
+  //       console.log("Error de respuesta del servidor:", error.response.data);
+  //     } else if (error.request) {
+  //       // La solicitud fue hecha pero no se recibió respuesta
+  //       console.log("Error sin respuesta del servidor:", error.request);
+  //     } else {
+  //       // Algo sucedió en la configuración de la solicitud que causó el error
+  //       console.log("Error de configuración:", error.message);
+  //     }
+  //   });
 }
 
 // Función para agregar un archivo al FormData si está presente
@@ -118,5 +134,6 @@ function foraneas() {
       console.log(error);
     });
 }
+function clear() {}
 
 foraneas();

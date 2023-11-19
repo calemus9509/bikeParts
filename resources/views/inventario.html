@@ -14,12 +14,12 @@
     <link href="..\css\styles.css" rel="stylesheet" />
     <link href="..\css\alertify.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="..\js\axios.min.js"></script>
-    <script src="..\js\productoInven.js"></script>
-    <script src="..\js\all.js"></script>
     <script src="..\js\jquery-3.6.0.js"></script>
     <script src="..\js\datatables.js"></script>
+    <script src="..\js\axios.min.js"></script>
+    <script src="..\js\all.js"></script>
     <script src="..\js\alertify.js"></script>
+    <script src="..\js\productoInven.js"></script>
 </head>
 
 <body class="sb-nav-fixed" onload="read()">
@@ -133,6 +133,7 @@
                             <table class="table" id="tablaSimple">
                                 <thead>
                                     <tr>
+                                        <th>Indice</th>
                                         <th>Nombre</th>
                                         <th>Cantidad</th>
                                         <th>Descripcion</th>
@@ -162,15 +163,128 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div class="text-muted">Derechos &copy; BikeParts 2023</div>
                         <div>
-                            <a href="#">Privacy Policy</a>
+                            <a href="#">Politica de Privacidad</a>
                             &middot;
-                            <a href="#">Terms &amp; Conditions</a>
+                            <a href="#">Terminos &amp; Condiciones</a>
+                        </div>
+                    </div>
+
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Modal  editar-->
+    <div class="modal fade" id="modificarModal" tabindex="-1" aria-labelledby="modificarModalLabel" aria-hidden="true"
+        data-bs-target="#modificarModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-warning bg-gradient">
+                    <h1 class="modal-title col-11 text-center ms-4" id="modificarModalLabel">Modificar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-2">
+                            <span class="fw-bolder">Nombre: </span>
+                        </div>
+                        <div class="col-4 form-floating">
+                            <div class="form-floating">
+                                <input type="text" name="txtNombreMod" id="txtNombreMod" class="form-control"
+                                    placeholder=".">
+                                <label for="floatingInput">Nombre:</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <span class="fw-bolder">Cantidad:</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="number" name="txtCantidadMod" id="txtCantidadMod" class="form-control"
+                                    placeholder=".">
+                                <label for="floatingInput">Cantidad:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+
+                        <div class="col-2">
+                            <span class="fw-bolder">Descripcion:</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="txt" name="txtDescripcionMod" id="txtDescripcionMod" class="form-control"
+                                    placeholder=".">
+                                <label for="floatingInput">Descripcion:</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <span class="fw-bolder">Precio:</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="number" name="txtPrecioMod" id="txtPrecioMod" class="form-control"
+                                    placeholder=".">
+                                <label for="floatingInput">Precio:</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+
+                        <div class="col-2">
+                            <span class="fw-bolder">Marca:</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="text" name="txtMarcaMod" id="txtMarcaMod" class="form-control"
+                                    placeholder=".">
+                                <label for="floatingInput">Marca:</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <span class="fw-bolder">Categoria:</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <div class="form-floating">
+                                    <select name="" id="txtCategoriaMod" class="form-control">
+                                        <option value="" selected disabled>Seleccionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+                            <button onclick="modificar()" type="button" class="btn btn-outline-warning "
+                                data-bs-dismiss="modal">Modificar</button>
                         </div>
                     </div>
                 </div>
-            </footer>
+            </div>
+        </div>
+    </div>
+    <!-- eliminar modal -->
+    <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-danger bg-gradient">
+                    <h1 class="modal-title col-11 text-center ms-4" id="eliminarModalLabel">Eliminar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 id="mensaje"></h4>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button onclick="eliminar()" type="button" class="btn bg-danger"
+                            data-bs-dismiss="modal">Eliminar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

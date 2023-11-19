@@ -10,7 +10,7 @@ function readI(url = "producto") {
         producto += `<td>${element.descripcion}</td>`;
         producto += `<td>${element.precio}</td>`;
         producto += `<td>${element.marca}</td>`;
-        producto += `<td>${element.categoria}</td>`;
+        producto += `<td>${element.nombreCategoria}</td>`;
         producto += `<td>${element.imagenUno}</td>`;
         producto += `</tr>`;
       });
