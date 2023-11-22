@@ -28,21 +28,27 @@ Route::get('/', function () {
 
 //rutas de las vistas
 Route::get('/indexAdmin', function () {
-    return view('indexAdmin');
-})->name('indexAdmin');
+    $response = response(view('indexAdmin'));
+
+    return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+})->name('indexAdmin')->middleware('checkSession');
 
 Route::get('/layout', function () {
-    return view('layout');
-})->name('layout');
+    $response = response(view('layout'));
+
+    return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+})->name('layout')->middleware('checkSession');
 
 
 Route::get('/inventario', function () {
-    return view('inventario');
-})->name('inventario');
+    $response = response(view('inventario'));
+
+    return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+})->name('inventario')->middleware('checkSession');
 
 Route::get('/formularioIn', function () {
     return view('formularioIn');
-})->name('formularioIn');
+})->name('formularioIn')->middleware('checkSession');
 
 
 
@@ -82,11 +88,11 @@ Route::get('/login', function () {
 Route::get('/administradores-clientes', function () {
     return view('Administradores');
 });
-Route::get('/bienvenida', function () {
-    $response = response(view('bienvenida'));
 
-    return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+Route::get('/formulario', function () {
+    return view('FormularioCC');
 })->middleware('checkSession');
+
 Route::get('/recuperar', function () {
     return view('ResetContraseña');
 });
@@ -105,6 +111,7 @@ Route::get('/check-session', [AuthController::class, 'checkSession']);
 
 Route::post('/logout', [AuthController::class, 'logout']);
 
+Route::post('/cambiar-contrasena', [AuthController::class, 'cambiarContrasena']);
 
 
 Route::get('/restablecer/{token}', [RecuperarContraseñaController::class, 'mostrarFormularioRestablecerContraseña']);
@@ -113,7 +120,6 @@ Route::post('/reset-password/{token}', [RecuperarContraseñaController::class, '
 
 
 
-Route::post('/cambiar-contrasena', [AuthController::class, 'cambiarContrasena']);
 
 Route::get('/obtener-productos', [ProductoController::class, 'obtenerProductos']);
 

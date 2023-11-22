@@ -20,6 +20,7 @@
     <script src="..\js\axios.min.js"></script>
     <script src="..\js\all.js"></script>
     <script src="..\js\productoIndex.js"></script>
+    <script src="js/Verificacion.js"></script>
 
 </head>
 
@@ -46,11 +47,11 @@
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li><a class="dropdown-item" href="/formulario">Cambiar contraseña</a></li>
                     <li>
                         <hr class="dropdown-divider" />
                     </li>
-                    <li><a class="dropdown-item" href="#!">Cerrar Sesion</a></li>
+                    <li><a class="dropdown-item" href="#!" onclick="logout()">Cerrar Sesion</a></li>
                 </ul>
             </li>
         </ul>
@@ -78,13 +79,13 @@
                                 <a class="nav-link" href="/layout">Static Navigation</a>
                             </nav>
                         </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Paginas
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                        </a> -->
+                        <!-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
@@ -96,16 +97,14 @@
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="/login">Login</a>
-                                        <a class="nav-link" href="/registro">Registro</a>
-                                        <a class="nav-link" href="/password">Olvidó su contraseña?</a>
+                                        <a class="nav-link" href="/formulario">Cambiar contraseña</a>
                                     </nav>
                                 </div>
                                 <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
                                     data-bs-parent="#sidenavAccordionPages">
                                 </div>
                             </nav>
-                        </div>
+                        </div> -->
                         <div class="sb-sidenav-menu-heading"> Sistema de Inventario</div>
                         <a class="nav-link" href="/inventario">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

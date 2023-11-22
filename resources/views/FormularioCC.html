@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8" />
@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Login Admin</title>
+    <title>Cambiar Contraseña</title>
     <link href="css/login.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/alertify.css" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/formularioCambio.js"></script>
+    <script src="js/alertify.js"></script>
 </head>
 
 <body class="bg-primary">
@@ -26,28 +28,29 @@
                                     <h3 class="font-weight-light my-4">Iniciar Sesión</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form id="loginForm" onsubmit="event.preventDefault(); login();">
+                                    <form>
                                         <div class="form-group">
-                                            <label for="txtUsuario">Usuario:</label>
-                                            <input type="text" id="Usuario" name="txtUsuario" class="form-control" placeholder="Ingrese su usuario" required>
+                                            <label for="nuevaContraseña">Nueva Contraseña:</label>
+                                            <input type="password" id="nuevaContraseña" name="nuevaContraseña"
+                                                class="form-control" placeholder="Ingrese la nueva contraseña" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="txtContraseña">Contraseña:</label>
-                                            <input type="password" id="Contraseña" name="txtContraseña" class="form-control" placeholder="Ingrese su contraseña" required>
+                                            <label for="confirmarContraseña">Confirmar Contraseña:</label>
+                                            <input type="password" id="confirmarContraseña" name="confirmarContraseña"
+                                                class="form-control" placeholder="Confirme la nueva contraseña"
+                                                required>
                                         </div>
-                                        <div class="text-center d-flex justify-content-around">
-                                            <a href="/pagina-principal" class="btn btn-primary mt-3">HOME</a>
-                                            <button type="button" class="btn btn-primary mt-3" onclick="login()">Iniciar Sesión</button>
+                                        <div class="text-center mt-3">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="confirmarCambioContrasena()">Confirmar
+                                                Cambio</button>
                                         </div>
                                     </form>
-                                </div>
-                                <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="/recuperar" class="small">¿Has olvidado la contraseña?</a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>                                                                
+                </div>
             </main>
         </div>
         <div id="layoutAuthentication_footer">

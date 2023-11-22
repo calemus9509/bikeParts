@@ -49,9 +49,9 @@ function MostrarProductos(pagina = 1) {
             res.data.forEach(element => {
                 card2 += `<div class="card m-2" style="width: 14rem;">
                     <img src="img/llanta.jpg" class="card-img-top custom-image" alt="...">
-                    <a class="text-black" style="text-decoration: none;" onclick="filtrarPorCategoria(${element.idcategorias})">
-                        <h3 class="text-center">${element.nombre}</h3>
-                    </a>
+                    <a class="text-black" style="text-decoration: none;cursor: pointer;" onclick="filtrarPorCategoria(${element.idcategorias})">
+        <h3 class="text-center">${element.nombre}</h3>
+    </a>
                 </div>`;
             });
             document.getElementById("categoriasss").innerHTML = card2;

@@ -37,7 +37,7 @@ function login() {
     .then(function (response) {
         // Verificar la respuesta y redirigir si es exitosa
         if (response.data.success) {
-            window.location.href = '/bienvenida'; // Ajusta la URL de redirección según tu configuración
+            window.location.href = '/indexAdmin'; // Ajusta la URL de redirección según tu configuración
         } else {
             alert('Error al iniciar sesión');
         }

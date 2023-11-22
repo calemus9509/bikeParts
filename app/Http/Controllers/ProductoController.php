@@ -15,7 +15,7 @@ class ProductoController extends Controller
     public function obtenerProductos()
     {
         // Obtén los productos paginados directamente desde la base de datos
-        $productos = Producto::paginate(6); // Cambia el número 6 según la cantidad deseada por página
+        $productos = Producto::where('estado','A')->paginate(6); // Cambia el número 6 según la cantidad deseada por página
 
         return response()->json($productos);
     }
@@ -42,7 +42,7 @@ class ProductoController extends Controller
         $productos = Producto::whereHas('categoria', function ($query) use ($categoriaId) {
             // Filtramos por el ID de la categoría
             $query->where('idcategorias', $categoriaId);
-        })->get(); // Obtenemos todos los resultados sin paginación
+        })->where('estado','A')->get(); // Obtenemos todos los resultados sin paginación
 
         // Devolvemos los productos filtrados en formato JSON
         return response()->json($productos);

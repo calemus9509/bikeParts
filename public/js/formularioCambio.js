@@ -1,8 +1,3 @@
-function mostrarFormularioCambioContrasena() {
-    // Muestra el formulario de cambio de contraseña
-    document.getElementById('cambioContrasenaFormulario').style.display = 'block';
-}
-
 function confirmarCambioContrasena() {
     let nuevaContraseña = document.getElementById('nuevaContraseña').value;
     let confirmarContraseña = document.getElementById('confirmarContraseña').value;
@@ -27,14 +22,12 @@ function confirmarCambioContrasena() {
     .then(function (response) {
         // Verifica la respuesta
         if (response.data.success) {
-            // Oculta el formulario después de cambiar la contraseña
-            document.getElementById('cambioContrasenaFormulario').style.display = 'none';
-            // Mensaje de éxito
-            mostrarAlerta('Contraseña cambiada con éxito');
-
             // Borra los valores del formulario
             document.getElementById('nuevaContraseña').value = '';
             document.getElementById('confirmarContraseña').value = '';
+            
+            // Mensaje de éxito
+            mostrarAlerta('Contraseña cambiada con éxito');
         } else {
             // Muestra un alert de error si la contraseña no cambió correctamente
             mostrarAlerta2('Error al cambiar la contraseña');
@@ -44,13 +37,6 @@ function confirmarCambioContrasena() {
         console.error(error);
     });
 }
-
-
-function cancelarCambioContrasena() {
-    // Oculta el formulario sin realizar ningún cambio
-    document.getElementById('cambioContrasenaFormulario').style.display = 'none';
-}
-
 
 function mostrarAlerta(mensaje) {
     alertify.success(mensaje);
