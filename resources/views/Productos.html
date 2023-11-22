@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="css/Productos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
 
     <div class="container-fluid">
+
         <!-- buscador -->
         <div class="row">
             <div class="col-2 d-flex justify-content-end">
@@ -34,10 +36,11 @@
                         style="height: 35px;cursor: pointer;"></i></a>
             </div>
         </div>
+
         <!-- navbar -->
         <div class="row bg-primary text-uppercase">
             <div class="col-4 text-center">
-                <a href="/" class="text-white" style="text-decoration: none;">
+                <a href="/pagina-principal" class="text-white" style="text-decoration: none;">
                     <h2>inicio</h2>
                 </a>
             </div>
@@ -61,31 +64,8 @@
         <!-- categorias -->
         <div class="row bg-black">
             <h1 class="bg-primary text-center text-white">NUESTRAS CATEGORIAS</h1>
-            <div class="d-flex flex-wrap justify-content-around mt-5 mb-5">
-                <div class="card m-2" style="width: 18rem;">
-                    <img src="img/llanta.jpg" class="card-img-top custom-image" alt="...">
-                    <a href="" class="text-black" style="text-decoration: none;">
-                        <h3 class="text-center">AMORTIGUADORES</h3>
-                    </a>
-                </div>
-                <div class="card m-2" style="width: 18rem;">
-                    <img src="img/llanta.jpg" class="card-img-top" alt="...">
-                    <a href="" class="text-black" style="text-decoration: none;">
-                        <h3 class="text-center">LLANTAS</h3>
-                    </a>
-                </div>
-                <div class="card m-2" style="width: 18rem;">
-                    <img src="img/llanta.jpg" class="card-img-top" alt="...">
-                    <a href="" class="text-black" style="text-decoration: none;">
-                        <h3 class="text-center">LUBRICANTES</h3>
-                    </a>
-                </div>
-                <div class="card m-2" style="width: 18rem;">
-                    <img src="img/llanta.jpg" class="card-img-top" alt="...">
-                    <a href="" class="text-black" style="text-decoration: none;">
-                        <h3 class="text-center">MOTOR</h3>
-                    </a>
-                </div>
+            <div class="d-flex flex-wrap justify-content-around mt-5 mb-5" id="categoriasss">
+
             </div>
         </div>
 
@@ -96,7 +76,8 @@
         <!-- titulo de productos -->
         <div class="row mt-4">
             <div class="col-8">
-                <div class="border border-primary border-4 text-center p-3" style="background-color: rgb(212, 212, 212);">
+                <div class="border border-primary border-4 text-center p-3"
+                    style="background-color: rgb(212, 212, 212);">
                     <h1 class="text-black letter-spacing" style="font-weight: 700;">
                         P R O D U C T O S
                     </h1>
@@ -106,11 +87,14 @@
 
         <!-- filtro por orden -->
         <div class="row m-4">
+            <div class="col">
+                <a href="/productos" class="btn btn-primary">Ver todos los productos</a>
+            </div>
             <div class="col d-flex justify-content-end">
                 <h5 class="d-inline">ORDENAR POR :</h5>
                 <div class="btn-group d-inline ml-2">
-                    <button type="button" class="btn dropdown-toggle dropup" style="background-color: rgb(212, 212, 212);" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button type="button" class="btn dropdown-toggle dropup"
+                        style="background-color: rgb(212, 212, 212);" data-bs-toggle="dropdown" aria-expanded="false">
                         Action
                     </button>
                     <ul class="dropdown-menu" style="background-color: rgb(212, 212, 212);">
@@ -121,117 +105,22 @@
             </div>
         </div>
 
-        <!-- Sección de filtro con los productos -->
-        <div class="row mt-3 ms-3">
-            <div class="col-4 d-flex flex-column justify-content-center border border-primary border-5 rounded-4" style="background-color: rgb(209, 206, 206);">
-                <div class="text-center">
-                    <h3>FILTROS</h3>
-                    <div class="bg-primary" style="height: 20px;"></div>
-                </div>
-                <div class="text-center mt-5">
-                    <h3>MARCA :</h3>
-                    <div class="d-flex flex-column" style="font-weight: bold;">
-                        <a class="btn">J H F Y O P L</a>
-                        <a class="btn">J H F Y O P L</a>
-                        <a class="btn">J H F Y O P L</a>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h3>Precio :</h3>
-                    <div class="d-flex flex-column" style="font-weight: bold;">
-                        <a class="btn">Desde $20.000 a $100.000</a>
-                        <a class="btn">Desde $20.000 a $100.000</a>
-                        <a class="btn">Desde $20.000 a $100.000</a>
-                    </div>
-                </div>
-                <div class="text-center d-flex flex-column align-items-center">
-                    <h5>MINIMO</h5>
-                    <input type="text" class="form-control">
-                    <h5>MÁXIMO</h5>
-                    <input type="text" class="form-control">
-                </div>
-            </div>            
-            <div class="col-8 d-flex justify-content-center align-items-center flex-column">
-                <div class="card mb-3 mt-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 250px;object-position: center center;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">llANTA PIRELLI ANGEL CITY</h5>
-                          <p class="card-text text-primary">Medidas 110-10-90</p>
-                          <h3>Precio : $150.000</h3>
-                          <div class="d-flex" style="flex-direction: row;">
-                            <a href="/detalle" class="btn btn-dark">SABER MÁS</a>
-                            <a class="btn btn-primary">COMPRAR</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 250px;object-position: center center;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">llANTA PIRELLI ANGEL CITY</h5>
-                          <p class="card-text text-primary">Medidas 110-10-90</p>
-                          <h3>Precio : $150.000</h3>
-                          <div class="d-flex" style="flex-direction: row;">
-                            <a href="/detalle" class="btn btn-dark">SABER MÁS</a>
-                            <a class="btn btn-primary">COMPRAR</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 250px;object-position: center center;">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">llANTA PIRELLI ANGEL CITY</h5>
-                          <p class="card-text text-primary">Medidas 110-10-90</p>
-                          <h3>Precio : $150.000</h3>
-                          <div class="d-flex" style="flex-direction: row;">
-                            <a href="/detalle" class="btn btn-dark">SABER MÁS</a>
-                            <a class="btn btn-primary">COMPRAR</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
+        <!-- productos -->
+        <div class="row mt-3" id="productos">
+
         </div>
 
         <!-- paginacion -->
         <div class="row mt-4">
             <div class="col d-flex justify-content-center">
                 <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="">1</a></li>
-                        <li class="page-item"><a class="page-link" href="">2</a></li>
-                        <li class="page-item"><a class="page-link" href="">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
+                    <ul class="pagination pagination-lg" id="paginacion">
+                        <!-- Aquí se generará la paginación dinámicamente -->
                     </ul>
                 </nav>
             </div>
         </div>
-        
+
         <!-- marcas aliadas-->
         <div class="row" style="margin-top: 75px;">
             <div class="text-center">
@@ -279,6 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="js/Productos.js"></script>
 </body>
 
 </html>

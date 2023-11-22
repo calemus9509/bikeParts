@@ -1,0 +1,26 @@
+.font-small {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: medium;
+
+}
+
+.font-big {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 40pt;
+
+}
+
+.color-principal {
+    color: rgb(0, 0, 0);
+}
+
+.color-secundario {
+    color: rgb(232, 108, 6);
+}
+
+
+    body {
+        background-color: #f2f2f2; /* Color gris claro */
+    }
+
+    

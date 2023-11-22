@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/Verificacion.js"></script>
+    <script src="js/formularioCambio.js"></script>
+    <link rel="stylesheet" href="css/alertify.css" />
+</head>
+
+<body>
+    <h1>Has Iniciado Sesión</h1>
+
+
+    <button onclick="logout()">Cerrar Sesión</button>
+
+    <!-- Agrega un botón para mostrar el formulario de cambio de contraseña -->
+    <button onclick="mostrarFormularioCambioContrasena()">Cambiar Contraseña</button>
+
+    <!-- Agrega el formulario de cambio de contraseña con un estilo display: none; para ocultarlo inicialmente -->
+    <form id="cambioContrasenaFormulario" style="display: none;"
+        onsubmit="event.preventDefault(); confirmarCambioContrasena();">
+        <div class="form-group">
+            <label for="nuevaContraseña">Nueva Contraseña:</label>
+            <input type="password" id="nuevaContraseña" name="nuevaContraseña" class="form-control"
+                placeholder="Ingrese la nueva contraseña" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmarContraseña">Confirmar Contraseña:</label>
+            <input type="password" id="confirmarContraseña" name="confirmarContraseña" class="form-control"
+                placeholder="Confirme la nueva contraseña" required>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-primary" onclick="confirmarCambioContrasena()">Confirmar
+                Cambio</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelarCambioContrasena()">Cancelar</button>
+        </div>
+    </form>
+    <script src="js/alertify.js"></script>
+</body>
+
+</html>

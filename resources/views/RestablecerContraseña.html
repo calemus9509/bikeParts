@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        div {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <h2>Restablecer Contraseña</h2>
+        <div>
+            <label for="Contraseña">Nueva Contraseña</label>
+            <input type="password" name="Contraseña" id="Contraseña" required>
+        </div>
+
+        <div>
+            <label for="confirmar_contraseña">Confirmar Contraseña</label>
+            <input type="password" name="Contraseña_confirmation" id="confirmar_contraseña" required>
+        </div>
+
+        <input type="hidden" id="token" value="">
+
+        <div>
+            <button type="button" onclick="restablecer()">Restablecer Contraseña</button>
+        </div>
+    </div>
+
+    <script>
+        const url = window.location.href;
+        const token = url.substring(url.lastIndexOf('/') + 1);
+
+        // Asignar el token al campo oculto
+        document.getElementById('token').value = token;
+
+        function restablecer() {
+            // Obtener los valores del formulario
+            var Contraseña = document.getElementById('Contraseña').value;
+            var confirmarContraseña = document.getElementById('confirmar_contraseña').value;
+            var token = document.getElementById('token').value;
+
+            // Verificar que las contraseñas coincidan
+            if (Contraseña !== confirmarContraseña) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            // Realizar la solicitud a la ruta de restablecimiento de contraseña
+            axios.post('/reset-password/' + token, {
+                Contraseña: Contraseña,
+                confirmarContraseña: confirmarContraseña,
+                token: token,
+            })
+                .then(function (response) {
+                    // Manejar la respuesta exitosa, por ejemplo, mostrar un mensaje al usuario
+                    alert('Contraseña restablecida con éxito.');
+
+                    // Redirigir a la página de inicio de sesión
+                    window.location.href = '/login';
+
+
+
+
+
+                    window.history.replaceState(null, null, '/login');
+                })
+                .catch(function (error) {
+                    // Manejar errores, por ejemplo, mostrar un mensaje de error
+                    alert('Hubo un problema al restablecer la contraseña. Por favor, inténtelo de nuevo.');
+                });
+        }
+    </script>
+</body>
+
+</html>
