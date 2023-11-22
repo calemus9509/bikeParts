@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComprasController;
-use App\Http\Controllers\JefeBodegaController;
-use App\Http\Controllers\MarcaMotoController;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\TipoMotosController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\RecuperarContraseñaController;
+use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('lasmejoresTiendas');
 });
 
 //rutas de las vistas
@@ -60,3 +62,75 @@ Route::resource('/producto', ProductoController::class)->only(['index', 'store',
 Route::resource('/ventas', VentasController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/compras', ComprasController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/categorias', CategoriaController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::get('/empresa', function () {
+    return view('CrudEmpresas');
+});
+
+
+Route::get('/pagina-principal', function () {
+    return view('PaginaPrincipal');
+});
+Route::get('/productos', function () {
+    return view('Productos');
+});
+Route::get('/detalle', function () {
+    return view('DetalleProducto');
+});
+Route::get('/carrito', function () {
+    return view('Carrito');
+});
+Route::get('/nosotros', function () {
+    return view('Nosotros');
+});
+Route::get('/login', function () {
+    $response = response(view('Login'));
+
+    return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+});
+Route::get('/administradores-clientes', function () {
+    return view('Administradores');
+});
+Route::get('/bienvenida', function () {
+    $response = response(view('bienvenida'));
+
+    return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+})->middleware('checkSession');
+Route::get('/recuperar', function () {
+    return view('ResetContraseña');
+});
+Route::get('/error', function () {
+    return view('Error');
+});
+
+
+Route::resource('/rols', RolController::class)->only(["index", "store", "update", "destroy"]);
+Route::resource('/personas', PersonaController::class)->only(["index", "store", "update", "destroy"]);
+
+
+Route::post('/loginn', [AuthController::class, 'login']);
+
+Route::get('/check-session', [AuthController::class, 'checkSession']);
+
+Route::post('/logout', [AuthController::class, 'logout']);
+
+
+
+Route::get('/restablecer/{token}', [RecuperarContraseñaController::class, 'mostrarFormularioRestablecerContraseña']);
+Route::post('/reset-password', [RecuperarContraseñaController::class, 'enviarSolicitud']);
+Route::post('/reset-password/{token}', [RecuperarContraseñaController::class, 'restablecerContraseña']);
+
+
+
+Route::post('/cambiar-contrasena', [AuthController::class, 'cambiarContrasena']);
+
+Route::get('/obtener-productos', [ProductoController::class, 'obtenerProductos']);
+
+
+Route::get('/obtener-producto/{idproducto}', [ProductoController::class, 'encontrarProducto']);
+
+Route::get('/categorias', [CategoriaController::class, 'index']);
+
+
+Route::get('/obtener-productos/{categoriaId}', [ProductoController::class, 'obtenerProductosPorCategoria']);
+
+Route::resource('/empresas', EmpresaController::class)->only(["index", "store", "update", "destroy"]);

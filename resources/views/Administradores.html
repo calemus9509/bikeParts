@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administradores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/Administradores.js"></script>
+    <link rel="stylesheet" href="css/alertify.css" />
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row bg-black">
+            <div class="col-10 d-flex justify-content-around">
+                <a href="" style="text-decoration: none;color: white;">
+                    <h2>Clientes</h2>
+                </a>
+                <a href="" style="text-decoration: none;color: white;">
+                    <h2>Empresas</h2>
+                </a>
+            </div>
+            <div class="col-2 d-flex justify-content-center align-items-center">
+                <a href="login" class="btn btn-danger" onclick="cerrarSesion()">Cerrar Sesion</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtNombre">Nombre:</label>
+                    <input type="text" class="form-control" id="txtNombre">
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtApellido">Apellido:</label>
+                    <input type="text" class="form-control" id="txtApellido">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtDocumento">Documento:</label>
+                    <input type="text" class="form-control" id="txtDocumento">
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtTelefono">Telefono:</label>
+                    <input type="text" class="form-control" id="txtTelefono">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6 form-group d-flex justify-content-center align-items-center">
+                <label for="txtRol">Rol:</label>
+                <select id="txtRol" class="form-control w-auto">
+                    <option selected disabled>Seleccionar</option>
+                </select>
+            </div>            
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtCorreo">Correo:</label>
+                    <input type="email" class="form-control" id="txtCorreo">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtUsuario">Usuario:</label>
+                    <input type="text" class="form-control" id="txtUsuario" disabled>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-center align-items-center">
+                <div class="form-group">
+                    <label for="txtContraseña">Contraseña:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="txtContraseña">
+                        <button class="btn btn-outline-secondary" type="button" onclick="mostrarOcultarContraseña()">
+                            <i class="fa-solid fa-eye" id="iconoOjo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col d-flex justify-content-center align-items-center">
+                <a class="btn btn-primary" onclick="crear()">Crear</a>
+            </div>
+        </div>
+
+        <div class="row bg-primary text-center text-white mt-4">
+            <h1>NUESTROS CLIENTES</h1>
+        </div>
+        <div class="row mt-3 d-flex justify-content-center align-items-center">
+            <div class="col-11">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Herramientas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientes">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal modificar-->
+    <div class="modal fade" id="ModificarModal" tabindex="-1" aria-labelledby="ModificarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h1 class="modal-title fs-5" id="ModificarModalLabel">Modifcar Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row mt-3">
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <label for="txtNombre2">Nombre:</label>
+                                    <input type="text" class="form-control" id="txtNombre2">
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <label for="txtApellido2">Apellido:</label>
+                                    <input type="text" class="form-control" id="txtApellido2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <label for="txtDocumento2">Documento:</label>
+                                    <input type="text" class="form-control" id="txtDocumento2">
+                                </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <label for="txtTelefono2">Telefono:</label>
+                                    <input type="text" class="form-control" id="txtTelefono2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6 form-group d-flex justify-content-center align-items-center">
+                                <label for="txtRol2">Rol:</label>
+                                <select id="txtRol2" class="form-control w-auto">
+                                    <option selected disabled>Seleccionar</option>
+                                </select>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <label for="txtCorreo2">Correo:</label>
+                                    <input type="email" class="form-control" id="txtCorreo2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div class="form-group">
+                                    <label for="txtUsuario2">Usuario:</label>
+                                    <input type="text" class="form-control" id="txtUsuario2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"
+                        onclick="modificar()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal eliminar-->
+    <div class="modal fade" id="EliminarModal" tabindex="-1" aria-labelledby="EliminarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h1 class="modal-title fs-5" id="ELiminarModalLabel">Eliminar Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4>¿Estas seguro de eliminar?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="inhabilitar()">Inhabilitar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="js/alertify.js"></script>
+</body>
+
+</html>

@@ -36,9 +36,9 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'personas' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'personas',
         ],
     ],
 
@@ -60,9 +60,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'personas' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Persona::class,
         ],
 
         // 'users' => [
@@ -91,8 +91,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'personas' => [
+            'provider' => 'personas',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

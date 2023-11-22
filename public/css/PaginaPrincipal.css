@@ -1,0 +1,45 @@
+.vertical-line {
+    border-left: 5px solid;
+    /* Color primario de Bootstrap */
+    height: 75px;
+    /* Ajusta la altura según tus necesidades */
+    margin: 0 10px;
+    /* Espacio entre la línea y los íconos */
+    opacity: 1;
+    /* Anula la opacidad predeterminada */
+}
+
+/* Estilo inicial para la imagen */
+.img-responsive {
+    width: 46%;
+    padding: 15px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5); /* Color de las bolitas inactivas con transparencia */
+    margin: 0 5px; /* Espacio entre las bolitas */
+    cursor: pointer;
+}
+.carousel-item img {
+    max-height: 380px; /* Establece la altura máxima deseada */
+    width: auto; /* Permite que el ancho se ajuste automáticamente */
+    margin: 0 auto; /* Centra horizontalmente las imágenes */
+}
+
+
+
+/* Estilo para pantallas con 1060px de ancho o menos */
+@media (max-width: 1060px) {
+    .img-responsive {
+        width: 70%;
+    }
+}
+/* Estilo para pantallas con 663px de ancho o menos */
+@media (max-width: 663px) {
+    .img-responsive {
+        width: 110%;
+    }
+}
