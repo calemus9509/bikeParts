@@ -18,46 +18,56 @@
 <body onload="leerEmpresas()">
 
     <div class="row col-12"
-        style="background-image: url(https://w0.peakpx.com/wallpaper/871/787/HD-wallpaper-carretera-bosque-dark-viajar.jpg); background-size: cover; background-position: center; height: 580px;">
-        <div class="col-12 text-center">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <a href="" class="btn btn-light mt-4 mx-3">Inicio</a>
-                    <a href="" class="btn btn-light mt-4 mx-3">Nosotros</a>
-                    <a href="" class="btn btn-light mt-4 mx-3">Tiendas</a>
+    style="background-image: url(https://w0.peakpx.com/wallpaper/871/787/HD-wallpaper-carretera-bosque-dark-viajar.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 70vh;">
+    <div class="col-12 text-center">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="d-flex flex-wrap justify-content-center align-items-center">
 
-                    <!-- Nuevo botón a la derecha -->
-                    <a href="" class="btn btn-light mt-4 mx-3 ">Se parte de nosotros</a>
-
-                    <div class="col-1 md-2 mt-12">
-                        <img src="img/logo.png" style="max-width: 90px; margin-left: 10;">
+                    <!-- LOGO -->
+                    <div class="col-12 col-md-2 mt-3 text-md-left text-center">
+                        <img src="img/logo.png" style="max-width: 90px;">
                     </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
+                    <div class="d-flex flex-wrap justify-content-between align-items-center col-12 col-md-7 mt-md-0 mt-3" style="z-index: 3;margin-bottom: 45px;">
+                        <a href="" class="btn btn-outline-light  mx-2">Inicio</a>
+                        <a href="" class="btn btn-outline-light  mx-2">Nosotros</a>
+                        <a href="" class="btn btn-outline-light  mx-2">Tiendas</a>
+                        <a href="" class="btn btn-warning mx-2">SE PARTE DE NOSOTROS</a>
+                    </div>
 
-    <div class="container">
-        <div class="row align-items-center">
+                    <!-- <div class="col-12 col-md-2 mt-3">
+                        <a href="" class="btn btn-warning">SE PARTE DE NOSOTROS</a>
+                    </div> -->
 
-        </div>
-        <div class="col-12 text-center">
-
-            <!-- Texto sobre la imagen superpuesta -->
-            <div class="imagen-superpuesta"
-                style="position: absolute; top: 10%; left: 47%; transform: translateX(-50%); z-index: 1;">
-                <img src="img/sin.png" class="img-fluid" alt="Imagen Superpuesta" style="width: 75%;">
-
-                <!-- Texto sobre la imagen -->
-                <div
-                    style="position: absolute; top: 15%; left: 50%; transform: translate(-50%, -50%); z-index: 2; color: white;">
-                    <h1>LAS MEJORES TIENDAS DE LA CIUDAD A UN SOLO CLiCK</h1>
                 </div>
             </div>
         </div>
+
     </div>
+</div>
+
+
+<div class="container">
+    <div class="text-center">
+
+        <!-- Texto sobre la imagen superpuesta -->
+        <div class="imagen-superpuesta"
+            style="position: absolute; top: 20vh; left: 50vw; transform: translateX(-50%); z-index: 1; ">
+            <img src="img/sin.png" id="imagenresponse" class="img-fluid w-75" alt="Imagen Superpuesta">
+
+            <!-- Texto sobre la imagen -->
+            <div
+                style="position: absolute; top: 5%; left: 50%; transform: translate(-50%, -50%); z-index: 2; color: white; text-align: center; width: 80%;">
+                <h3 style="font-size: 2.5em; overflow: hidden;">LAS MEJORES TIENDAS DE LA CIUDAD</h3>
+            </div>
+
+        </div>
     </div>
+</div>
+
+    </div>
+
 
     <br>
 
@@ -82,30 +92,27 @@
     <div class="d-flex justify-content-center align-items-center" id="contenedor"></div>
 
     <!-- Div naranja -->
-    <div class="row" style="background-color: rgb(245, 114, 0); width: 101%; height: 10px;"></div>
+    <div class="row" style="background-color: rgb(245, 114, 0); width: 100%; height: 10px;"></div>
 
-    <div class="row" style="background-color: rgb(245, 114, 0); width: 101%; height: 15px;"></div>
-    <div style="display: flex; flex-direction: row;">
+    <div class="row" style="background-color: rgb(245, 114, 0); width: 100%; height: 15px;"></div>
+    <div class="row bg-dark">
 
         <!-- Información de contacto -->
-        <div style="flex: 1; background-color: rgb(47, 48, 47); color: white; width: 102%; text-align: center;">
-            <br>
-            <h2>Información de contacto</h2>
-            <p>Teléfono: (123) 456-7890</p>
-            <p>Correo electrónico: ejemplo.com</p>
-            <p>Redes sociales: <a href="https://www.facebook.com/ejemplo">Facebook</a>, <a
-                    href="https://www.twitter.com/ejemplo">Twitter</a></p>
+        <div class="col-5 text-light text-center p-5">
+            <h1>Información de contacto</h1>
+            <h2>Teléfono: (123) 456-7890</h2>
+            <h2>Correo electrónico: ejemplo.com</h2>
+
         </div>
 
         <!-- Logo -->
-        <div class="col-md-1">
-            <img src="img/logo.png" style="max-width: 171px; margin-left: 10;">
+        <div class="col-2 d-flex justify-content-center align-content-center p-4">
+            <div class="img-logo rounded-3"></div>
         </div>
-
         <!-- Frase -->
-        <div style="flex: 1; background-color: rgb(47, 48, 47); text-align: center;">
+        <div class="col-5 text-center">
             <br>
-            <p style="font-size: 24px; font-weight: bold; color: white;"><br> "Conviértete en alguien que nadie,<br>
+            <p style="font-size: 34px; font-weight: bold; color: white;"><br> "Conviértete en alguien que nadie,<br>
                 pensó que lo lograrías".</p>
         </div>
     </div>
@@ -116,8 +123,8 @@
             @2023 BIKE-PARTS
         </h3>
     </div>
-
+    <div style="flex: 1; background-color: rgb(47, 48, 47); color: white; width: 102%; text-align: center;">
 
 </body>
 
-</html>
+</html

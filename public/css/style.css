@@ -1,26 +1,50 @@
 .font-small {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: medium;
-
+    font-size: 1em;
+    /* Cambiado a un valor relativo */
 }
 
 .font-big {
     font-family: 'Josefin Sans', sans-serif;
-    font-size: 40pt;
-
+    font-size: 2.5em;
+    /* Cambiado a un valor relativo */
 }
 
-.color-principal {
+.text-primary {
     color: rgb(0, 0, 0);
 }
 
-.color-secundario {
+.text-secondary {
     color: rgb(232, 108, 6);
 }
 
+body {
+    background-color: #f2f2f2;
+    /* Color gris claro */
+}
 
-    body {
-        background-color: #f2f2f2; /* Color gris claro */
+.imagen-superpuesta img {
+    max-width: 100%;
+    height: auto;
+}
+
+.img-logo {
+    background-image: url(/img/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    div[style*="transform: translate(-50%, -50%)"] {
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
-    
+    h1[style*="font-size: 2.5em;"] {
+        font-size: 1.5em;
+    }
+}

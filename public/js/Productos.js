@@ -1,6 +1,3 @@
-
-
-
 function MostrarProductos(pagina = 1) {
     axios.get(`/obtener-productos?page=${pagina}`)
         .then(res => {
@@ -34,6 +31,8 @@ function MostrarProductos(pagina = 1) {
 
             document.getElementById("productos").innerHTML = card;
 
+            // document.getElementById("productos").scrollIntoView({ behavior: 'smooth' });
+
             // Actualizar la paginación si es necesario
             if (productos.total > productos.per_page) {
                 actualizarPaginacion(productos);
@@ -60,54 +59,6 @@ function MostrarProductos(pagina = 1) {
             console.error(err);
         });
 }
-
-
-
-// function filtrarPorCategoria(categoriaId) {
-//     axios.get(`/obtener-productos/${categoriaId}`)
-//         .then(res => {
-//             console.log(res.data);
-//             var productos = res.data; // Solo la información de paginación
-//             var card = "";
-
-//             productos.data.forEach(element => {
-//                 card += `<div class="col-md-4 mb-3">
-//                     <div class="card" style="max-width: 540px;">
-//                         <div class="row g-0">
-//                             <div class="col-md-4">
-//                                 <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
-//                                     style="object-fit: cover; height: 250px;object-position: center center;">
-//                             </div>
-//                             <div class="col-md-8">
-//                                 <div class="card-body">
-//                                     <h5 class="card-title">${element.nombre}-${element.marca}</h5>
-//                                     <p class="card-text text-primary">${element.descripcion}</p>
-//                                     <h3>Precio: $${element.precio}</h3>
-//                                     <div class="d-flex" style="flex-direction: row;">
-//                                         <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-//                                         <a class="btn btn-primary">COMPRAR</a>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>`;
-//             });
-
-//             document.getElementById("productos").innerHTML = card;
-
-//             // Actualizar la paginación solo si hay más de una página
-//             if (productos.last_page > 1) {
-//                 actualizarPaginacion(productos);
-//             } else {
-//                 // Si solo hay una página, elimina la paginación
-//                 document.getElementById("paginacion").innerHTML = '';
-//             }
-//         })
-//         .catch(err => {
-//             console.error(err);
-//         });
-// }
 
 
 function filtrarPorCategoria(categoriaId) {
@@ -148,6 +99,8 @@ function filtrarPorCategoria(categoriaId) {
 
                 // Eliminar la paginación
                 document.getElementById("paginacion").innerHTML = '';
+
+                document.getElementById("productos").scrollIntoView({ behavior: 'smooth' });
             } else {
                 // Manejar el caso cuando no hay productos
                 console.error('No se encontraron productos para la categoría seleccionada.');
@@ -157,6 +110,8 @@ function filtrarPorCategoria(categoriaId) {
             console.error(err);
         });
 }
+
+
 
 
 
