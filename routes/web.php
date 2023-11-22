@@ -35,17 +35,6 @@ Route::get('/layout', function () {
     return view('layout');
 })->name('layout');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-Route::get('/password', function () {
-    return view('password');
-})->name('password');
-
-Route::get('/registro', function () {
-    return view('registro');
-})->name('registro');
 
 Route::get('/inventario', function () {
     return view('inventario');
@@ -62,10 +51,13 @@ Route::resource('/producto', ProductoController::class)->only(['index', 'store',
 Route::resource('/ventas', VentasController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/compras', ComprasController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::resource('/categorias', CategoriaController::class)->only(['index', 'store', 'update', 'destroy']);
+
+
+//rutas de kevin
+
 Route::get('/empresa', function () {
     return view('CrudEmpresas');
 });
-
 
 Route::get('/pagina-principal', function () {
     return view('PaginaPrincipal');
