@@ -15,18 +15,41 @@ function read(url = "producto") {
                 productos += `<td>${element.precio}</td>`;
                 productos += `<td>${element.marca}</td>`;
                 productos += `<td>${element.nombreCategoria}</td>`;
-                productos += `<td>${element.imagenUno}</td>`;
+                // Mostrar la primera imagen de manera separada
+                productos += `<td>`;
+                if (element.imagenes) {
+                    try {
+                        const imagenesArray = JSON.parse(element.imagenes);
+
+                        if (imagenesArray.length > 0) {
+                            productos += `<img src="${imagenesArray[1]}" alt="Imagen 1" style="max-width: 100px; max-height: 100px;">`;
+                        } else {
+                            productos += `No hay imágenes`;
+                        }
+                    } catch (error) {
+                        console.error(
+                            "Error al parsear las rutas de las imágenes:",
+                            error
+                        );
+                        productos += `Error al cargar imágenes`;
+                    }
+                } else {
+                    productos += `No hay imágenes`;
+                }
+
+                productos += `</td>`;
                 productos += `<td>
                 <a onclick='leerModi(${JSON.stringify(
                     element
-                )})' class='btn btn-outline-warning' data-bs-toggle="modal" data-bs-target="#modificarModal">Modificar</a>
+                )})' class='btn btn-outline-warning my-1'  style="width: 100px;"  data-bs-toggle="modal" data-bs-target="#modificarModal">Modificar</a>
                 <a onclick="leerEliminar(${element.idproducto},'${
                     element.nombre
-                }')" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
+                }')" class="btn btn-outline-danger my-1"  style="width: 100px;" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
                   </td>`;
                 productos += `</tr>`;
             });
             tableBodyInventario.innerHTML = productos;
+            // Inventarios.innerHTML = productos;
         })
         .catch(function (error) {
             console.log(error);
@@ -77,6 +100,7 @@ function read(url = "producto") {
         ],
     });
 }
+
 //modificar producto
 function modificar() {
     axios
@@ -157,5 +181,4 @@ function clear() {
     txtCantidad.value = "";
     txtPrecio.value = "";
 }
-
 read();

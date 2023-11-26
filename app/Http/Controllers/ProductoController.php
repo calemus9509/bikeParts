@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductoController extends Controller
     public function obtenerProductos()
     {
         // Obtén los productos paginados directamente desde la base de datos
-        $productos = Producto::where('estado','A')->paginate(6); // Cambia el número 6 según la cantidad deseada por página
+        $productos = Producto::where('estado', 'A')->paginate(6); // Cambia el número 6 según la cantidad deseada por página
 
         return response()->json($productos);
     }
@@ -42,7 +43,7 @@ class ProductoController extends Controller
         $productos = Producto::whereHas('categoria', function ($query) use ($categoriaId) {
             // Filtramos por el ID de la categoría
             $query->where('idcategorias', $categoriaId);
-        })->where('estado','A')->get(); // Obtenemos todos los resultados sin paginación
+        })->where('estado', 'A')->get(); // Obtenemos todos los resultados sin paginación
 
         // Devolvemos los productos filtrados en formato JSON
         return response()->json($productos);
@@ -67,46 +68,32 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        $producto = Producto::create($request->all());
+        // Almacenar las imágenes en el sistema de archivos y obtener las rutas
+        $uploadedFiles = [];
+        foreach ($request->file('imagenes') as $imagen) {
+            $rutaImagen = $imagen->store('public/img');
+            $uploadedFiles[] = Storage::url($rutaImagen);
+        }
+
+        // Crear el producto con los datos del formulario y las imágenes almacenadas
+        $producto = Producto::create([
+            'nombre' => $request->nombre,
+            'cantidad' => $request->cantidad,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'marca' => $request->marca,
+            'imagenes' => json_encode($uploadedFiles),
+        ]);
 
         // Asociar el producto a la categoría existente
         $categoria = Categoria::findOrFail($request->categoriaF);
         $producto->categoria()->associate($categoria);
         $producto->save();
 
+        // Devolver una respuesta JSON con el producto creado
         return response()->json($producto, 201);
-
-        // $request->validate([
-        //     'imagenUno' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'imagenDos' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'imagenTres' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'imagenCuatro' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-
-        // $imagenes = [];
-
-        // $imagenes['imagenUno'] = $this->guardarImagen($request->file('imagenUno'));
-        // $imagenes['imagenDos'] = $this->guardarImagen($request->file('imagenDos'));
-        // $imagenes['imagenTres'] = $this->guardarImagen($request->file('imagenTres'));
-        // $imagenes['imagenCuatro'] = $this->guardarImagen($request->file('imagenCuatro'));
-
-        // $producto = new Producto([
-        //     'nombre' => $request->input('nombre'),
-        //     'descripcion' => $request->input('descripcion'),
-        //     'cantidad' => $request->input('cantidad'),
-        //     'precio' => $request->input('precio'),
-        //     'marca' => $request->input('marca'),
-        //     'categoriaf' => $request->input('categoriaf'),
-        //     'imagenUno' => $imagenes['imagenUno'],
-        //     'imagenDos' => $imagenes['imagenDos'],
-        //     'imagenTres' => $imagenes['imagenTres'],
-        //     'imagenCuatro' => $imagenes['imagenCuatro'],
-        // ]);
-
-        // $producto->save();
-
-        // return response()->json(['mensaje' => 'Producto guardado con éxito']);
     }
+
 
     /**
      * Update the specified resource in storage.
