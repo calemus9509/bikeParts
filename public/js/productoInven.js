@@ -76,14 +76,14 @@ function read(url = "producto") {
                 text: "<i class='fa-solid fa-file-excel fa-bounce'></i>",
                 titleAttr: "Excel",
                 className: "excel",
-                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
             },
             {
                 extend: "print",
                 text: "<i class='fa-solid fa-print fa-bounce'></i>",
                 titleAttr: "Imprimir",
                 className: "imprimir",
-                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
             },
             {
                 download: "open",
@@ -91,14 +91,14 @@ function read(url = "producto") {
                 text: "<i class='fa-solid fa-file-pdf fa-bounce'></i>",
                 titleAttr: "PDF",
                 className: "pdf",
-                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
             },
             {
                 extend: "copy",
                 text: "<i class='fa-solid fa-copy fa-bounce'></i>",
                 titleAttr: "Copiar",
                 className: "copy",
-                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
             },
         ],
     });
