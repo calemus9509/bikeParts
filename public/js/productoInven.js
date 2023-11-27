@@ -15,6 +15,7 @@ function read(url = "producto") {
                 productos += `<td>${element.precio}</td>`;
                 productos += `<td>${element.marca}</td>`;
                 productos += `<td>${element.nombreCategoria}</td>`;
+
                 // Mostrar la primera imagen de manera separada
                 productos += `<td>`;
                 if (element.imagenes) {
@@ -22,9 +23,10 @@ function read(url = "producto") {
                         const imagenesArray = JSON.parse(element.imagenes);
 
                         if (imagenesArray.length > 0) {
-                            productos += `<img src="${imagenesArray[1]}" alt="Imagen 1" style="max-width: 100px; max-height: 100px;">`;
+                            productos += `<img src="${imagenesArray[0]}" alt="Imagen 1" style="max-width: 100px; max-height: 100px;">`;
                         } else {
-                            productos += `No hay imágenes`;
+                            // Si el array de imágenes está vacío, mostrar la imagen predeterminada
+                            productos += `<img src="/storage/img/Producto-sin-imagen.jpg" alt="Producto sin imagen" style="max-width: 100px; max-height: 100px;">`;
                         }
                     } catch (error) {
                         console.error(
@@ -34,18 +36,19 @@ function read(url = "producto") {
                         productos += `Error al cargar imágenes`;
                     }
                 } else {
-                    productos += `No hay imágenes`;
+                    // Si no hay imágenes, mostrar la imagen predeterminada
+                    productos += `<img src="/storage/img/Producto-sin-imagen.jpg" alt="Producto sin imagen" style="max-width: 100px; max-height: 100px;">`;
                 }
-
                 productos += `</td>`;
+
                 productos += `<td>
-                <a onclick='leerModi(${JSON.stringify(
-                    element
-                )})' class='btn btn-outline-warning my-1'  style="width: 100px;"  data-bs-toggle="modal" data-bs-target="#modificarModal">Modificar</a>
-                <a onclick="leerEliminar(${element.idproducto},'${
+                    <a onclick='leerModi(${JSON.stringify(
+                        element
+                    )})' class='btn btn-outline-warning my-1'  style="width: 100px;"  data-bs-toggle="modal" data-bs-target="#modificarModal">Modificar</a>
+                    <a onclick="leerEliminar(${element.idproducto}, '${
                     element.nombre
                 }')" class="btn btn-outline-danger my-1"  style="width: 100px;" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
-                  </td>`;
+                </td>`;
                 productos += `</tr>`;
             });
             tableBodyInventario.innerHTML = productos;
@@ -54,7 +57,7 @@ function read(url = "producto") {
         .catch(function (error) {
             console.log(error);
         });
-    //funcion del datatable
+    // Función del DataTable
     new DataTable("#tablaSimple", {
         retrieve: true,
         language: {
@@ -117,7 +120,7 @@ function modificar() {
             console.log(response);
             read();
             clear();
-            mostrarAlerta("Modificado correctamente");
+            // mostrarAlerta("Modificado correctamente");
         })
         .catch(function (error) {
             console.log(error);

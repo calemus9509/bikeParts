@@ -2,8 +2,11 @@ function registrar() {
     const formData = new FormData();
     const files = document.getElementById("txtImagenes").files;
 
-    for (let i = 0; i < files.length; i++) {
-        formData.append("imagenes[]", files[i]);
+    // Agregar imágenes al formulario solo si hay imágenes seleccionadas
+    if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+            formData.append("imagenes[]", files[i]);
+        }
     }
 
     formData.append("nombre", txtNombre.value);
@@ -17,14 +20,13 @@ function registrar() {
         .post("producto", formData, {})
         .then(function (response) {
             console.log(response);
+            alert("Producto Creado!");
 
             clear();
         })
         .catch(function (error) {
             console.log(error);
         });
-
-    alert("Producto Creado!");
 }
 
 // function create() {

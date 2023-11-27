@@ -7,6 +7,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductoController extends Controller
 {
@@ -70,9 +71,14 @@ class ProductoController extends Controller
     {
         // Almacenar las imágenes en el sistema de archivos y obtener las rutas
         $uploadedFiles = [];
-        foreach ($request->file('imagenes') as $imagen) {
-            $rutaImagen = $imagen->store('public/img');
-            $uploadedFiles[] = Storage::url($rutaImagen);
+
+        // Verificar si $request->file('imagenes') no es null y es un array antes de intentar recorrerlo
+        $imagenes = $request->file('imagenes');
+        if (!is_null($imagenes) && is_array($imagenes)) {
+            foreach ($imagenes as $imagen) {
+                $rutaImagen = $imagen->store('public/img');
+                $uploadedFiles[] = Storage::url($rutaImagen);
+            }
         }
 
         // Crear el producto con los datos del formulario y las imágenes almacenadas
@@ -85,13 +91,23 @@ class ProductoController extends Controller
             'imagenes' => json_encode($uploadedFiles),
         ]);
 
-        // Asociar el producto a la categoría existente
-        $categoria = Categoria::findOrFail($request->categoriaF);
-        $producto->categoria()->associate($categoria);
-        $producto->save();
+        try {
+            // Verificar si se proporcionó una categoría en la solicitud
+            if ($request->has('categoriaF')) {
+                // Buscar la categoría por el ID proporcionado
+                $categoria = Categoria::findOrFail($request->categoriaF);
+                $producto->categoria()->associate($categoria);
+            }
 
-        // Devolver una respuesta JSON con el producto creado
-        return response()->json($producto, 201);
+            // Guardar el producto
+            $producto->save();
+
+            // Devolver una respuesta JSON con el producto creado
+            return response()->json($producto, 201);
+        } catch (ModelNotFoundException $e) {
+            // Manejar el caso en que la categoría no fue encontrada
+            return response()->json(['error' => 'La categoría no fue encontrada.'], 404);
+        }
     }
 
 
