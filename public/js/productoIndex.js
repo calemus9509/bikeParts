@@ -12,28 +12,28 @@ function readI(url = "producto") {
                 producto += `<td>${element.marca}</td>`;
                 producto += `<td>${element.nombreCategoria}</td>`;
                 // Mostrar la primera imagen de manera separada
-                producto += `<td>`;
-                if (element.imagenes) {
-                    try {
-                        const imagenesArray = JSON.parse(element.imagenes);
+                // producto += `<td>`;
+                // if (element.imagenes) {
+                //     try {
+                //         const imagenesArray = JSON.parse(element.imagenes);
 
-                        if (imagenesArray.length > 0) {
-                            producto += `<img src="${imagenesArray[0]}" alt="Imagen 1" style="max-width: 100px; max-height: 100px;">`;
-                        } else {
-                            producto += `No hay imágenes`;
-                        }
-                    } catch (error) {
-                        console.error(
-                            "Error al parsear las rutas de las imágenes:",
-                            error
-                        );
-                        producto += `Error al cargar imágenes`;
-                    }
-                } else {
-                    producto += `No hay imágenes`;
-                }
+                //         if (imagenesArray.length > 0) {
+                //             producto += `<img src="${imagenesArray[0]}" alt="Imagen 1" style="max-width: 100px; max-height: 100px;">`;
+                //         } else {
+                //             producto += `No hay imágenes`;
+                //         }
+                //     } catch (error) {
+                //         console.error(
+                //             "Error al parsear las rutas de las imágenes:",
+                //             error
+                //         );
+                //         producto += `Error al cargar imágenes`;
+                //     }
+                // } else {
+                //     producto += `No hay imágenes`;
+                // }
 
-                producto += `</td>`;
+                producto += `</tr>`;
             });
 
             // Limpiar el cuerpo de la tabla antes de actualizar
