@@ -14,7 +14,6 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::where('estado', 'A')->get()  ;
         return response()->json($empresa);
-        // return Empresa::all();
 
     }
 
@@ -38,5 +37,10 @@ class EmpresaController extends Controller
         $tienda = Empresa::findOrFail($empresa->id);
         $tienda->estado = 'I';
         $tienda->save();
+    }
+
+    public function empresaPorId($empresaId) {
+        $empresa = Empresa::findOrFail($empresaId);
+        return response()->json(['mision' => $empresa->mision, 'vision' => $empresa->vision, 'descripcion' => $empresa->descripcion, 'imagen' => $empresa->imagen]);
     }
 }

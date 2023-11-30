@@ -1,50 +1,75 @@
-.font-small {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 1em;
-    /* Cambiado a un valor relativo */
+.fondo {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 90vh;
+    background-image: url('https://w0.peakpx.com/wallpaper/871/787/HD-wallpaper-carretera-bosque-dark-viajar.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-.font-big {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 2.5em;
-    /* Cambiado a un valor relativo */
-}
-
-.text-primary {
-    color: rgb(0, 0, 0);
-}
-
-.text-secondary {
-    color: rgb(232, 108, 6);
-}
-
-body {
-    background-color: #f2f2f2;
-    /* Color gris claro */
-}
-
-.imagen-superpuesta img {
-    max-width: 100%;
+.nueva-imagen {
+    position: absolute;
+    top: 65%;
+    /*  posición vertical */
+    left: 50%;
+    /*  posición horizontal  */
+    transform: translate(-50%, -50%);
+    max-width: 55%;
+    /* Ajusta el ancho máximo según tus necesidades */
     height: auto;
 }
 
-.img-logo {
-    background-image: url(/img/logo.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    width: 100%;
-    height: 100%;
+
+.navbar {
+    background-color: transparent !important;
+    /* Hace que la barra de navegación sea transparente */
 }
 
-@media screen and (max-width: 768px) {
-    div[style*="transform: translate(-50%, -50%)"] {
-        top: 5%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.custom-btn {
+    /* fondo del boton al hacer el response */
+    background-color: white;
 
-    h1[style*="font-size: 2.5em;"] {
-        font-size: 1.5em;
-    }
+}
+
+.logo {
+    max-width: 90px;
+    border-radius: 5%;
+    position: absolute;
+    height: auto;
+    top: 30px;
+    /* Ajusta la posición vertical según sea necesario */
+    left: 90px;
+    /* Ajusta la posición horizontal según sea necesario */
+
+}
+
+.align-right {
+    margin-left: auto;
+}
+
+
+
+.logo-img {
+    max-width: 200px;
+    /* Tamaño del logo */
+    height: auto;
+    border-radius: 15px;
+
+}
+
+
+
+
+.link {
+    text-decoration: none;
+    color: #f8f8f8;
+    /* color del texto */
+    font-weight: normal;
+    /* grosor de la fuente */
+    /* Otros estilos que desees agregar */
+    font-size: 30px;
+    /* tamaño del texto */
+    margin-right: 150px;
+    /* espacio entre enlaces */
 }

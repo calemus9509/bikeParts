@@ -15,24 +15,22 @@ function leerEmpresas() {
         row.classList.add('row');
 
         empresasChunk.forEach(element => {
-
           const cardColumn = document.createElement('div');
           cardColumn.classList.add('col-md-4');
 
-          const textCarta = `<div class="card mt-5 mb-5" style="width: 18rem;">
+          const textCarta = `<div class="card mt-5 mb-5" style="max-width: 25rem;">
                              <img src="${element.imagen}" class="card-img-top" alt="...">
                              <div class="card-body">
                                <h5 class="card-title">${element.nombre}</h5>
                                <p class="card-text">${element.nit}</p>
                                <p class="card-text">${element.descripcion}</p>
-                               <a href="/pagina-principal" class="btn btn-dark">Ver tienda</a>
+                               <a href="/pagina-principal" class="btn btn-dark" onclick="seleccionarEmpresa(${element.id})">Ver tienda</a>
                              </div>
                            </div>`;
 
           cardColumn.innerHTML = textCarta;
           row.appendChild(cardColumn);
         });
-
 
         container.appendChild(row);
       }
@@ -43,6 +41,7 @@ function leerEmpresas() {
     });
 }
 
-function saludar() {
-  alert("Saludar");
+// Función para guardar el ID de la empresa seleccionada en el localStorage
+function seleccionarEmpresa(idEmpresa) {
+  localStorage.setItem('empresaSeleccionada', idEmpresa);
 }

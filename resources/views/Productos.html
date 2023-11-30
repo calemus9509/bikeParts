@@ -18,27 +18,29 @@
     <div class="container-fluid">
 
         <!-- buscador -->
-        <div class="row">
+        <div class="row icon-container">
             <a href="/" class="col-2 d-flex justify-content-end">
                 <img src="img/bikeParts.png" alt="" class="img-responsive">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
-                <input class="form-control me-2" type="search" placeholder="SEARCH" aria-label="Search"
-                    style="width: 500px;">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
-                    SEARCH</button>
+                <div class="search-container d-flex align-items-center">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="SEARCH"
+                        aria-label="Search">
+                    <div id="autocompleteResults" class="autocomplete-results"></div>
+                </div>
             </div>
-            <div class="col-2 d-flex justify-content-center align-items-center">
-                <a href="login" class="text-black"><i class="fa-regular fa-circle-user"
-                        style="height: 40px;cursor: pointer;"></i></a>
+            <div class="col-2 d-flex justify-content-center align-items-center ">
+                <a href="login" class="text-black">
+                    <i class="fa-regular fa-circle-user" style="height: 40px;cursor: pointer;"></i>
+                </a>
                 <hr class="vertical-line text-primary" />
-                <a href="carrito" class="text-black"><i class="fa-solid fa-cart-shopping"
-                        style="height: 35px;cursor: pointer;"></i></a>
+                <a href="carrito" class="text-black">
+                    <i onclick="mostrarcarrito()" class="fa-solid fa-cart-shopping" style="height: 35px;cursor: pointer;"></i>
+                </a>
             </div>
         </div>
-
-        <!-- navbar -->
-        <div class="row bg-primary text-uppercase">
+        <!-- Navbar -->
+        <div class="row bg-primary text-uppercase" id="navBar">
             <div class="col-4 text-center">
                 <a href="/pagina-principal" class="text-white" style="text-decoration: none;">
                     <h2>inicio</h2>
@@ -79,7 +81,7 @@
                 <div class="border border-primary border-4 text-center p-3"
                     style="background-color: rgb(212, 212, 212);">
                     <h1 class="text-black letter-spacing" style="font-weight: 700;">
-                        P R O D U C T O S
+                        PRODUCTOS
                     </h1>
                 </div>
             </div>

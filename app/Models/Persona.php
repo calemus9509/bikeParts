@@ -12,6 +12,11 @@ class Persona extends Authenticatable
 
     protected $table = 'personas';
 
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'admin_id', 'id');
+    }
+
     protected $fillable = [
         'Nombre',
         'Apellido',
@@ -29,6 +34,3 @@ class Persona extends Authenticatable
         'updated_at'
     ];
 }
-
-
-
