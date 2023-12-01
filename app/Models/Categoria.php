@@ -15,7 +15,6 @@ class Categoria extends Model
         'idcategorias',
         'nombre',
         'estado',
-        'id_categoria',
     ];
     protected $hidden = [
         'created_at',

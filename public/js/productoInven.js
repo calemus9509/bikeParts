@@ -47,6 +47,7 @@ function read(url = "producto") {
                         productos += `<img src="/storage/img/Producto-sin-imagen.jpg" alt="Producto sin imagen" style="max-width: 100px; max-height: 100px;">`;
                     }
                     productos += `</td>`;
+
                     productos += `<td>
                     <a onclick='leerModi(${JSON.stringify(
                         element
@@ -70,49 +71,49 @@ function read(url = "producto") {
 
     // Función del DataTable
     new DataTable("#tablaSimple", {
-      retrieve: true,
-      language: {
-          url: "./json/es.json",
-      },
-      dom: "Bfrtip",
-      buttons: [
-          {
-              extend: "colvis",
-              text: "<i class='fa-solid fa-filter fa-beat'></i>",
-              titleAttr: "Filtrar",
-              className: "filtro",
-          },
-          {
-              extend: "excel",
-              text: "<i class='fa-solid fa-file-excel fa-bounce'></i>",
-              titleAttr: "Excel",
-              className: "excel",
-              exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
-          },
-          {
-              extend: "print",
-              text: "<i class='fa-solid fa-print fa-bounce'></i>",
-              titleAttr: "Imprimir",
-              className: "imprimir",
-              exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
-          },
-          {
-              download: "open",
-              extend: "pdf",
-              text: "<i class='fa-solid fa-file-pdf fa-bounce'></i>",
-              titleAttr: "PDF",
-              className: "pdf",
-              exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
-          },
-          {
-              extend: "copy",
-              text: "<i class='fa-solid fa-copy fa-bounce'></i>",
-              titleAttr: "Copiar",
-              className: "copy",
-              exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
-          },
-      ],
-  });
+        retrieve: true,
+        language: {
+            url: "./json/es.json",
+        },
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "colvis",
+                text: "<i class='fa-solid fa-filter fa-beat'></i>",
+                titleAttr: "Filtrar",
+                className: "filtro",
+            },
+            {
+                extend: "excel",
+                text: "<i class='fa-solid fa-file-excel fa-bounce'></i>",
+                titleAttr: "Excel",
+                className: "excel",
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+            },
+            {
+                extend: "print",
+                text: "<i class='fa-solid fa-print fa-bounce'></i>",
+                titleAttr: "Imprimir",
+                className: "imprimir",
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+            },
+            {
+                download: "open",
+                extend: "pdf",
+                text: "<i class='fa-solid fa-file-pdf fa-bounce'></i>",
+                titleAttr: "PDF",
+                className: "pdf",
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+            },
+            {
+                extend: "copy",
+                text: "<i class='fa-solid fa-copy fa-bounce'></i>",
+                titleAttr: "Copiar",
+                className: "copy",
+                exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6] },
+            },
+        ],
+    });
 }
 //modificar producto
 function modificar() {

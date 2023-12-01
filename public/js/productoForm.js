@@ -30,55 +30,44 @@ function registrar() {
         });
 }
 
-
-
-function addFileToFormData(fieldName, fileInput, formData) {
-  if (fileInput && fileInput.files && fileInput.files.length > 0) {
-    formData.append(fieldName, fileInput.files[0]);
-  }
-}
-
-
-
-
 function foraneas() {
-  // Llamada para obtener las categorías
-  axios.get("/categorias")
-      .then(function (response) {
-          const select = document.getElementById("txtCategoria");
-          
-          // Agrega las opciones al select
-          select.innerHTML = '<option value="" selected disabled>Seleccionar</option>';
-          response.data.forEach((element) => {
-              const option = document.createElement("option");
-              option.value = element.idcategorias;
-              option.text = element.nombre;
-              select.appendChild(option);
-          });
-      })
-      .catch(function (error) {
-          console.log(error);
-      });
+    // Llamada para obtener las categorías
+    axios
+        .get("/categorias")
+        .then(function (response) {
+            const select = document.getElementById("txtCategoria");
 
-  // Llamada para obtener la información del usuario (incluido el ID de la empresa)
-  axios.get("/check-session")
-      .then(function (response) {
-          const empresaInput = document.getElementById("txtEmpresa");
+            // Agrega las opciones al select
+            select.innerHTML =
+                '<option value="" selected disabled>Seleccionar</option>';
+            response.data.forEach((element) => {
+                const option = document.createElement("option");
+                option.value = element.idcategorias;
+                option.text = element.nombre;
+                select.appendChild(option);
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
-          // Verifica si la sesión está activa
-          if (response.data.success) {
-              const empresaId = response.data.user.empresa_id;
-              // Establece el valor del input de la empresa
-              empresaInput.value = empresaId;
-          }
-      })
-      .catch(function (error) {
-          console.log(error);
-      });
+    // Llamada para obtener la información del usuario (incluido el ID de la empresa)
+    axios
+        .get("/check-session")
+        .then(function (response) {
+            const empresaInput = document.getElementById("txtEmpresa");
+
+            // Verifica si la sesión está activa
+            if (response.data.success) {
+                const empresaId = response.data.user.empresa_id;
+                // Establece el valor del input de la empresa
+                empresaInput.value = empresaId;
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
-
-
-
 
 function clear() {}
 

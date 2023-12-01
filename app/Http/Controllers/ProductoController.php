@@ -144,26 +144,27 @@ class ProductoController extends Controller
             'descripcion' => $request->descripcion,
             'precio' => $request->precio,
             'marca' => $request->marca,
+            'categoriaF' => $request->categoriaF,
+            'empresa_id' => $request->empresa_id,
             'imagenes' => json_encode($uploadedFiles),
         ]);
 
-        try {
-            // Verificar si se proporcionó una categoría en la solicitud
-            if ($request->has('categoriaF')) {
-                // Buscar la categoría por el ID proporcionado
-                $categoria = Categoria::findOrFail($request->categoriaF);
-                $producto->categoria()->associate($categoria);
-            }
+        // try {
+        //     // Verificar si se proporcionó una categoría en la solicitud
+        //     if ($request->has('categoriaF')) {
+        //         // Buscar la categoría por el ID proporcionado
+        //         $categoria = Categoria::findOrFail($request->categoriaF);
+        //         $producto->categoria()->associate($categoria);
+        //     }
+        //     // Guardar el producto
 
-            // Guardar el producto
-            $producto->save();
-
-            // Devolver una respuesta JSON con el producto creado
-            return response()->json($producto, 201);
-        } catch (ModelNotFoundException $e) {
-            // Manejar el caso en que la categoría no fue encontrada
-            return response()->json(['error' => 'La categoría no fue encontrada.'], 404);
-        }
+        //     // Devolver una respuesta JSON con el producto creado
+        //     return response()->json($producto, 201);
+        // } catch (ModelNotFoundException $e) {
+        //     // Manejar el caso en que la categoría no fue encontrada
+        //     return response()->json(['error' => 'La categoría no fue encontrada.'], 404);
+        // }
+        $producto->save();
     }
 
     /**
@@ -182,6 +183,5 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($producto->idproducto);
         $producto->estado = 'I';
         $producto->save();
-
     }
 }

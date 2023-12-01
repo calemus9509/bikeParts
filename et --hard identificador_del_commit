@@ -1,0 +1,91 @@
+[33mcommit 4d9f66596568cc61743df79428345c1642719d44[m[33m ([m[1;36mHEAD -> [m[1;32mcamilo[m[33m, [m[1;31morigin/camilo[m[33m)[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Wed Nov 29 22:05:42 2023 -0500
+
+    merge rama kevin en camilo
+
+[33mcommit acad4f32e3a0b642adb76e57211c4f5c76a1700b[m
+Merge: a1d0e61 dcb149c
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Wed Nov 29 22:00:13 2023 -0500
+
+    Merge rama 'kevin' en camilo
+
+[33mcommit dcb149ce743f94e76b276f7d8c84328ee9845d86[m[33m ([m[1;31morigin/kevin[m[33m, [m[1;32mkevin[m[33m)[m
+Author: kevin velez <kevinarleyvelezledezma@gmail.com>
+Date:   Wed Nov 29 21:47:31 2023 -0500
+
+    cambio penultimo
+
+[33mcommit a1d0e61e9056a978371ec23adea4ce479ee06f54[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Wed Nov 29 21:44:12 2023 -0500
+
+    pueden volver
+
+[33mcommit 55fe021421d296d3b19da98fe5a428ef1ba2c838[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Sun Nov 26 21:21:23 2023 -0500
+
+    nadatable
+
+[33mcommit 3ed451cde6ae5b1ca6605f38f308946355aa44f4[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Sun Nov 26 21:03:50 2023 -0500
+
+    comentaron cartas
+
+[33mcommit 775f1be0bfce56d002bd9f52b1fe58f69b87056b[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Sun Nov 26 19:22:47 2023 -0500
+
+    no imagen en el panel adminis
+
+[33mcommit a8c99bec781f7a9952e3564801934b8b10c1cf0b[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Sun Nov 26 19:06:25 2023 -0500
+
+    validacion imagenes - categoria
+
+[33mcommit f1dd5332b2814196d6a76f8eb449735086c99330[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Sat Nov 25 22:21:58 2023 -0500
+
+    subir imagenes
+
+[33mcommit 24ad1dc67bfa98118cfdabc4a9a4e31ba704ee8a[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Wed Nov 22 22:28:04 2023 -0500
+
+    funcion modificar completada
+
+[33mcommit 09b510a2f9bad68cf59d79d2a7bdf11ec4b4a86a[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Wed Nov 22 18:27:49 2023 -0500
+
+    vendor
+
+[33mcommit 6fd6dcd23fe2b508f22570d817764f5d37c47e73[m
+Author: kevin velez <kevinarleyvelezledezma@gmail.com>
+Date:   Wed Nov 22 16:16:00 2023 -0500
+
+    detallitos
+
+[33mcommit 3e11b8bb72203081fc3942a5aaff5a23f284fb7c[m
+Author: kevin velez <kevinarleyvelezledezma@gmail.com>
+Date:   Wed Nov 22 01:08:18 2023 -0500
+
+    login con dashboard
+
+[33mcommit da3986bb5c8ca923cc2ce4314f6fb3759e16e97b[m
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Tue Nov 21 21:35:55 2023 -0500
+
+    no iban esas rutas
+
+[33mcommit ad0989c45d2bc58629fed7628514b15c163af982[m
+Merge: 36a8ba9 f7392d3
+Author: camilo andres lemos <camilolemus30@gmail.com>
+Date:   Tue Nov 21 21:20:22 2023 -0500
+
+    Merge con Kivin
