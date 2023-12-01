@@ -115,47 +115,6 @@ function read(url = "producto") {
         ],
     });
 }
-//modificar producto
-function modificar() {
-    this.idproducto = id;
-    axios
-        .put(`/producto/${id}`, {
-            nombre: txtNombreMod.value,
-            cantidad: txtCantidadMod.value,
-            descripcion: txtDescripcionMod.value,
-            precio: txtPrecioMod.value,
-            marca: txtMarcaMod.value,
-            nombreCategoria: txtCategoriaMod.value,
-        })
-        .then(function (response) {
-            console.log(response);
-            read();
-            clear();
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-//mostrar en el modal lo seleccionado
-function leerModi(id) {
-    axios
-        .get("producto")
-        .then(function (response) {
-            console.log(response.data[0]);
-            txtNombreMod.value = response.data[0].nombre;
-            txtCantidadMod.value = response.data[0].cantidad;
-            txtDescripcionMod.value = response.data[0].descripcion;
-            txtPrecioMod.value = response.data[0].precio;
-            txtMarcaMod.value = response.data[0].marca;
-            this.id = response.data[0].idproducto; // Esto asigna 'id' al contexto incorrecto, considera eliminarlo si no es necesario
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-// traer lo del selec de categorias
 function selCategorias() {
     axios
         .get("categorias")
@@ -177,7 +136,58 @@ function selCategorias() {
         });
 }
 
-selCategorias();
+//modificar producto
+function modificar() {
+    axios
+        .put(`/producto/${idproducto}`, {
+            idproducto: idproducto,
+            nombre: txtNombreMod.value,
+            cantidad: txtCantidadMod.value,
+            descripcion: txtDescripcionMod.value,
+            precio: txtPrecioMod.value,
+            marca: txtMarcaMod.value,
+            categoriaF: txtCategoriaMod.value,
+        })
+        .then(function (response) {
+            console.log(response);
+            read();
+            clear();
+            // mostrarAlerta("Modificado correctamente");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+//mostrar en el modal lo seleccionado
+function leerModi(id) {
+    console.log(id);
+    this.idproducto = id.idproducto;
+    txtNombreMod.value = id.nombre;
+    txtCantidadMod.value = id.cantidad;
+    txtDescripcionMod.value = id.descripcion;
+    txtPrecioMod.value = id.precio;
+    txtMarcaMod.value = id.marca;
+    axios
+        .get("categorias")
+        .then(function (response) {
+            const select = document.getElementById("txtCategoriaMod");
+            const categoria = response.data;
+            select.innerHTML =
+                '<option value="" selected disabled>Seleccionar</option>';
+            categoria.forEach((element) => {
+                const option = document.createElement("option");
+                option.value = element.idcategorias;
+                option.text = element.nombre;
+                select.appendChild(option);
+            });
+            txtCategoriaMod.value = id.categoriaF;
+        })
+
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 
 //eliminar producto
 function eliminar() {
@@ -200,6 +210,8 @@ function leerEliminar(id, nombre) {
     this.idproducto = id;
     mensaje.innerHTML = `Esta seguro de eliminar el producto  ${nombre} ?`;
 }
+
+selCategorias();
 
 function clear() {
     txtNombre.value = "";
