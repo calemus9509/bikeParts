@@ -39,8 +39,12 @@ class EmpresaController extends Controller
         $tienda->save();
     }
 
+    // public function empresaPorId($empresaId) {
+    //     $empresa = Empresa::findOrFail($empresaId);
+    //     return response()->json(['mision' => $empresa->mision, 'vision' => $empresa->vision, 'descripcion' => $empresa->descripcion, 'imagen' => $empresa->imagen]);
+    // }
     public function empresaPorId($empresaId) {
         $empresa = Empresa::findOrFail($empresaId);
-        return response()->json(['mision' => $empresa->mision, 'vision' => $empresa->vision, 'descripcion' => $empresa->descripcion, 'imagen' => $empresa->imagen]);
+        return response()->json($empresa);
     }
 }

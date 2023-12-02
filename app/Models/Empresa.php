@@ -27,6 +27,8 @@ class Empresa extends Model
         'logo',
         'vision',
         'mision',
+        'correo',
+        'instagram',
     ];
 
     protected $hiddens = [

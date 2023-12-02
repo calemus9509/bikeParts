@@ -170,6 +170,28 @@ function mostrarProductosAleatorios(){
 
 mostrarProductosAleatorios()
 
+
+function nosotros() {
+    const empresaId = localStorage.getItem('empresaSeleccionada');
+    axios.get(`/empresas/${empresaId}`)
+        .then(res => {
+            console.log(res);
+            footer = "";
+
+            footer += `<h3>Información de Contacto</h3>
+            <p>Teléfono: +57-${res.data.telefono}</p>
+            <p>Email: ${res.data.correo}</p>
+            <p>Dirección: ${res.data.direccion}</p>
+            <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+            document.getElementById("footer").innerHTML = footer;
+        })
+        .catch(err => {
+            console.error(err);
+        })
+}
+nosotros();
+
 function mostrarDetalle(idproducto) {
     // Guarda el ID en el localStorage
     localStorage.setItem('productoId', idproducto);

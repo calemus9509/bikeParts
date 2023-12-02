@@ -5,6 +5,7 @@ function nosotros() {
             descripcion = "";
             mision = "";
             vision = "";
+            footer = "";
 
             console.log(res.data);
             descripcion += `<div class="col-md-7 text-center mb-3 mb-md-0">
@@ -39,6 +40,14 @@ function nosotros() {
         </div>
     </div>
 </div>`;
+
+footer += `<h3>Información de Contacto</h3>
+<p>Teléfono: +57-${res.data.telefono}</p>
+<p>Email: ${res.data.correo}</p>
+<p>Dirección: ${res.data.direccion}</p>
+<a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+document.getElementById("footer").innerHTML = footer;
 
         
         document.getElementById("descripcion").innerHTML = descripcion;
