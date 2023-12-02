@@ -1,8 +1,58 @@
 function MostrarProductos(pagina = 1) {
-    // Obtener el ID de la empresa desde el localStorage
+    productoFiltro = localStorage.getItem('idCategory');
     const empresaId = localStorage.getItem('empresaSeleccionada');
 
-    // Configurar la URL de la solicitud de productos
+    if (productoFiltro && productoFiltro >= 0) {
+    
+    axios.get(`/obtener-productos/${productoFiltro}?empresa=${empresaId}`)
+        .then(res => {
+            console.log(res.data);
+            var productos = res.data;
+
+            // Verificar si hay productos antes de intentar acceder a la propiedad 'data'
+            if (productos && productos.length > 0) {
+                var card = "";
+
+                productos.forEach(element => {
+                    card += `<div class="col-md-4 mb-3">
+                    <div class="card" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
+                                    style="object-fit: cover; height: 250px;object-position: center center;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">${element.nombre}-${element.marca}</h5>
+                                    <p class="card-text text-primary">${element.descripcion}</p>
+                                    <h3>Precio: $${element.precio}</h3>
+                                    <div class="d-flex" style="flex-direction: row;">
+                                        <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
+                                        <a class="btn btn-primary" onclick="agregaralcarrito(${element.idproducto})">COMPRAR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                });
+
+                document.getElementById("productos").innerHTML = card;
+
+                // Eliminar la paginación
+                document.getElementById("paginacion").innerHTML = '';
+
+                document.getElementById("productos").scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Manejar el caso cuando no hay productos
+                console.error('No se encontraron productos para la categoría seleccionada.');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    } else {
+        // Configurar la URL de la solicitud de productos
     let url = empresaId ? `/obtener-productos?empresa=${empresaId}&page=${pagina}` : `/obtener-productos?page=${pagina}`;
 
     axios.get(url)
@@ -45,8 +95,9 @@ function MostrarProductos(pagina = 1) {
         .catch(err => {
             console.error(err);
         });
-
-
+        
+    }
+    
     axios.get("/categorias")
         .then(res => {
             var card2 = "";
@@ -63,6 +114,10 @@ function MostrarProductos(pagina = 1) {
         .catch(err => {
             console.error(err);
         });
+}
+
+function eliminarIdCategory(){
+    localStorage.removeItem('idCategory');
 }
 
 function filtrarPorCategoria(categoriaId) {

@@ -14,6 +14,29 @@
 </head>
 
 <body>
+    <!-- modal para confirmar retiro y eliminacion del carrito -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de regresar a la Pagina Principal?
+                    se eliminaran todos los productos del carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="noretiro()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- data-bs-toggle="modal" data-bs-target="#exampleModal" -->
+            <!-- onclick="validacioncarrito()" -->
 
     <div class="container-fluid">
 
@@ -90,7 +113,7 @@
         <!-- filtro por orden -->
         <div class="row m-4">
             <div class="col">
-                <a href="/productos" class="btn btn-primary">Ver todos los productos</a>
+                <a href="/productos" onclick="eliminarIdCategory()" class="btn btn-primary">Ver todos los productos</a>
             </div>
             <div class="col d-flex justify-content-end">
                 <h5 class="d-inline">ORDENAR POR :</h5>
@@ -171,6 +194,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script src="js/Productos.js"></script>
+    <!-- <script src="js/carrito.js"></script> -->
 </body>
 
 </html>

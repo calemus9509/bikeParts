@@ -108,7 +108,7 @@ function mostrarCategorias() {
                     style="height: 250px; width: 350px; position: relative;">
 
                     <div class="card text-bg-dark border-primary border-3 rounded">
-                    <a href="/productos" onclick="mostrarId(${element.id})" >
+                    <a onclick="mostrarId(${element.idcategorias})" >
                         <img src="img/llanta.jpg" alt="Amortiguador"
                             style="width: 300px; height: 300px; object-fit: cover;">
                         <div class="card-img-overlay">
@@ -131,6 +131,12 @@ function mostrarCategorias() {
             console.error(err);
         });
 }
+
+function mostrarId(categoriaId) {
+    localStorage.setItem('idCategory', categoriaId);
+    window.location.href = "/productos"
+}
+
 mostrarCategorias()
 
 function mostrarProductosAleatorios(){
