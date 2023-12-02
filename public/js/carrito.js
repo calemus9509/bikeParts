@@ -1,26 +1,23 @@
-let detallecarrito = '';
+let detallecarrito = "";
 let totalGlobal = 0;
 let carrito = [];
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
 
     // Obtén el contenedor de resultados
     var autocompleteResults = document.getElementById("autocompleteResults");
 
-    
     // recuperamos el array que viene desde otras paginas
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
-
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
 
     // aqui miramos si el carrito tiene productos o no
     if (carrito.length > 0) {
         // ejecutamos la funcion donde extraeremos los detalles de cada producto
-        mostrarcarrito(carrito)
-    }
-    else {
-        console.error('No hay nada agregado al carrito');
+        mostrarcarrito(carrito);
+    } else {
+        console.error("No hay nada agregado al carrito");
     }
 
     // Maneja el evento de cambio en el input de búsqueda
@@ -43,8 +40,13 @@ function buscarAutocompletado(termino) {
     var autocompleteResults = document.getElementById("autocompleteResults");
 
     // Realiza una solicitud al servidor para obtener resultados de autocompletado
-    axios.get(`/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem('empresaSeleccionada')}`)
-        .then(res => {
+    axios
+        .get(
+            `/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem(
+                "empresaSeleccionada"
+            )}`
+        )
+        .then((res) => {
             // Muestra los resultados en la consola
             mostrarResultadosAutocompletado(res.data);
 
@@ -57,13 +59,10 @@ function buscarAutocompletado(termino) {
 
             console.log("Resultados de la búsqueda:", res.data);
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
         });
 }
-
-
-
 
 function mostrarResultadosAutocompletado(resultados) {
     var autocompleteResults = document.getElementById("autocompleteResults");
@@ -75,7 +74,7 @@ function mostrarResultadosAutocompletado(resultados) {
         var resultsContainer = document.createElement("div");
 
         // Crea elementos para cada resultado y agrégales al contenedor
-        resultados.forEach(resultado => {
+        resultados.forEach((resultado) => {
             var resultItem = document.createElement("div");
             resultItem.className = "card";
             resultItem.innerHTML = `
@@ -89,8 +88,8 @@ function mostrarResultadosAutocompletado(resultados) {
             // Agrega un evento de clic al resultado
             resultItem.addEventListener("click", function () {
                 // Al hacer clic, guarda el ID en localStorage y redirige a la página de detalles
-                localStorage.setItem('productoId', resultado.idproducto);
-                window.location.href = '/detalle';
+                localStorage.setItem("productoId", resultado.idproducto);
+                window.location.href = "/detalle";
             });
 
             resultsContainer.appendChild(resultItem);
@@ -113,7 +112,6 @@ function mostrarResultadosAutocompletado(resultados) {
     }
 }
 
-
 // funciones de jaime del carrito
 // evento que se ejecuta cuando se carga la pagina ademas de una validcion del carrito
 // tambien se recupera lo del local storage
@@ -123,15 +121,15 @@ function mostrarResultadosAutocompletado(resultados) {
 function mostrarcarrito(carrito) {
     // Reiniciar el totalGlobal antes de empezar a mostrar el carrito
     totalGlobal = 0;
-    detallecarrito = '';
+    detallecarrito = "";
 
     // Itera sobre cada ID y realiza una solicitud para cada uno
     carrito.forEach(function (idProducto, index) {
-
         // Llamada a la función del controlador de producto
-        axios.get(`/obtener-producto/${idProducto}`)
+        axios
+            .get(`/obtener-producto/${idProducto}`)
             .then(function (res) {
-                var producto = res.data.producto
+                var producto = res.data.producto;
                 console.log(producto);
 
                 detallecarrito += `<div class="card mb-3" style="background-color: rgb(209, 206, 206);">
@@ -141,28 +139,36 @@ function mostrarcarrito(carrito) {
                             class="card-img-top" alt="..." style="max-width: 100%;">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">${producto.nombre} - ${producto.marca} </h5>
-                        <p class="card-text text-primary">${producto.descripcion}</p>
+                        <h5 class="card-title">${producto.nombre} - ${
+                    producto.marca
+                } </h5>
+                        <p class="card-text text-primary">${
+                            producto.descripcion
+                        }</p>
                         <h3 id="precio${index}">Precio: $${producto.precio}</h3>
                     
 
                         <!-- Botón de eliminar y campo de cantidad -->
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-danger btn-block" onclick="eliminardelcarrito(${producto.idproducto})">Eliminar</button>
+                            <button class="btn btn-danger btn-block" onclick="eliminardelcarrito(${
+                                producto.idproducto
+                            })">Eliminar</button>
                             <div class="input-group" style="width: 120px;">
-                                <input type="number" class="form-control" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(producto)}, ${index}),enviarCarritoPorWhatsApp(${index})'>
+                                <input type="number" class="form-control" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(
+                    producto
+                )}, ${index})'>
                             </div>
                         </div>
                     </div>
-                </div>`
+                </div>`;
 
                 // sumamos el precio unitario para el primer subtotal
                 totalGlobal += producto.precio;
 
                 // Asigna el contenido de "detallecarrito" al elemento con id "detallecarrito"
-                document.getElementById("detallecarrito").innerHTML = detallecarrito;
+                document.getElementById("detallecarrito").innerHTML =
+                    detallecarrito;
                 document.getElementById("total").innerHTML = "$" + totalGlobal;
-
             })
             .catch(function (error) {
                 // Manejar errores
@@ -177,7 +183,8 @@ function actCantidad(producto, index) {
     let cantidadNueva = parseInt(cantidadInput.value, 10);
 
     // Obtener la cantidad anterior almacenada en un atributo data-prev-cantidad
-    let cantidadAnterior = parseInt(cantidadInput.getAttribute("data-prev-cantidad"), 10) || 1;
+    let cantidadAnterior =
+        parseInt(cantidadInput.getAttribute("data-prev-cantidad"), 10) || 1;
 
     // Restar el precio anterior multiplicado por la cantidad anterior al totalGlobal
     totalGlobal -= cantidadAnterior * producto.precio;
@@ -186,7 +193,9 @@ function actCantidad(producto, index) {
     totalGlobal += cantidadNueva * producto.precio;
 
     // Actualizar el precio en el HTML
-    document.getElementById(`precio${index}`).innerHTML = `Precio: $${cantidadNueva * producto.precio}`;
+    document.getElementById(`precio${index}`).innerHTML = `Precio: $${
+        cantidadNueva * producto.precio
+    }`;
 
     // Actualizar el totalGlobal en el HTML
     document.getElementById("total").innerHTML = "$" + totalGlobal;
@@ -195,9 +204,9 @@ function actCantidad(producto, index) {
     cantidadInput.setAttribute("data-prev-cantidad", cantidadNueva);
 }
 
-// funcion que esta sirviendo... 
+// funcion que esta sirviendo...
 function eliminardelcarrito(id) {
-    carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    carrito = JSON.parse(localStorage.getItem("productos")) || [];
 
     let index = carrito.indexOf(id);
 
@@ -207,11 +216,12 @@ function eliminardelcarrito(id) {
 
         if (carrito.length === 0) {
             // Si el carrito está vacío, establecer contenido y totalGlobal en cero
-            detallecarrito = '';
+            detallecarrito = "";
             totalGlobal = 0;
-            document.getElementById("detallecarrito").innerHTML = detallecarrito;
+            document.getElementById("detallecarrito").innerHTML =
+                detallecarrito;
             document.getElementById("total").innerHTML = "$" + totalGlobal;
-            localStorage.removeItem('productos');
+            localStorage.removeItem("productos");
         } else {
             // Si el carrito no está vacío, actualizar la interfaz de usuario
             localStorage.productos = JSON.stringify(carrito);
@@ -229,9 +239,9 @@ function completarCompra() {
 
 // Función para enviar el carrito por WhatsApp utilizando Click to Chat
 async function enviarCarritoPorWhatsApp(producto, index) {
-
     // Obtén la información del carrito actualizada (solo los IDs)
-    const carritoActualizado = JSON.parse(localStorage.getItem('productos')) || [];
+    const carritoActualizado =
+        JSON.parse(localStorage.getItem("productos")) || [];
 
     // Array para almacenar los detalles completos de los productos
     const detallesProductos = [];
@@ -246,53 +256,60 @@ async function enviarCarritoPorWhatsApp(producto, index) {
             // Agrega los detalles del producto al array
             detallesProductos.push(producto);
         } catch (error) {
-            console.error(`Error al obtener detalles del producto ${idProducto}:`, error);
+            console.error(
+                `Error al obtener detalles del producto ${idProducto}:`,
+                error
+            );
         }
     }
 
     // Formatea la información del carrito para enviarla por WhatsApp
-    let mensajeWhatsApp = '¡Gracias Por Elegir a BIKEPARTS!\nDetalles del carrito:\nTotal Compra:' + totalGlobal + '\n';
+    let mensajeWhatsApp =
+        "¡Gracias Por Elegir a BIKEPARTS!\nDetalles del carrito:\nTotal Compra:" +
+        totalGlobal +
+        "\n";
 
     detallesProductos.forEach((producto, index) => {
         // Obtén la cantidad seleccionada por el usuario
         const cantidadInput = document.getElementById(`cantidadporca${index}`);
         const cantidadElegida = parseInt(cantidadInput.value, 10);
 
-
-        mensajeWhatsApp += `${index + 1}. ${producto.nombre} - ${producto.marca}\n`;
+        mensajeWhatsApp += `${index + 1}. ${producto.nombre} - ${
+            producto.marca
+        }\n`;
         mensajeWhatsApp += `   Precio x unidad: $${producto.precio}\n`;
         mensajeWhatsApp += `   Cantidad: ${cantidadElegida}\n\n`;
-
     });
 
     // Número de teléfono al que se enviará el mensaje (incluyendo el prefijo internacional)
-    const numeroDestino = '+573217361556';
+    const numeroDestino = "+573217361556";
     //  +573217361556 lemus
     // +573185958871 kevin
     //  +573102445188 Jaime
 
     // Generar el enlace "Click to Chat" de WhatsApp
-    const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWhatsApp)}`;
+    const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(
+        mensajeWhatsApp
+    )}`;
 
     console.log(mensajeWhatsApp);
     // Abrir una nueva ventana o redirigir a la URL del enlace
-    window.open(enlaceWhatsApp, '_blank');
+    window.open(enlaceWhatsApp, "_blank");
 }
-
 
 // onclicks del modal
 function retirodepagina() {
-    window.location.href = '/';
-    localStorage.removeItem('productos')
+    window.location.href = "/";
+    localStorage.removeItem("productos");
 }
 function noretiro() {
-    window.location.href = '/carrito';
+    window.location.href = "/carrito";
 }
 function validacioncarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $('#exampleModal').modal('show');
+        $("#exampleModal").modal("show");
     } else {
-        window.location.href = '/';
+        window.location.href = "/";
     }
 }
