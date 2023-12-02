@@ -226,3 +226,73 @@ function completarCompra() {
     // Enviar detalles del carrito por WhatsApp
     enviarCarritoPorWhatsApp(carrito);
 }
+
+// Función para enviar el carrito por WhatsApp utilizando Click to Chat
+async function enviarCarritoPorWhatsApp(producto, index) {
+
+    // Obtén la información del carrito actualizada (solo los IDs)
+    const carritoActualizado = JSON.parse(localStorage.getItem('productos')) || [];
+
+    // Array para almacenar los detalles completos de los productos
+    const detallesProductos = [];
+
+    // Itera sobre los IDs del carrito y obtén los detalles de cada producto
+    for (const idProducto of carritoActualizado) {
+        try {
+            // Llamada a la función del controlador para obtener detalles del producto
+            const response = await axios.get(`/obtener-producto/${idProducto}`);
+            const producto = response.data.producto;
+
+            // Agrega los detalles del producto al array
+            detallesProductos.push(producto);
+        } catch (error) {
+            console.error(`Error al obtener detalles del producto ${idProducto}:`, error);
+        }
+    }
+
+    // Formatea la información del carrito para enviarla por WhatsApp
+    let mensajeWhatsApp = '¡Gracias Por Elegir a BIKEPARTS!\nDetalles del carrito:\nTotal Compra:' + totalGlobal + '\n';
+
+    detallesProductos.forEach((producto, index) => {
+        // Obtén la cantidad seleccionada por el usuario
+        const cantidadInput = document.getElementById(`cantidadporca${index}`);
+        const cantidadElegida = parseInt(cantidadInput.value, 10);
+
+
+        mensajeWhatsApp += `${index + 1}. ${producto.nombre} - ${producto.marca}\n`;
+        mensajeWhatsApp += `   Precio x unidad: $${producto.precio}\n`;
+        mensajeWhatsApp += `   Cantidad: ${cantidadElegida}\n\n`;
+
+    });
+
+    // Número de teléfono al que se enviará el mensaje (incluyendo el prefijo internacional)
+    const numeroDestino = '+573217361556';
+    //  +573217361556 lemus
+    // +573185958871 kevin
+    //  +573102445188 Jaime
+
+    // Generar el enlace "Click to Chat" de WhatsApp
+    const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWhatsApp)}`;
+
+    console.log(mensajeWhatsApp);
+    // Abrir una nueva ventana o redirigir a la URL del enlace
+    window.open(enlaceWhatsApp, '_blank');
+}
+
+
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+}

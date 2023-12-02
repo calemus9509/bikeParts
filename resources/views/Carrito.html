@@ -14,11 +14,33 @@
 </head>
 
 <body>
+    <!-- modal para confirmar retiro y eliminacion del carrito -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de regresar a la Pagina Principal?
+                    se eliminaran todos los productos del carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="noretiro()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid">
         <!-- buscador -->
         <div class="row icon-container">
-            <a href="/" class="col-2 d-flex justify-content-end">
+            <!-- parte de modal y validacion del carrito -->
+            <a href="/" class="col-2 d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            onclick="validacioncarrito()">
                 <img src="img/bikeParts.png" alt="" class="img-responsive">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
@@ -61,31 +83,6 @@
         <div class="row bg-primary text-center mt-5">
             <h1>CARRITO DE COMPRA</h1>
         </div>
-
-        <!-- original  -->
-        <!-- <div class="container mt-5">
-            <div class="row mb-3">
-                <div class="col-md-9" style="max-height: 400px; overflow-y: auto;">
-
-                    Tarjeta funcion 
-                    <div id="detallecarrito"></div>
-
-                    <div class="col-md-3"
-                        style="background-color: rgb(209, 206, 206); padding: 20px; max-height: 50vh; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div class="text-center">
-                            <h3>RESUMEN DE COMPRAS</h3>
-                            <hr class="bg-dark" style="height: 10px;">
-                            <div class="d-flex justify-content-between">
-                                <p>TOTAL :</p>
-                                <h5>$150.000</h5>
-                            </div>
-                        </div>
-                        <div class="text-center mt-3">
-                            <a href="" class="btn btn-primary" style="width: 100%;">SEGUIR COMPRA</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
         <!-- prueba 3 -->
         <div class="container mt-5">
