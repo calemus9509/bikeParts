@@ -5,7 +5,7 @@ function mostrarDetalleProducto(id) {
         .get(`/obtener-producto/${id}`)
         .then((res) => {
             var producto = res.data.producto; // Accede al objeto producto
-            var imagenesArray = JSON.parse(producto.imagenes); 
+            var imagenesArray = JSON.parse(producto.imagenes);
             // Aquí puedes usar la información del producto como desees
             console.log(producto);
             var stock = producto.cantidad;
@@ -51,25 +51,25 @@ function mostrarDetalleProducto(id) {
             </div>
         </div>`;
 
-           // Asigna el contenido de "detalle" al elemento con id "detalles"
-           document.getElementById("detalles").innerHTML = detalle;
+            // Asigna el contenido de "detalle" al elemento con id "detalles"
+            document.getElementById("detalles").innerHTML = detalle;
 
-           if (stock < 15 && stock > 0) {
-               document.getElementById("stock").innerHTML = `
+            if (stock < 15 && stock > 0) {
+                document.getElementById("stock").innerHTML = `
                 <div class="mt-5 mb-5 bg-warning text-center rounded" >
                 <h2>Stock Bajo</h2>
                </div>`;
-           } else if (stock === 0) {
-               document.getElementById("stock").innerHTML = `
+            } else if (stock === 0) {
+                document.getElementById("stock").innerHTML = `
                <div class="mt-5 mb-5 bg-danger text-center rounded">
                <h2>Stock No Disponible</h2>
               </div>`;
-           } else if (stock >= 15) {
-               document.getElementById("stock").innerHTML = `
+            } else if (stock >= 15) {
+                document.getElementById("stock").innerHTML = `
                <div class="mt-5 mb-5 bg-success text-center rounded" >
                <h2>Stock  Disponible</h2>
               </div>`;
-           }
+            }
         })
         .catch((err) => {
             console.error(err);
