@@ -259,53 +259,6 @@ function actualizarPaginacion(productos, orden) {
     }
 }
 
-// function obtenerProductosOrdenados(orden) {
-//     // Obtén el ID de la empresa desde localStorage
-//     const empresaId = localStorage.getItem('empresaSeleccionada');
-
-//     // Realiza la solicitud al servidor para obtener productos ordenados
-//     axios.get(`/obtener-productos-ordenados/${orden}?empresa=${empresaId}`)
-//         .then(res => {
-//             console.log(res);
-//             var productos = res.data;
-//             var card = "";
-
-//             productos.data.forEach(element => {
-//                 card += `<div class="col-md-4 mb-3">
-//                     <div class="card" style="max-width: 540px;">
-//                         <div class="row g-0">
-//                             <div class="col-md-4">
-//                                 <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
-//                                     style="object-fit: cover; height: 250px;object-position: center center;">
-//                             </div>
-//                             <div class="col-md-8">
-//                                 <div class="card-body">
-//                                     <h5 class="card-title">${element.nombre}-${element.marca}</h5>
-//                                     <p class="card-text text-primary">${element.descripcion}</p>
-//                                     <h3>Precio: $${element.precio}</h3>
-//                                     <div class="d-flex" style="flex-direction: row;">
-//                                         <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-//                                         <button onclick="agregaralcarrito(${element.idproducto})" class="btn btn-primary ms-3">COMPRAR</button>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>`;
-//             });
-
-//             document.getElementById("productos").innerHTML = card;
-
-//             // Actualizar la paginación si es necesario
-//             if (productos.total > productos.per_page) {
-//                 actualizarPaginacion(productos);
-//             }
-//         })
-//         .catch(err => {
-//             console.error(err);
-//         });
-// }
-
 document.addEventListener("DOMContentLoaded", function () {
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
@@ -415,18 +368,14 @@ function agregaralcarrito(id) {
     // Verificar si el ID ya está en el carrito
     if (!carrito.includes(id)) {
         carrito.push(id);
-        console.log("Producto agregado al carrito:", id);
+        mostrarAlerta('Producto agregado al carrito');
+        localStorage.productos = JSON.stringify(carrito);
     } else {
-        console.log("El producto ya está en el carrito:", id);
+        mostrarAlerta2('El producto ya está en el carrito');
     }
-    console.log(carrito);
 }
 
 carrito = JSON.parse(localStorage.getItem("productos")) || [];
-
-function mostrarcarrito() {
-    localStorage.productos = JSON.stringify(carrito);
-}
 
 // <- TODO LO RELACIONADO CON EL CARRITO DE COMPRAS EN ESTE BLOQUE
 
@@ -451,3 +400,35 @@ function nosotros() {
         });
 }
 nosotros();
+function mostrarAlerta(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.success(mensaje, 3);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.error(mensaje, 3); // Duración de 3 segundos
+}
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamañocarrito = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamañocarrito);
+}
+setInterval(mostrarcantidadcarrito, 500)
+
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+}
