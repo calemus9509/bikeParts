@@ -11813,3 +11813,4 @@
 #62 C:\\laragon\\www\\bikeParts\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\laragon\\\\www\\\\...')
 #63 {main}
 "} 
+[2023-12-07 23:36:17] local.INFO: Iniciando restablecerContraseña...  

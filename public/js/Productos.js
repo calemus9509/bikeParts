@@ -129,12 +129,16 @@ function MostrarProductos(pagina = 1) {
             var card2 = "";
             res.data.forEach((element) => {
                 const imagenesArray = JSON.parse(element.imagenes);
-                card2 += `<div class="card m-2" style="width: 14rem;">
-                    <img src="${imagenesArray[0]}" class="card-img-top custom-image" alt="..." >
-                    <a class="text-black" style="text-decoration: none;cursor: pointer;" onclick="filtrarPorCategoria(${element.idcategorias})">
-        <h3 class="text-center">${element.nombre}</h3>
-    </a>
-                </div>`;
+                card2 += `<div class="card m-2" style="width: 14rem; position: relative; overflow: hidden;" onmouseover="hoverCard(this)"
+                onmouseout="unhoverCard(this)" >
+                <img src="${imagenesArray[0]}" class="card-img-top" alt="..."
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="card-overlay" onclick="filtrarPorCategoria(${element.idcategorias})"
+    
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+                    <h3 style="color: white; font-size: 1.5rem; transition: transform 0.3s ease;">${element.nombre}</h3>
+                </div>
+            </div>`;
             });
             document.getElementById("categoriasss").innerHTML = card2;
         })
@@ -142,6 +146,18 @@ function MostrarProductos(pagina = 1) {
             console.error(err);
         });
 }
+
+// efectos de la carta de categorias
+function hoverCard(card) {
+    card.querySelector('.card-overlay').style.opacity = "1";
+    card.querySelector('h3').style.transform = "scale(1.1)";
+}
+
+function unhoverCard(card) {
+    card.querySelector('.card-overlay').style.opacity = "0";
+    card.querySelector('h3').style.transform = "scale(1)";
+}
+// fin de efectos
 
 function handleOrdenSelection(orden) {
     // Guarda la elección del usuario en el localStorage
