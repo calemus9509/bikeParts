@@ -5,6 +5,7 @@ function mostrarDetalleProducto(id) {
         .get(`/obtener-producto/${id}`)
         .then((res) => {
             var producto = res.data.producto; // Accede al objeto producto
+            var imagenesArray = JSON.parse(producto.imagenes); 
             // Aquí puedes usar la información del producto como desees
             console.log(producto);
             var stock = producto.cantidad;
@@ -31,20 +32,20 @@ function mostrarDetalleProducto(id) {
             </div>
             <div class="col-md-6">
                 <div class="m-3 border border-black border-5 rounded-4" style="height: 500px; background-color: rgb(209, 206, 206); overflow: hidden;">
-                    <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${imagenesArray[0]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="m-3 bg-primary" style="height: 20px;">
                     <!-- Contenido del div bg-primary -->
                 </div>
                 <div class="mb-4 d-flex justify-content-around">
                     <div class="border border-black border-5" style="height: 100px; background-color: rgb(209, 206, 206); width: 100px; overflow: hidden;">
-                        <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${imagenesArray[1]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="border border-black border-5" style="height: 100px; background-color: rgb(209, 206, 206); width: 100px; overflow: hidden;">
-                        <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${imagenesArray[2]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="border border-black border-5" style="height: 100px; background-color: rgb(209, 206, 206); width: 100px; overflow: hidden;">
-                        <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${imagenesArray[3]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
