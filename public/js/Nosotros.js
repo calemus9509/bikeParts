@@ -5,6 +5,7 @@ function nosotros() {
             descripcion = "";
             mision = "";
             vision = "";
+            footer = "";
 
             console.log(res.data);
             descripcion += `<div class="col-md-7 text-center mb-3 mb-md-0">
@@ -39,6 +40,14 @@ function nosotros() {
         </div>
     </div>
 </div>`;
+
+footer += `<h3>Información de Contacto</h3>
+<p>Teléfono: +57-${res.data.telefono}</p>
+<p>Email: ${res.data.correo}</p>
+<p>Dirección: ${res.data.direccion}</p>
+<a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+document.getElementById("footer").innerHTML = footer;
 
         
         document.getElementById("descripcion").innerHTML = descripcion;
@@ -147,4 +156,26 @@ function mostrarResultadosAutocompletado(resultados) {
         autocompleteResults.style.display = "none";
     }
 }
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamaño = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamaño);
+}
 
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+}

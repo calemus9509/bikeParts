@@ -13,7 +13,8 @@ function crear() {
         imagen: txtImagen.value,
         vision: txtVision.value,
         mision: txtMision.value,
-
+        correo: txtcorreo.value,
+        instagram: txtinstagram.value,
     })
         .then(res => {
             console.log(res)
@@ -40,7 +41,7 @@ function mostrar() {
                     <td>${element.nombre}</td>
                     <td>${element.descripcion}</td>
                     <td>${element.nit}</td>
-                    <td><img src="${element.imagen}" alt="${element.nombre}" width="50"></td>
+                    <td><img src="${element.imagen}" style="width: 50%;"></td>
                     <td>
                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modificarModal" onclick='leerModificacion(${JSON.stringify(element)})'>Modificar</a>
                         <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick='leerModificacion(${JSON.stringify(element)})'>Inhabilitar</a>
@@ -85,6 +86,8 @@ function limpiar() {
     document.getElementById("txtVision").value = "";
     document.getElementById("txtMision").value = "";
     document.getElementById("txtAdmin").value = "";
+    document.getElementById("txtcorreo").value = "";
+    document.getElementById("txtinstagram").value = "";
 }
 
 function leerModificacion(element) {
@@ -99,6 +102,8 @@ function leerModificacion(element) {
     txtVision2.value = element.vision;
     txtMision2.value = element.mision;
     txtTelefono2.value = element.telefono;
+    txtcorreo2.value = element.correo;
+    txtinstagram2.value = element.instagram;
     axios.get("/personas")
     .then(res => {
         const select = document.getElementById('txtAdmin2');
@@ -133,6 +138,8 @@ function Modificar() {
         imagen: txtImagen2.value,
         vision: txtVision2.value,
         mision: txtMision2.value,
+        correo: txtcorreo2.value,
+        instagram: txtinstagram2.value,
     })
         .then(res => {
 

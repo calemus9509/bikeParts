@@ -14,12 +14,35 @@
     <script src="js/Paginaprincipal.js"></script>
 </head>
 
-<body>
+<body onload="mostrarcantidadcarrito()">
+
+    
 
     <div class="container-fluid">
+        <!-- modal para confirmar retiro y eliminacion del carrito -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de regresar a la Pagina Principal?
+                    se eliminaran todos los productos del carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="noretiro()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- buscador -->
         <div class="row icon-container">
-            <a href="/" class="col-2 d-flex justify-content-end">
+            <a href="/" class="col-2 d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            onclick="validacioncarrito()">
                 <img src="img/bikeParts.png" alt="" class="img-responsive">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
@@ -36,6 +59,10 @@
                 <hr class="vertical-line text-primary" />
                 <a href="carrito" class="text-black">
                     <i class="fa-solid fa-cart-shopping" style="height: 35px;cursor: pointer;"></i>
+                    <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger"
+                        id="cantidadItems">
+                        0
+                <span class="visually-hidden">unread messages</span>
                 </a>
             </div>
         </div>
@@ -58,30 +85,37 @@
             </div>
         </div>
 
-        <!-- carrusel -->
+        <!-- carrusel-->
         <div class="row mt-3">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide position-relative" data-bs-ride="carousel">
+
+                <!-- Contenedor de las imágenes -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="img/carrusel1.jpg" class="d-block w-100" alt="...">
+                        <img src="img/carrusel1.jpg" class="d-block w-100 object-fit-cover" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="img/carrusel2.jpg" class="d-block w-100" alt="...">
+                        <img src="img/carrusel2.jpg" class="d-block w-100 object-fit-cover" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="img/carrusel3.jpg" class="d-block w-100" alt="...">
+                        <img src="img/carrusel3.jpg" class="d-block w-100 object-fit-cover" alt="...">
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <button type="button" class="dot" data-bs-target="#carouselExampleIndicators"
+
+                <!-- Botones de desplazamiento -->
+                <div class="d-flex justify-content-center position-absolute w-100 bottom-0">
+                    <button type="button" class="dot bg-light border-black" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="0"></button>
-                    <button type="button" class="dot" data-bs-target="#carouselExampleIndicators"
+                    <button type="button" class="dot bg-light border-black" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="1"></button>
-                    <button type="button" class="dot" data-bs-target="#carouselExampleIndicators"
+                    <button type="button" class="dot bg-light border-black" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="2"></button>
                 </div>
+
             </div>
         </div>
+        <!-- fin del codigo carrusel -->
+
         <!-- lines azul sin sentido -->
         <div class="row mt-3">
             <div class="bg-primary" style="height: 20px;"></div>
@@ -134,52 +168,42 @@
         <div class="row mt-4">
             <div class="bg-primary" style="height: 20px;"></div>
         </div>
-        <!-- nuestros clientes -->
+        <!--Inicio Preguntas frecuentes -->
         <div class="row" style="background-color: rgb(212, 212, 212);">
             <div class="bg-black text-white d-flex align-items-center justify-content-center" style="height: 70px;">
-                <h2>NUESTROS CLIENTES</h2>
+                <h2>PREGUNTAS FRECUENTES</h2>
             </div>
             <div class="mt-5 mb-5 d-flex justify-content-around flex-wrap">
-                <div class="text-center m-2" style="max-width: 300px;">
-                    <img src="img/carrusel1.jpg" width="150px" height="150px" style="border-radius: 50%;">
-                    <p style="font-weight: 600;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur,
-                        vero. Eius error totam ipsa
-                        eaque distinctio, libero culpa, id consequuntur consequatur dolores eveniet pariatur delectus
-                        accusantium veritatis ut quae iste.</p>
+                <div class="text-center m-2" style="max-width: 500px;">
+
+                    <p style="font-weight: 1000;">¿Cómo puedo buscar piezas específicas para mi modelo de moto?</p>
+                    <p> Puedes utilizar la barra de búsqueda en la página principal e ingresar el nombre,
+                        o puedes navegar por las categorías de productos para encontrar la pieza que necesitas.</p>
                 </div>
-                <div class="text-center m-2" style="max-width: 300px;">
-                    <img src="img/duke.jpg" width="150px" height="150px" style="border-radius: 50%;">
-                    <p style="font-weight: 600;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur,
-                        vero. Eius error totam ipsa
-                        eaque distinctio, libero culpa, id consequuntur consequatur dolores eveniet pariatur delectus
-                        accusantium veritatis ut quae iste.</p>
+                <div class="text-center m-2" style="max-width: 500px;">
+
+                    <p style="font-weight: 1000;"> ¿Cómo hago para realizar un pedido?</p>
+                    <p> Después de encontrar la pieza que necesitas, agrégala al carrito de compras y sigue
+                        los pasos del proceso de pago. Asegúrate de proporcionar la información de envío correcta.</p>
                 </div>
-                <div class="text-center m-2" style="max-width: 300px;">
-                    <img src="img/carrusel2.jpg" width="150px" height="150px" style="border-radius: 50%;">
-                    <p style="font-weight: 600;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur,
-                        vero. Eius error totam ipsa
-                        eaque distinctio, libero culpa, id consequuntur consequatur dolores eveniet pariatur delectus
-                        accusantium veritatis ut quae iste.</p>
+                <div class="text-center m-2" style="max-width: 500px;">
+
+                    <p style="font-weight: 1000;"> ¿Ofrecen descuentos o promociones especiales?</p>
+                    <p>Sí, ocasionalmente ofrecemos descuentos y promociones especiales. Mantente actualizado revisando
+                        nuestras
+                        redes sociales y suscribiéndote a nuestro boletín de noticias.</p>
                 </div>
             </div>
         </div>
+
+        <!--  fin Preguntas frecuentes -->
         <!-- footer -->
         <div class="row bg-black text-white mt-3">
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Información de Contacto</h3>
-                <p>Teléfono: +123456789</p>
-                <p>Email: info@example.com</p>
-                <p>Dirección: 123 Calle Principal</p>
+            <div class="col-lg-4 col-12 mt-3 mb-3 d-flex justify-content-center">
+                <img src="img/bikeParts.png" style="width: 30%;" alt="">
             </div>
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Redes Sociales</h3>
-                <ul>
-                    <li><a href="https://web.facebook.com/profile.php?id=100041777677632"
-                            style="text-decoration: none;">Facebook</a></li>
-                    <li><a href="#" style="text-decoration: none;">Twitter</a></li>
-                    <li><a href="https://www.instagram.com/jaime_montoya08/"
-                            style="text-decoration: none;">Instagram</a></li>
-                </ul>
+            <div class="col-lg-4 col-12 mt-3 mb-3" id="footer">
+                
             </div>
             <div class="col-lg-4 col-12 mt-3 mb-3">
                 <h3>Quejas y Reclamaciones</h3>

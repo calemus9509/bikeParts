@@ -184,4 +184,28 @@ class ProductoController extends Controller
         $producto->estado = 'I';
         $producto->save();
     }
+
+    public function obtenerProductosOrdenados(Request $request, $orden)
+    {
+        // Obtén el ID de la empresa desde la solicitud
+        $empresaId = $request->input('empresa');
+
+        // Filtra los productos por ID de empresa si está presente
+        $query = Producto::where('estado', 'A');
+        if ($empresaId) {
+            $query->where('empresa_id', $empresaId);
+        }
+
+        // Aplica el orden según el parámetro proporcionado
+        if ($orden === 'mayor') {
+            $query->orderBy('precio', 'desc');
+        } elseif ($orden === 'menor') {
+            $query->orderBy('precio', 'asc');
+        }
+
+        // Obtén los productos paginados directamente desde la base de datos
+        $productos = $query->paginate(6); // Cambia el número 6 según la cantidad deseada por página
+
+        return response()->json($productos);
+    }
 }

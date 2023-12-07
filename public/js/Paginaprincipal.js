@@ -170,7 +170,54 @@ function mostrarProductosAleatorios(){
 
 mostrarProductosAleatorios()
 
+
+function nosotros() {
+    const empresaId = localStorage.getItem('empresaSeleccionada');
+    axios.get(`/empresas/${empresaId}`)
+        .then(res => {
+            console.log(res);
+            footer = "";
+
+            footer += `<h3>Información de Contacto</h3>
+            <p>Teléfono: +57-${res.data.telefono}</p>
+            <p>Email: ${res.data.correo}</p>
+            <p>Dirección: ${res.data.direccion}</p>
+            <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+            document.getElementById("footer").innerHTML = footer;
+        })
+        .catch(err => {
+            console.error(err);
+        })
+}
+nosotros();
+
 function mostrarDetalle(idproducto) {
     // Guarda el ID en el localStorage
     localStorage.setItem('productoId', idproducto);
+}
+
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamañocarrito = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamañocarrito);
+}
+setInterval(mostrarcantidadcarrito, 500)
+
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
 }

@@ -1,6 +1,7 @@
 let detallecarrito = "";
 let totalGlobal = 0;
 let carrito = [];
+let tamañocar = "";
 
 document.addEventListener("DOMContentLoaded", function () {
     // Obtén el input de búsqueda
@@ -130,6 +131,7 @@ function mostrarcarrito(carrito) {
             .get(`/obtener-producto/${idProducto}`)
             .then(function (res) {
                 var producto = res.data.producto;
+                let tamañocar = `${carrito.length}`;
                 console.log(producto);
 
                 detallecarrito += `<div class="card mb-3" style="background-color: rgb(209, 206, 206);">
@@ -156,7 +158,7 @@ function mostrarcarrito(carrito) {
                             <div class="input-group" style="width: 120px;">
                                 <input type="number" class="form-control" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(
                     producto
-                )}, ${index})'>
+                )}, ${index}),enviarCarritoPorWhatsApp(${index})'>
                             </div>
                         </div>
                     </div>
@@ -181,6 +183,10 @@ function mostrarcarrito(carrito) {
 function actCantidad(producto, index) {
     let cantidadInput = document.getElementById(`cantidadporca${index}`);
     let cantidadNueva = parseInt(cantidadInput.value, 10);
+    // Verificar si el campo del input está vacío y establecer cantidadNueva a 1
+    if (!cantidadInput.value || cantidadNueva === 0) {
+        cantidadNueva = 1;
+    }
 
     // Obtener la cantidad anterior almacenada en un atributo data-prev-cantidad
     let cantidadAnterior =
@@ -212,7 +218,7 @@ function eliminardelcarrito(id) {
 
     if (index !== -1) {
         carrito.splice(index, 1);
-        console.log("Producto eliminado del array:", id);
+        mostrarAlerta("El producto se elimino con exito");
 
         if (carrito.length === 0) {
             // Si el carrito está vacío, establecer contenido y totalGlobal en cero
@@ -225,7 +231,7 @@ function eliminardelcarrito(id) {
         } else {
             // Si el carrito no está vacío, actualizar la interfaz de usuario
             localStorage.productos = JSON.stringify(carrito);
-            mostrarcarrito(carrito);
+            setTimeout(actualizarpagina, 1000);
         }
     } else {
         console.log("El producto no se encontró en el array");

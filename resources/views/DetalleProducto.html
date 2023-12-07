@@ -11,14 +11,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/alertify.css" />
+    <script src="js/alertify.js"></script>
 </head>
 
-<body>
+<body onload="mostrarcantidadcarrito()">
+    <!-- modal para confirmar retiro y eliminacion del carrito -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de regresar a la Pagina Principal?
+                    se eliminaran todos los productos del carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="noretiro()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid">
         <!-- buscador -->
         <div class="row icon-container">
-            <a href="/" class="col-2 d-flex justify-content-end">
+            <a href="/" class="col-2 d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            onclick="validacioncarrito()">
                 <img src="img/bikeParts.png" alt="" class="img-responsive">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
@@ -35,6 +58,10 @@
                 <hr class="vertical-line text-primary" />
                 <a href="carrito" class="text-black">
                     <i class="fa-solid fa-cart-shopping" style="height: 35px;cursor: pointer;"></i>
+                    <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger"
+                        id="cantidadItems">
+                        0
+                <span class="visually-hidden">unread messages</span>
                 </a>
             </div>
         </div>
@@ -58,32 +85,12 @@
         </div>
 
         <!-- detalles -->
-        <div id="detalles" class="row mt-5 m-2 rounded" style="background-color: rgb(209, 206, 206);">
+        <div id="detalles" class="row mt-5 mb-5 m-2 rounded" style="background-color: rgb(209, 206, 206);">
 
 
         </div>
 
-        <!-- descripcion -->
-        <div class="container bg-primary mt-4" style="height: 20px;">
-
-        </div>
-        <div class="row text-center">
-            <h1 class="espacio">DESCRIPCION</h1>
-        </div>
-        <div class="container bg-primary" style="height: 20px;">
-
-        </div>
-        <div class="row text-center m-5">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores quas vel, alias distinctio ipsa
-                necessitatibus fuga suscipit nesciunt aliquid, porro delectus quos nihil beatae illo nulla, placeat
-                temporibus modi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat saepe inventore non.
-                Culpa, corrupti sed dolor animi, tempora deserunt ea cum ratione, rerum eius omnis voluptatum non quae
-                ut quasi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, consequatur quas. Fugiat
-                debitis nemo molestiae non corrupti blanditiis repellendus, quos illo. Recusandae, tenetur deleniti at
-                eius est cum adipisci quasi? Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-                perspiciatis reprehenderit ullam architecto maxime praesentium? Neque sapiente aut ipsa perspiciatis
-                quasi cumque maxime, laudantium, qui eveniet earum facere nobis mollitia!</p>
-        </div>
+        
 
         <!-- footer -->
         <div class="row bg-black text-white">

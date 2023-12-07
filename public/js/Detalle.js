@@ -24,7 +24,7 @@ function mostrarDetalleProducto(id) {
                     <h2>STOCK DISPONIBLE</h2>
                 </div>
                 <div class="mt-3 mb-3 text-white">
-                    <a class="btn btn-primary" style="width: 100%; font-weight: 600;">AGREGAR AL CARRITO</a>
+                    <a class="btn btn-primary" style="width: 100%; font-weight: 600;" onclick="agregaralcarrito(${producto.idproducto})">AGREGAR AL CARRITO</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -165,4 +165,52 @@ function mostrarResultadosAutocompletado(resultados) {
         // Si no hay resultados, oculta el contenedor
         autocompleteResults.style.display = "none";
     }
+}
+
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamañocarrito = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamañocarrito);
+}
+setInterval(mostrarcantidadcarrito, 500)
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+}
+
+// funcion del carrito
+function agregaralcarrito(id) {
+    // Verificar si el ID ya está en el carrito
+    if (!carrito.includes(id)) {
+        carrito.push(id);
+
+        mostrarAlerta('Producto agregado al carrito');
+        localStorage.productos = JSON.stringify(carrito)
+    } else {
+        mostrarAlerta2('El producto ya está en el carrito');
+    }
+    console.log(carrito);
+}
+carrito = JSON.parse(localStorage.getItem('productos')) || [];
+
+function mostrarAlerta(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.success(mensaje, 3);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.error(mensaje, 3); // Duración de 3 segundos
 }

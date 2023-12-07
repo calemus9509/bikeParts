@@ -80,11 +80,6 @@ Route::get('/carrito', function () {
 Route::get('/nosotros', function () {
     return view('Nosotros');
 });
-// Route::get('/login', function () {
-//     $response = response(view('Login'));
-
-//     return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
-// });
 Route::get('/login', function () {
     // Verificar si el usuario ya ha iniciado sesión
     if (session('user')) {
@@ -137,6 +132,8 @@ Route::get('/obtener-productos', [ProductoController::class, 'obtenerProductos']
 Route::get('/buscar-autocompletado', [ProductoController::class, 'buscarAutocompletado']);
 
 Route::get('/obtener-producto/{idproducto}', [ProductoController::class, 'encontrarProducto']);
+
+Route::get('/obtener-productos-ordenados/{orden}', [ProductoController::class, 'obtenerProductosOrdenados']);
 
 Route::get('/categorias', [CategoriaController::class, 'index']);
 
