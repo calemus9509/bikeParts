@@ -136,27 +136,28 @@ function mostrarcarrito(carrito) {
                 let tamañocar = `${carrito.length}`
                 console.log(producto);
 
-                detallecarrito += `<div class="card mb-3" style="background-color: rgb(209, 206, 206);">
-                    <div class="d-flex justify-content-center align-items-center"
-                        style="max-height: 200px; overflow: hidden;">
-                        <img src="https://tiendaonlinebmw.vtexassets.com/arquivos/ids/158586-800-auto?v=637498647336900000&width=800&height=auto&aspect=true"
-                            class="card-img-top" alt="..." style="max-width: 100%;">
+                detallecarrito += `<div class="card mb-3  border-dark" style="max-width: 750px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://tiendaonlinebmw.vtexassets.com/arquivos/ids/158586-800-auto?v=637498647336900000&width=800&height=auto&aspect=true" class="img-fluid rounded-start w-100" alt="...">
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${producto.nombre} - ${producto.marca} </h5>
-                        <p class="card-text text-primary">${producto.descripcion}</p>
-                        <h3 id="precio${index}">Precio: $${producto.precio}</h3>
-                    
-
-                        <!-- Botón de eliminar y campo de cantidad -->
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-danger btn-block" onclick="eliminardelcarrito(${producto.idproducto})">Eliminar</button>
-                            <div class="input-group" style="width: 120px;">
-                                <input type="number" class="form-control" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(producto)}, ${index})'>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">${producto.nombre} - ${producto.marca} </h2>
+                            <p class="card-text">${producto.descripcion}</p>
+                            <h4 class="mb-3 text-primary" id="precio${index}">Precio: $${producto.precio}</h4>
+        
+                            <div class="d-flex justify-content-between align-items-center">
+                            <!-- Botón de eliminar y campo de cantidad -->
+                                <button class="btn btn-danger" onclick="eliminardelcarrito(${producto.idproducto})">Eliminar</button>
+                                <div class="input-group" style="width: 120px;">
+                                <input type="number" class="form-control border-dark" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(producto)}, ${index})'>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>`
+                </div>
+            </div>`
 
                 // sumamos el precio unitario para el primer subtotal
                 totalGlobal += producto.precio;
@@ -165,6 +166,7 @@ function mostrarcarrito(carrito) {
                 document.getElementById("detallecarrito").innerHTML = detallecarrito;
                 document.getElementById("total").innerHTML = "$" + totalGlobal;
                 document.getElementById("cantidadItems").innerHTML = tamañocar + "+";
+                document.getElementById("totalPRO").innerHTML = tamañocar;
 
             })
             .catch(function (error) {
