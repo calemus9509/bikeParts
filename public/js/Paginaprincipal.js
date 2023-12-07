@@ -109,22 +109,20 @@ function mostrarCategorias() {
             res.data.forEach((element) => {
                 const imagenesArray = JSON.parse(element.imagenes);
                 cardsHTML += `
-            <div class="col-md-4 mb-5 mt-2 d-flex justify-content-center">
-                <div class="d-flex flex-column align-items-center p-3 mb-5"
-                    style="height: 250px; width: 350px; position: relative;">
-
-                    <div class="card text-bg-dark border-primary border-3 rounded">
-                    <a onclick="mostrarId(${element.idcategorias})" >
+                <div class="d-flex flex-column align-items-center p-3  m-5"
+                style="height: 250px; width: 250px; position: relative;">
+    
+                <div class="card text-bg-dark border-black border-3 rounded " onmouseover="growCard(this)"
+                    onmouseout="shrinkCard(this)">
+                    <a onclick="mostrarId(${element.idcategorias})">
                         <img src="${imagenesArray[0]}" alt="Amortiguador"
-                            style="width: 300px; height: 300px; object-fit: cover;">
-                        <div class="card-img-overlay">
-
-                            <h5 class="card-title bg-black rounded text-center" style="color: white;">${element.nombre}</h5>
-                            <p class="card-text"></p>
+                            style="width: 300px; height: 300px; object-fit: cover; transition: transform 0.3s;">
+                        <div class="card-img-overlay mt-5">
+                            <h5 class="card-title rounded text-center text-white"
+                                style="position: absolute; bottom: 0; width: 90%; background-color: rgba(0, 0, 0, 0.7); padding: 4px;">
+                                ${element.nombre}</h5>
                         </div>
-
                     </a>
-                    </div>
                 </div>
             </div>
             `;
@@ -136,6 +134,16 @@ function mostrarCategorias() {
             console.error(err);
         });
 }
+
+// efecto de carta de categorias inicio
+function growCard(card) {
+    card.style.transform = "scale(1.1)";
+}
+
+function shrinkCard(card) {
+    card.style.transform = "scale(1)";
+}
+// fin de funciones efectos carta inicio
 
 function mostrarId(categoriaId) {
     localStorage.setItem("idCategory", categoriaId);
