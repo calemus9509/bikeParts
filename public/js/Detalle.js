@@ -5,8 +5,10 @@ function mostrarDetalleProducto(id) {
         .get(`/obtener-producto/${id}`)
         .then((res) => {
             var producto = res.data.producto; // Accede al objeto producto
+            var imagenesArray = JSON.parse(producto.imagenes); 
             // Aquí puedes usar la información del producto como desees
             console.log(producto);
+            var stock = producto.cantidad;
 
             // Actualiza el contenido de "detalle"
             var detalle = `<div class="row">
@@ -21,8 +23,8 @@ function mostrarDetalleProducto(id) {
                 <div class="mb-3 d-flex justify-content-start">
                     <h3>Precio: $${producto.precio}</h3>
                 </div>
-                <div class="mt-5 mb-3 bg-primary text-center rounded">
-                    <h2>STOCK DISPONIBLE</h2>
+                <div id="stock">
+                  
                 </div>
                 <div class="mt-3 mb-3 text-white">
                     <a class="btn btn-primary" style="width: 100%; font-weight: 600;" onclick="agregaralcarrito(${producto.idproducto})">AGREGAR AL CARRITO</a>
@@ -30,27 +32,44 @@ function mostrarDetalleProducto(id) {
             </div>
             <div class="col-md-6">
                 <div class="m-3 border border-black border-5 rounded-4" style="height: 500px; background-color: rgb(209, 206, 206); overflow: hidden;">
-                    <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${imagenesArray[0]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="m-3 bg-primary" style="height: 20px;">
                     <!-- Contenido del div bg-primary -->
                 </div>
                 <div class="mb-4 d-flex justify-content-around">
                     <div class="border border-black border-5" style="height: 100px; background-color: rgb(209, 206, 206); width: 100px; overflow: hidden;">
-                        <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${imagenesArray[1]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="border border-black border-5" style="height: 100px; background-color: rgb(209, 206, 206); width: 100px; overflow: hidden;">
-                        <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${imagenesArray[2]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="border border-black border-5" style="height: 100px; background-color: rgb(209, 206, 206); width: 100px; overflow: hidden;">
-                        <img src="img/duke.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${imagenesArray[3]}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
         </div>`;
 
-            // Asigna el contenido de "detalle" al elemento con id "detalles"
-            document.getElementById("detalles").innerHTML = detalle;
+           // Asigna el contenido de "detalle" al elemento con id "detalles"
+           document.getElementById("detalles").innerHTML = detalle;
+
+           if (stock < 15 && stock > 0) {
+               document.getElementById("stock").innerHTML = `
+                <div class="mt-5 mb-5 bg-warning text-center rounded" >
+                <h2>Stock Bajo</h2>
+               </div>`;
+           } else if (stock === 0) {
+               document.getElementById("stock").innerHTML = `
+               <div class="mt-5 mb-5 bg-danger text-center rounded">
+               <h2>Stock No Disponible</h2>
+              </div>`;
+           } else if (stock >= 15) {
+               document.getElementById("stock").innerHTML = `
+               <div class="mt-5 mb-5 bg-success text-center rounded" >
+               <h2>Stock  Disponible</h2>
+              </div>`;
+           }
         })
         .catch((err) => {
             console.error(err);
