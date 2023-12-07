@@ -1,8 +1,9 @@
 // Función para mostrar los detalles del producto
 function mostrarDetalleProducto(id) {
     // Realiza una solicitud Axios para obtener los detalles del producto por ID
-    axios.get(`/obtener-producto/${id}`)
-        .then(res => {
+    axios
+        .get(`/obtener-producto/${id}`)
+        .then((res) => {
             var producto = res.data.producto; // Accede al objeto producto
             // Aquí puedes usar la información del producto como desees
             console.log(producto);
@@ -51,28 +52,27 @@ function mostrarDetalleProducto(id) {
             // Asigna el contenido de "detalle" al elemento con id "detalles"
             document.getElementById("detalles").innerHTML = detalle;
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
         });
 }
 
-
 // En tu archivo Detalle.js (o donde tengas tu lógica de la página de detalles)
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Recupera el ID del producto almacenado en el localStorage
-    var productoId = localStorage.getItem('productoId');
+    var productoId = localStorage.getItem("productoId");
 
     // Verifica si el ID está presente
     if (productoId) {
         // Llama a la función para mostrar los detalles del producto
         mostrarDetalleProducto(productoId);
     } else {
-        console.error('No se encontró el ID del producto en el localStorage');
+        console.error("No se encontró el ID del producto en el localStorage");
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
 
@@ -99,8 +99,13 @@ function buscarAutocompletado(termino) {
     var autocompleteResults = document.getElementById("autocompleteResults");
 
     // Realiza una solicitud al servidor para obtener resultados de autocompletado
-    axios.get(`/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem('empresaSeleccionada')}`)
-        .then(res => {
+    axios
+        .get(
+            `/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem(
+                "empresaSeleccionada"
+            )}`
+        )
+        .then((res) => {
             // Muestra los resultados en la consola
             mostrarResultadosAutocompletado(res.data);
 
@@ -113,11 +118,10 @@ function buscarAutocompletado(termino) {
 
             console.log("Resultados de la búsqueda:", res.data);
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
         });
 }
-
 
 function mostrarResultadosAutocompletado(resultados) {
     var autocompleteResults = document.getElementById("autocompleteResults");
@@ -129,7 +133,7 @@ function mostrarResultadosAutocompletado(resultados) {
         var resultsContainer = document.createElement("div");
 
         // Crea elementos para cada resultado y agrégales al contenedor
-        resultados.forEach(resultado => {
+        resultados.forEach((resultado) => {
             var resultItem = document.createElement("div");
             resultItem.className = "card";
             resultItem.innerHTML = `
@@ -143,8 +147,8 @@ function mostrarResultadosAutocompletado(resultados) {
             // Agrega un evento de clic al resultado
             resultItem.addEventListener("click", function () {
                 // Al hacer clic, guarda el ID en localStorage y redirige a la página de detalles
-                localStorage.setItem('productoId', resultado.idproducto);
-                window.location.href = '/detalle';
+                localStorage.setItem("productoId", resultado.idproducto);
+                window.location.href = "/detalle";
             });
 
             resultsContainer.appendChild(resultItem);
@@ -168,26 +172,26 @@ function mostrarResultadosAutocompletado(resultados) {
 }
 
 function mostrarcantidadcarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
-    tamañocarrito = `${carrito.length}+`
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
+    tamañocarrito = `${carrito.length}+`;
     document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
     console.log(tamañocarrito);
 }
-setInterval(mostrarcantidadcarrito, 500)
+setInterval(mostrarcantidadcarrito, 500);
 // onclicks del modal
 function retirodepagina() {
-    window.location.href = '/';
-    localStorage.removeItem('productos')
+    window.location.href = "/";
+    localStorage.removeItem("productos");
 }
 function noretiro() {
-    window.location.href = '/carrito';
+    window.location.href = "/carrito";
 }
 function validacioncarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $('#exampleModal').modal('show');
+        $("#exampleModal").modal("show");
     } else {
-        window.location.href = '/';
+        window.location.href = "/";
     }
 }
 
@@ -197,20 +201,20 @@ function agregaralcarrito(id) {
     if (!carrito.includes(id)) {
         carrito.push(id);
 
-        mostrarAlerta('Producto agregado al carrito');
-        localStorage.productos = JSON.stringify(carrito)
+        mostrarAlerta("Producto agregado al carrito");
+        localStorage.productos = JSON.stringify(carrito);
     } else {
-        mostrarAlerta2('El producto ya está en el carrito');
+        mostrarAlerta2("El producto ya está en el carrito");
     }
     console.log(carrito);
 }
-carrito = JSON.parse(localStorage.getItem('productos')) || [];
+carrito = JSON.parse(localStorage.getItem("productos")) || [];
 
 function mostrarAlerta(mensaje) {
-    alertify.set('notifier', 'position', 'top-center');
+    alertify.set("notifier", "position", "top-center");
     alertify.success(mensaje, 3);
 }
 function mostrarAlerta2(mensaje) {
-    alertify.set('notifier', 'position', 'top-center');
+    alertify.set("notifier", "position", "top-center");
     alertify.error(mensaje, 3); // Duración de 3 segundos
 }

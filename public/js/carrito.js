@@ -158,7 +158,7 @@ function mostrarcarrito(carrito) {
                             <div class="input-group" style="width: 120px;">
                                 <input type="number" class="form-control" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(
                     producto
-                )}, ${index}),enviarCarritoPorWhatsApp(${index})'>
+                )}, ${index})'>
                             </div>
                         </div>
                     </div>
@@ -171,6 +171,8 @@ function mostrarcarrito(carrito) {
                 document.getElementById("detallecarrito").innerHTML =
                     detallecarrito;
                 document.getElementById("total").innerHTML = "$" + totalGlobal;
+                document.getElementById("cantidadItems").innerHTML =
+                    tamañocar + "+";
             })
             .catch(function (error) {
                 // Manejar errores
@@ -224,10 +226,13 @@ function eliminardelcarrito(id) {
             // Si el carrito está vacío, establecer contenido y totalGlobal en cero
             detallecarrito = "";
             totalGlobal = 0;
+            tamañocar = "";
             document.getElementById("detallecarrito").innerHTML =
                 detallecarrito;
             document.getElementById("total").innerHTML = "$" + totalGlobal;
             localStorage.removeItem("productos");
+            document.getElementById("cantidadItems").innerHTML =
+                tamañocar + "+";
         } else {
             // Si el carrito no está vacío, actualizar la interfaz de usuario
             localStorage.productos = JSON.stringify(carrito);
@@ -318,4 +323,36 @@ function validacioncarrito() {
     } else {
         window.location.href = "/";
     }
+}
+
+function nosotros() {
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    axios
+        .get(`/empresas/${empresaId}`)
+        .then((res) => {
+            console.log(res);
+            footer = "";
+
+            footer += `<h3>Información de Contacto</h3>
+            <p>Teléfono: +57-${res.data.telefono}</p>
+            <p>Email: ${res.data.correo}</p>
+            <p>Dirección: ${res.data.direccion}</p>
+            <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+            document.getElementById("footer").innerHTML = footer;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+nosotros();
+
+// funciones de alertas
+function mostrarAlerta(mensaje) {
+    alertify.set("notifier", "position", "top-center");
+    alertify.error(mensaje, 3);
+}
+
+function actualizarpagina() {
+    location.reload();
 }

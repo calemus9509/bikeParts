@@ -1,7 +1,7 @@
 // var myCarousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'), {
 //     interval: 2000 // Configura el intervalo en 3 segundos
 //   });
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
 
@@ -28,8 +28,13 @@ function buscarAutocompletado(termino) {
     var autocompleteResults = document.getElementById("autocompleteResults");
 
     // Realiza una solicitud al servidor para obtener resultados de autocompletado
-    axios.get(`/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem('empresaSeleccionada')}`)
-        .then(res => {
+    axios
+        .get(
+            `/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem(
+                "empresaSeleccionada"
+            )}`
+        )
+        .then((res) => {
             // Muestra los resultados en la consola
             mostrarResultadosAutocompletado(res.data);
 
@@ -42,11 +47,10 @@ function buscarAutocompletado(termino) {
 
             console.log("Resultados de la búsqueda:", res.data);
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
         });
 }
-
 
 function mostrarResultadosAutocompletado(resultados) {
     var autocompleteResults = document.getElementById("autocompleteResults");
@@ -58,7 +62,7 @@ function mostrarResultadosAutocompletado(resultados) {
         var resultsContainer = document.createElement("div");
 
         // Crea elementos para cada resultado y agrégales al contenedor
-        resultados.forEach(resultado => {
+        resultados.forEach((resultado) => {
             var resultItem = document.createElement("div");
             resultItem.className = "card";
             resultItem.innerHTML = `
@@ -72,8 +76,8 @@ function mostrarResultadosAutocompletado(resultados) {
             // Agrega un evento de clic al resultado
             resultItem.addEventListener("click", function () {
                 // Al hacer clic, guarda el ID en localStorage y redirige a la página de detalles
-                localStorage.setItem('productoId', resultado.idproducto);
-                window.location.href = '/detalle';
+                localStorage.setItem("productoId", resultado.idproducto);
+                window.location.href = "/detalle";
             });
 
             resultsContainer.appendChild(resultItem);
@@ -97,11 +101,13 @@ function mostrarResultadosAutocompletado(resultados) {
 }
 
 function mostrarCategorias() {
-    axios.get("/categorias")
-        .then(res => {
+    axios
+        .get("/categorias")
+        .then((res) => {
             console.log(res);
             var cardsHTML = "";
-            res.data.forEach(element => {
+            res.data.forEach((element) => {
+                const imagenesArray = JSON.parse(element.imagenes);
                 cardsHTML += `
             <div class="col-md-4 mb-5 mt-2 d-flex justify-content-center">
                 <div class="d-flex flex-column align-items-center p-3 mb-5"
@@ -109,7 +115,7 @@ function mostrarCategorias() {
 
                     <div class="card text-bg-dark border-primary border-3 rounded">
                     <a onclick="mostrarId(${element.idcategorias})" >
-                        <img src="img/llanta.jpg" alt="Amortiguador"
+                        <img src="${imagenesArray[0]}" alt="Amortiguador"
                             style="width: 300px; height: 300px; object-fit: cover;">
                         <div class="card-img-overlay">
 
@@ -122,36 +128,37 @@ function mostrarCategorias() {
                 </div>
             </div>
             `;
-
             });
 
             document.getElementById("mostrarCategorias").innerHTML = cardsHTML;
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
         });
 }
 
 function mostrarId(categoriaId) {
-    localStorage.setItem('idCategory', categoriaId);
-    window.location.href = "/productos"
+    localStorage.setItem("idCategory", categoriaId);
+    window.location.href = "/productos";
 }
 
-mostrarCategorias()
+mostrarCategorias();
 
-function mostrarProductosAleatorios(){
-     // Obtener el ID de la empresa desde el localStorage
-     const empresaId = localStorage.getItem('empresaSeleccionada');
- 
-     axios.get(`/obtener-productos?empresa=${empresaId}`)
-         .then(res => {
-             console.log(res);
-             var productos = res.data; // Solo la información de paginación
-             var card = "";
- 
-             productos.data.slice(0, 4).forEach(element => {
-                 card += `<div class="card mb-3" style="width: 17rem;">
-                 <img src="img/carrusel1.jpg" class="card-img-top" alt="..."
+function mostrarProductosAleatorios() {
+    // Obtener el ID de la empresa desde el localStorage
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+
+    axios
+        .get(`/obtener-productos?empresa=${empresaId}`)
+        .then((res) => {
+            console.log(res);
+            var productos = res.data; // Solo la información de paginación
+            var card = "";
+
+            productos.data.slice(0, 4).forEach((element) => {
+                const imagenesArray = JSON.parse(element.imagenes);
+                card += `<div class="card mb-3" style="width: 17rem;">
+                 <img src="${imagenesArray[0]}" class="card-img-top" alt="..."
                      style="object-fit: cover; height: 250px;object-position: center center;">
                  <div class="card-body text-center">
                      <h3 class="card-title">${element.nombre}-${element.marca}</h3>
@@ -159,22 +166,22 @@ function mostrarProductosAleatorios(){
                      <a href="/detalle" onclick="mostrarDetalle(${element.idproducto})" class="btn btn-primary">Ir</a>
                  </div>
              </div>`;
-             });
- 
-             document.getElementById("productosAleatorios").innerHTML = card;
-         })
-         .catch(err => {
-             console.error(err);
-         });
+            });
+
+            document.getElementById("productosAleatorios").innerHTML = card;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
 
-mostrarProductosAleatorios()
-
+mostrarProductosAleatorios();
 
 function nosotros() {
-    const empresaId = localStorage.getItem('empresaSeleccionada');
-    axios.get(`/empresas/${empresaId}`)
-        .then(res => {
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    axios
+        .get(`/empresas/${empresaId}`)
+        .then((res) => {
             console.log(res);
             footer = "";
 
@@ -186,38 +193,38 @@ function nosotros() {
 
             document.getElementById("footer").innerHTML = footer;
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
-        })
+        });
 }
 nosotros();
 
 function mostrarDetalle(idproducto) {
     // Guarda el ID en el localStorage
-    localStorage.setItem('productoId', idproducto);
+    localStorage.setItem("productoId", idproducto);
 }
 
 function mostrarcantidadcarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
-    tamañocarrito = `${carrito.length}+`
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
+    tamañocarrito = `${carrito.length}+`;
     document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
     console.log(tamañocarrito);
 }
-setInterval(mostrarcantidadcarrito, 500)
+setInterval(mostrarcantidadcarrito, 500);
 
 // onclicks del modal
 function retirodepagina() {
-    window.location.href = '/';
-    localStorage.removeItem('productos')
+    window.location.href = "/";
+    localStorage.removeItem("productos");
 }
 function noretiro() {
-    window.location.href = '/carrito';
+    window.location.href = "/carrito";
 }
 function validacioncarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $('#exampleModal').modal('show');
+        $("#exampleModal").modal("show");
     } else {
-        window.location.href = '/';
+        window.location.href = "/";
     }
 }

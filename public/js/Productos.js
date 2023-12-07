@@ -31,11 +31,12 @@ function MostrarProductos(pagina = 1) {
                     var card = "";
 
                     productos.forEach((element) => {
+                        const imagenesArray = JSON.parse(element.imagenes);
                         card += `<div class="col-md-4 mb-3">
                     <div class="card" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
+                                <img src="${imagenesArray[0]}" class="img-fluid rounded-start" alt="..."
                                     style="object-fit: cover; height: 250px;object-position: center center;">
                             </div>
                             <div class="col-md-8">
@@ -86,11 +87,12 @@ function MostrarProductos(pagina = 1) {
                 var card = "";
 
                 productos.data.forEach((element) => {
+                    const imagenesArray = JSON.parse(element.imagenes);
                     card += `<div class="col-md-4 mb-3">
                     <div class="card" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
+                                <img src="${imagenesArray[0]}" class="img-fluid rounded-start" alt="..."
                                     style="object-fit: cover; height: 250px;object-position: center center;">
                             </div>
                             <div class="col-md-8">
@@ -126,8 +128,9 @@ function MostrarProductos(pagina = 1) {
         .then((res) => {
             var card2 = "";
             res.data.forEach((element) => {
+                const imagenesArray = JSON.parse(element.imagenes);
                 card2 += `<div class="card m-2" style="width: 14rem;">
-                    <img src="img/llanta.jpg" class="card-img-top custom-image" alt="...">
+                    <img src="${imagenesArray[0]}" class="card-img-top custom-image" alt="..." >
                     <a class="text-black" style="text-decoration: none;cursor: pointer;" onclick="filtrarPorCategoria(${element.idcategorias})">
         <h3 class="text-center">${element.nombre}</h3>
     </a>
@@ -185,11 +188,12 @@ function filtrarPorCategoria(categoriaId) {
                 var card = "";
 
                 productos.forEach((element) => {
+                    const imagenesArray = JSON.parse(element.imagenes);
                     card += `<div class="col-md-4 mb-3">
                     <div class="card" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
+                                <img src="${imagenesArray[0]}" class="img-fluid rounded-start" alt="..."
                                     style="object-fit: cover; height: 250px;object-position: center center;">
                             </div>
                             <div class="col-md-8">
@@ -368,10 +372,10 @@ function agregaralcarrito(id) {
     // Verificar si el ID ya está en el carrito
     if (!carrito.includes(id)) {
         carrito.push(id);
-        mostrarAlerta('Producto agregado al carrito');
+        mostrarAlerta("Producto agregado al carrito");
         localStorage.productos = JSON.stringify(carrito);
     } else {
-        mostrarAlerta2('El producto ya está en el carrito');
+        mostrarAlerta2("El producto ya está en el carrito");
     }
 }
 
@@ -401,34 +405,34 @@ function nosotros() {
 }
 nosotros();
 function mostrarAlerta(mensaje) {
-    alertify.set('notifier', 'position', 'top-center');
+    alertify.set("notifier", "position", "top-center");
     alertify.success(mensaje, 3);
 }
 function mostrarAlerta2(mensaje) {
-    alertify.set('notifier', 'position', 'top-center');
+    alertify.set("notifier", "position", "top-center");
     alertify.error(mensaje, 3); // Duración de 3 segundos
 }
 function mostrarcantidadcarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
-    tamañocarrito = `${carrito.length}+`
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
+    tamañocarrito = `${carrito.length}+`;
     document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
     console.log(tamañocarrito);
 }
-setInterval(mostrarcantidadcarrito, 500)
+setInterval(mostrarcantidadcarrito, 500);
 
 // onclicks del modal
 function retirodepagina() {
-    window.location.href = '/';
-    localStorage.removeItem('productos')
+    window.location.href = "/";
+    localStorage.removeItem("productos");
 }
 function noretiro() {
-    window.location.href = '/carrito';
+    window.location.href = "/carrito";
 }
 function validacioncarrito() {
-    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $('#exampleModal').modal('show');
+        $("#exampleModal").modal("show");
     } else {
-        window.location.href = '/';
+        window.location.href = "/";
     }
 }
