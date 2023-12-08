@@ -132,7 +132,6 @@ function mostrarcarrito(carrito) {
             .then(function (res) {
                 var producto = res.data.producto;
                 let tamañocar = `${carrito.length}`;
-                console.log(producto);
 
                 detallecarrito += `<div class="card mb-3  border-dark" style="max-width: 750px;">
                 <div class="row g-0">
@@ -141,15 +140,25 @@ function mostrarcarrito(carrito) {
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h2 class="card-title">${producto.nombre} - ${producto.marca} </h2>
+                            <h2 class="card-title">${producto.nombre} - ${
+                    producto.marca
+                } </h2>
                             <p class="card-text">${producto.descripcion}</p>
-                            <h4 class="mb-3 text-primary" id="precio${index}">Precio: $${producto.precio}</h4>
+                            <h4 class="mb-3 text-primary" id="precio${index}">Precio: $${
+                    producto.precio
+                }</h4>
         
                             <div class="d-flex justify-content-between align-items-center">
-                            <!-- Botón de eliminar y campo de cantidad -->
-                                <button class="btn btn-danger" onclick="eliminardelcarrito(${producto.idproducto})">Eliminar</button>
+                                <!-- Botón de eliminar y campo de cantidad -->
+                                <button class="btn btn-danger" onclick="eliminardelcarrito(${
+                                    producto.idproducto
+                                })">Eliminar</button>
                                 <div class="input-group" style="width: 120px;">
-                                <input type="number" class="form-control border-dark" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(producto)}, ${index})'>
+                                    <input type="number" class="form-control border-dark" value="1" min="1" max="${
+                                        producto.cantidad
+                                    }" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(
+                    producto
+                )}, ${index})'>
                                 </div>
                             </div>
                         </div>
@@ -176,12 +185,49 @@ function mostrarcarrito(carrito) {
 }
 
 // funcion que esta sirviendo
+// function actCantidad(producto, index) {
+//     let cantidadInput = document.getElementById(`cantidadporca${index}`);
+//     let cantidadNueva = parseInt(cantidadInput.value, 10);
+//     // Verificar si el campo del input está vacío y establecer cantidadNueva a 1
+//     if (!cantidadInput.value || cantidadNueva === 0) {
+//         cantidadNueva = 1;
+//     }
+
+//     // Obtener la cantidad anterior almacenada en un atributo data-prev-cantidad
+//     let cantidadAnterior =
+//         parseInt(cantidadInput.getAttribute("data-prev-cantidad"), 10) || 1;
+
+//     // Restar el precio anterior multiplicado por la cantidad anterior al totalGlobal
+//     totalGlobal -= cantidadAnterior * producto.precio;
+
+//     // Sumar el nuevo precio multiplicado por la nueva cantidad al totalGlobal
+//     totalGlobal += cantidadNueva * producto.precio;
+
+//     // Actualizar el precio en el HTML
+//     document.getElementById(`precio${index}`).innerHTML = `Precio: $${
+//         cantidadNueva * producto.precio
+//     }`;
+
+//     // Actualizar el totalGlobal en el HTML
+//     document.getElementById("total").innerHTML = "$" + totalGlobal;
+
+//     // Almacenar la nueva cantidad como cantidad anterior para la próxima iteración
+//     cantidadInput.setAttribute("data-prev-cantidad", cantidadNueva);
+// }
+
 function actCantidad(producto, index) {
     let cantidadInput = document.getElementById(`cantidadporca${index}`);
     let cantidadNueva = parseInt(cantidadInput.value, 10);
-    // Verificar si el campo del input está vacío y establecer cantidadNueva a 1
-    if (!cantidadInput.value || cantidadNueva === 0) {
+
+    // Verificar si el campo del input está vacío o la cantidad es menor a 1
+    if (!cantidadInput.value || cantidadNueva < 1) {
         cantidadNueva = 1;
+    }
+
+    // Verificar si la cantidad nueva supera el stock disponible
+    if (cantidadNueva > producto.cantidad) {
+        // Si es mayor, establecer la cantidad al stock disponible
+        cantidadNueva = producto.cantidad;
     }
 
     // Obtener la cantidad anterior almacenada en un atributo data-prev-cantidad
@@ -202,6 +248,9 @@ function actCantidad(producto, index) {
     // Actualizar el totalGlobal en el HTML
     document.getElementById("total").innerHTML = "$" + totalGlobal;
 
+    // Actualizar el valor del input con la cantidad ajustada
+    cantidadInput.value = cantidadNueva;
+
     // Almacenar la nueva cantidad como cantidad anterior para la próxima iteración
     cantidadInput.setAttribute("data-prev-cantidad", cantidadNueva);
 }
@@ -220,13 +269,14 @@ function eliminardelcarrito(id) {
             // Si el carrito está vacío, establecer contenido y totalGlobal en cero
             detallecarrito = "";
             totalGlobal = 0;
-            tamañocar = "";
+            tamañocar = 0;
             document.getElementById("detallecarrito").innerHTML =
                 detallecarrito;
             document.getElementById("total").innerHTML = "$" + totalGlobal;
             localStorage.removeItem("productos");
             document.getElementById("cantidadItems").innerHTML =
                 tamañocar + "+";
+                document.getElementById("totalPRO").innerHTML = tamañocar;
         } else {
             // Si el carrito no está vacío, actualizar la interfaz de usuario
             localStorage.productos = JSON.stringify(carrito);
@@ -247,6 +297,12 @@ async function enviarCarritoPorWhatsApp(producto, index) {
     // Obtén la información del carrito actualizada (solo los IDs)
     const carritoActualizado =
         JSON.parse(localStorage.getItem("productos")) || [];
+
+    // Verifica si el carrito está vacío
+    if (carritoActualizado.length === 0) {
+        alert("No hay productos en el carrito.");
+        return;
+    }
 
     // Array para almacenar los detalles completos de los productos
     const detallesProductos = [];
@@ -296,19 +352,25 @@ async function enviarCarritoPorWhatsApp(producto, index) {
     const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(
         mensajeWhatsApp
     )}`;
+    const confirmacion = window.confirm(
+        "Este Pedido se enviará atraves de whatsapp, Si aceptas, los productos se eliminaran del carrito, ¿estas de acuerdo?"
+    );
 
-    console.log(mensajeWhatsApp);
-    // Abrir una nueva ventana o redirigir a la URL del enlace
-    window.open(enlaceWhatsApp, "_blank");
+    // Verifica si el usuario confirmó
+    if (confirmacion) {
+        window.open(enlaceWhatsApp, "_blank");
+        localStorage.removeItem("productos");
+        location.reload();
+    } else {
+        // El usuario canceló, puedes agregar un mensaje o hacer algo más si lo deseas
+        console.log("Operación cancelada por el usuario");
+    }
 }
 
 // onclicks del modal
 function retirodepagina() {
     window.location.href = "/";
     localStorage.removeItem("productos");
-}
-function noretiro() {
-    window.location.href = "/carrito";
 }
 function validacioncarrito() {
     const carrito = JSON.parse(localStorage.getItem("productos")) || [];
@@ -349,4 +411,20 @@ function mostrarAlerta(mensaje) {
 
 function actualizarpagina() {
     location.reload();
+}
+
+function enviarRecla(){
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    axios.post("/reclamaciones", {
+        reclamacion: txtRecla.value,
+        empre_id: empresaId,
+    })
+    .then(res => {
+        console.log(res)
+        txtRecla.value = "";
+        alert("reclamacion o sugerencia enviada");
+    })
+    .catch(err => {
+        console.error(err); 
+    })
 }

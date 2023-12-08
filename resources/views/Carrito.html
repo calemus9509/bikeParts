@@ -36,6 +36,7 @@
             </div>
         </div>
     </div>
+    
 
     <div class="container-fluid">
         <!-- buscador -->
@@ -61,11 +62,13 @@
                     <i class="fa-solid fa-cart-shopping" style="height: 35px;cursor: pointer;"></i>
                     <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger"
                         id="cantidadItems">
-                        0
+                        0+
                         <span class="visually-hidden">unread messages</span>
                 </a>
             </div>
         </div>
+
+        
         <!-- Navbar -->
         <div class="row bg-primary text-uppercase" id="navBar">
             <div class="col-4 text-center">
@@ -106,11 +109,11 @@
                         <hr class="bg-dark" style="height: 10px;">
                         <div class="d-flex justify-content-between">
                             <p>TOTAL PRODUCTOS:</p>
-                            <h5 id="totalPRO">$</h5>
+                            <h5 id="totalPRO">0</h5>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>TOTAL:</p>
-                            <h5 id="total">$</h5>
+                            <h5 id="total">$0</h5>
                         </div>
                     </div>
                     <div class="text-center mt-3">
@@ -133,12 +136,12 @@
 
             </div>
             <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Quejas y Reclamaciones</h3>
+                <h3>Sugerencias y Reclamaciones</h3>
                 <p>Estamos aquí para ayudarte. Si tienes alguna queja o reclamación, por favor, déjanos saber a través
                     de este formulario:</p>
                 <form class="d-flex align-content-center">
-                    <input class="m-2" placeholder="Escribe tu queja o reclamación"></input>
-                    <button class="btn btn-primary m-2" type="submit">Enviar</button>
+                    <input class="m-2" placeholder="Escribe tu reclamación" id="txtRecla"></input>
+                    <a class="btn btn-primary m-2" onclick="enviarRecla()">Enviar</a>
                 </form>
             </div>
         </div>

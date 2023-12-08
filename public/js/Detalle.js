@@ -18,7 +18,6 @@ function mostrarDetalleProducto(id) {
                     <h5 style="font-weight: 500;">${producto.descripcion}</h5>
                 </div>
                 <div class="mt-5 mb-3 d-flex justify-content-start">
-                    <h5 style="font-weight: 500;">CANTIDAD: ${producto.cantidad}</h5>
                 </div>
                 <div class="mb-3 d-flex justify-content-start">
                     <h3>Precio: $${producto.precio}</h3>
@@ -202,9 +201,9 @@ function retirodepagina() {
     window.location.href = "/";
     localStorage.removeItem("productos");
 }
-function noretiro() {
-    window.location.href = "/carrito";
-}
+// function noretiro() {
+//     window.location.href = "/carrito";
+// }
 function validacioncarrito() {
     const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
@@ -214,19 +213,34 @@ function validacioncarrito() {
     }
 }
 
-// funcion del carrito
+// Función del carrito
 function agregaralcarrito(id) {
-    // Verificar si el ID ya está en el carrito
-    if (!carrito.includes(id)) {
-        carrito.push(id);
+    // Realiza una solicitud para obtener los detalles del producto por ID
+    axios
+        .get(`/obtener-producto/${id}`)
+        .then((res) => {
+            var producto = res.data.producto;
+            
+            // Verifica la cantidad del producto antes de agregarlo al carrito
+            if (producto.cantidad > 0) {
+                // Verifica si el ID ya está en el carrito
+                if (!carrito.includes(id)) {
+                    carrito.push(id);
 
-        mostrarAlerta("Producto agregado al carrito");
-        localStorage.productos = JSON.stringify(carrito);
-    } else {
-        mostrarAlerta2("El producto ya está en el carrito");
-    }
-    console.log(carrito);
+                    mostrarAlerta("Producto agregado al carrito");
+                    localStorage.productos = JSON.stringify(carrito);
+                } else {
+                    mostrarAlerta2("El producto ya está en el carrito");
+                }
+            } else {
+                mostrarAlerta2("Este producto no está disponible en stock.");
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
+
 carrito = JSON.parse(localStorage.getItem("productos")) || [];
 
 function mostrarAlerta(mensaje) {
@@ -236,4 +250,20 @@ function mostrarAlerta(mensaje) {
 function mostrarAlerta2(mensaje) {
     alertify.set("notifier", "position", "top-center");
     alertify.error(mensaje, 3); // Duración de 3 segundos
+}
+
+function enviarRecla(){
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    axios.post("/reclamaciones", {
+        reclamacion: txtRecla.value,
+        empre_id: empresaId,
+    })
+    .then(res => {
+        console.log(res)
+        txtRecla.value = "";
+        alert("reclamacion o sugerencia enviada");
+    })
+    .catch(err => {
+        console.error(err); 
+    })
 }

@@ -168,9 +168,9 @@ function retirodepagina() {
     window.location.href = '/';
     localStorage.removeItem('productos')
 }
-function noretiro() {
-    window.location.href = '/carrito';
-}
+// function noretiro() {
+//     window.location.href = '/carrito';
+// }
 function validacioncarrito() {
     const carrito = JSON.parse(localStorage.getItem('productos')) || [];
     if (carrito.length >= 1) {
@@ -178,4 +178,20 @@ function validacioncarrito() {
     } else {
         window.location.href = '/';
     }
+}
+
+function enviarRecla(){
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    axios.post("/reclamaciones", {
+        reclamacion: txtRecla.value,
+        empre_id: empresaId,
+    })
+    .then(res => {
+        console.log(res)
+        txtRecla.value = "";
+        alert("reclamacion o sugerencia enviada");
+    })
+    .catch(err => {
+        console.error(err); 
+    })
 }
