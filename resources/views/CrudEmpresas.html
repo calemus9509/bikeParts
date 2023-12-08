@@ -10,16 +10,37 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="js/CrudEmpresa.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <style>
+        .container-scroll {
+            max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+            overflow-y: auto;
+            padding-right: 15px; /* Agrega un poco de espacio a la derecha para evitar que el desplazamiento vertical oculte parte del contenido */
+        }
+    </style>
 </head>
 
 <body onload="mostrar()">
     <div class="container-fluid">
-
-        <div class="text-center mt-4">
-            <h1>Formulario de Creacion y Modificacion</h1>
+        <div class="row bg-black">
+            <div class="col-10 d-flex justify-content-around">
+                <a href="/administradores-clientes" style="text-decoration: none;color: white;">
+                    <h2>Clientes</h2>
+                </a>
+                <a href="/empresa" style="text-decoration: none;color: white;">
+                    <h2>Empresas</h2>
+                </a>
+            </div>
+            <div class="col-2 d-flex justify-content-center align-items-center">
+                <a href="/" class="btn btn-danger" >Cerrar</a>
+            </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="text-center mt-4">
+            <h1>Formulario de Empresa</h1>
+        </div>
+        <div class="container-scroll">
+            <div class="row mt-5">
             <div class="col-6 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="">Nombre:</label>
@@ -39,10 +60,10 @@
 
 
             </div>
-        </div>
+            </div>
 
 
-        <div class="row mt-5">
+            <div class="row mt-5">
             <div class="col-6 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="">Nit:</label>
@@ -59,9 +80,9 @@
 
                 </div>
             </div>
-        </div>
+            </div>
 
-        <div class="row mt-5">
+            <div class="row mt-5">
             <div class="col-6 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="">Direccion:</label>
@@ -77,9 +98,9 @@
                     <input type="text" id="txtTelefono" class="form-control">
                 </div>
             </div>
-        </div>
+            </div>
 
-        <div class="row mt-5">
+            <div class="row mt-5">
             <div class="col-6 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="">Logo:</label>
@@ -95,8 +116,8 @@
                     <input type="text" id="txtVision" class="form-control">
                 </div>
             </div>
-        </div>
-        <div class="row mt-5">
+            </div>
+            <div class="row mt-5">
             <div class="col-6 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="">Mision:</label>
@@ -113,9 +134,9 @@
                     </select>
                 </div>
             </div>
-        </div>
+            </div>
 
-        <div class="row mt-5">
+            <div class="row mt-5">
             <div class="col-6 d-flex justify-content-center align-items-center">
                 <div class="form-group">
                     <label for="">Correo:</label>
@@ -131,8 +152,8 @@
                     <input type="text" id="txtinstagram" class="form-control">
                 </div>
             </div>
+            </div>
         </div>
-
         <div class="row mt-4 ">
             <div class="col d-flex justify-content-center">
 
@@ -142,9 +163,11 @@
 
 
         </div>
-
+        <div class="row bg-primary text-center text-white mt-4">
+            <h1>NUESTRAS EMPRESAS</h1>
+        </div>
         <div class="row d-flex justify-content-center align-items-center mt-5">
-            <div class="col-8 ">
+            <div class="col-10">
                 <table class="table">
                     <thead>
                         <tr>
