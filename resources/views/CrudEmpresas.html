@@ -12,139 +12,142 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
-<body onload="mostrar()">
+<body class="bg-dark" onload="mostrar()">
     <div class="container-fluid">
 
-        <div class="text-center mt-4">
-            <h1>Formulario de Creacion y Modificacion</h1>
+        <div class="row my-5">
+            <h1 class="text-center text-white">Formulario de Creacion de Empresas</h1>
         </div>
 
-        <div class="row mt-5">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Nombre:</label>
-                    <input type="text" id="txtNombre" class="form-control">
-
-                </div>
-
-
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Nombre:</span>
             </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
-
-                <div class="form-group">
-                    <label for="">Descripcion:</label>
-                    <input type="text" id="txtDescripcion" class="form-control">
-
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="txt" name="txtNombre" id="txtNombre" class="form-control" placeholder=".">
+                    <label for="floatingInput">Nombre:</label>
                 </div>
-
-
             </div>
-        </div>
-
-
-        <div class="row mt-5">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Nit:</label>
-                    <input type="text" id="txtNit" class="form-control">
-
-                </div>
-
-
+            <div class="col-2">
+                <span class="fw-bolder text-white">Descripcion:</span>
             </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Imagenes:</label>
-                    <input type="text" id="txtImagen" class="form-control">
-
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="txt" name="txtDescripcion" id="txtDescripcion" class="form-control" placeholder=".">
+                    <label for="floatingInput">Descripcion:</label>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Direccion:</label>
-                    <input type="text" id="txtDireccion" class="form-control">
 
-                </div>
-
-
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Nit:</span>
             </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Telefono:</label>
-                    <input type="text" id="txtTelefono" class="form-control">
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="txt" name="txtNit" id="txtNit" class="form-control" placeholder=".">
+                    <label for="floatingInput">Nit:</label>
                 </div>
             </div>
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Logo:</label>
-                    <input type="text" id="txtLogo" class="form-control">
-
-                </div>
-
-
+            <div class="col-2">
+                <span class="fw-bolder text-white">Imagenes:</span>
             </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Vision:</label>
-                    <input type="text" id="txtVision" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Mision:</label>
-                    <input type="text" id="txtMision" class="form-control">
-                </div>
-
-
-            </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="txtAdmin">Administrador a cargo:</label>
-                    <select id="txtAdmin" class="form-control w-auto">
-                        <option selected disabled>Seleccionar</option>
-                    </select>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="file" name="txtImagen[]" id="txtImagen" multiple accept="image/*" class="form-control">
                 </div>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Correo:</label>
-                    <input type="email" id="txtcorreo" class="form-control">
-
-                </div>
-
-
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Direccion:</span>
             </div>
-            <div class="col-6 d-flex justify-content-center align-items-center">
-                <div class="form-group">
-                    <label for="">Instagram (opcional):</label>
-                    <input type="text" id="txtinstagram" class="form-control">
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="txt" name="txtDireccion" id="txtDireccion" class="form-control" placeholder=".">
+                    <label for="floatingInput">Direccion:</label>
+                </div>
+            </div>
+            <div class="col-2">
+                <span class="fw-bolder text-white">Telefono:</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="txt" name="txtTelefono" id="txtTelefono" class="form-control" placeholder=".">
+                    <label for="floatingInput">Telefono:</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Logo:</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="file" name="txtLogo[]" id="txtLogo" multiple accept="image/*" class="form-control">
+                </div>
+            </div>
+            <div class="col-2">
+                <span class="fw-bolder text-white">Imagenes:</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="file" name="txtImagen[]" id="txtImagen" multiple accept="image/*" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Mision:</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" name="txtMision" id="txtMision" class="form-control" placeholder=".">
+                    <label for="floatingInput">Mision:</label>
+                </div>
+            </div>
+            <div class="col-2">
+                <span class="fw-bolder text-white">Administrador a Cargo:</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" name="txtAdmin" id="txtAdmin" class="form-control" placeholder=".">
+                    <label for="floatingInput">Administrador a Cargo:</label>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-4 ">
-            <div class="col d-flex justify-content-center">
-
-                <a class=" btn btn-primary" onclick="crear()">Guardar</a>
-
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Correo:</span>
             </div>
-
-
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="email" name="txtcorreo" id="txtcorreo" class="form-control" placeholder=".">
+                    <label for="floatingInput">Correo:</label>
+                </div>
+            </div>
+            <div class="col-2">
+                <span class="fw-bolder text-white">Instagram (Opcional):</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" name="txtinstagram" id="txtinstagram" class="form-control" placeholder=".">
+                    <label for="floatingInput">Instagram (Opcional):</label>
+                </div>
+            </div>
         </div>
 
+        <div class=" row my-3 justify-content-center">
+            <div class="col-4 d-grid gap-2">
+                <a onclick="crear()" class="btn btn-outline-warning">Guardar</a>
+            </div>
+        </div>
         <div class="row d-flex justify-content-center align-items-center mt-5">
-            <div class="col-8 ">
+            <div class="card ">
                 <table class="table">
                     <thead>
                         <tr>
@@ -230,10 +233,10 @@
                                     <div class="form-group">
                                         <label for="">Direccion:</label>
                                         <input type="text" id="txtDireccion2" class="form-control">
-                    
+
                                     </div>
-                    
-                    
+
+
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <div class="form-group">
@@ -242,16 +245,16 @@
                                     </div>
                                 </div>
                             </div>
-                    
+
                             <div class="row mt-5">
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <div class="form-group">
                                         <label for="">Logo:</label>
                                         <input type="text" id="txtLogo2" class="form-control">
-                    
+
                                     </div>
-                    
-                    
+
+
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <div class="form-group">
@@ -266,8 +269,8 @@
                                         <label for="">Mision:</label>
                                         <input type="text" id="txtMision2" class="form-control">
                                     </div>
-                    
-                    
+
+
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <div class="form-group">
@@ -283,10 +286,10 @@
                                     <div class="form-group">
                                         <label for="">Correo:</label>
                                         <input type="email" id="txtcorreo2" class="form-control">
-                    
+
                                     </div>
-                    
-                    
+
+
                                 </div>
                                 <div class="col-6 d-flex justify-content-center align-items-center">
                                     <div class="form-group">
@@ -309,12 +312,13 @@
         </div>
 
 
-       
 
 
-        
+
+
         <!-- Modal para inhabiliatr -->
-        <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+        <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg ">
                 <div class="modal-content">
                     <div class="modal-header bg-danger">
@@ -322,11 +326,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                       <h3>Esta seguro de la inabilitar la empresa?</h3>
+                        <h3>Esta seguro de la inabilitar la empresa?</h3>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="eliminar()">Eliminar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                            onclick="eliminar()">Eliminar</button>
                     </div>
                 </div>
             </div>
