@@ -7,6 +7,7 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\ReclamacionController;
 use App\Http\Controllers\RecuperarContraseñaController;
 use App\Http\Controllers\RolController;
 use Illuminate\Support\Facades\Route;
@@ -142,3 +143,8 @@ Route::get('/obtener-productos/{categoriaId}', [ProductoController::class, 'obte
 
 Route::resource('/empresas', EmpresaController::class)->only(["index", "store", "update", "destroy"]);
 Route::get('/empresas/{empresaId}', [EmpresaController::class, "empresaPorId"]);
+
+
+Route::get('/reclamaciones/{id}',[ReclamacionController::class, "index"]);
+Route::post('/reclamaciones',[ReclamacionController::class, "store"]);
+Route::delete('/reclamaciones/{reclamacion}', [ReclamacionController::class, 'destroy']);

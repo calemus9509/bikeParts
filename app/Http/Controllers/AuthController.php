@@ -18,6 +18,11 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'message' => 'Las contraseñas no coinciden']);
         }
 
+        // Validar la complejidad de la nueva contraseña
+        if (!preg_match('/^(?=.*[A-Z])(?=.*[0-9]).{6,}$/', $nuevaContraseña)) {
+            return response()->json(['success' => false, 'message' => 'La contraseña debe tener al menos una letra mayúscula, un número y ser de al menos 6 caracteres']);
+        }
+
         // Encriptar la nueva contraseña
         $nuevaContraseñaEncriptada = Hash::make($nuevaContraseña);
 
@@ -32,7 +37,7 @@ class AuthController extends Controller
     }
 
 
-    
+
     public function login(Request $request)
     {
         $Usuario = $request->input('Usuario');

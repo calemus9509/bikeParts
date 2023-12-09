@@ -46,3 +46,35 @@ function login() {
         console.error(error);
     });
 }
+
+function reclamaciones() {
+    const empresaId = JSON.parse(localStorage.getItem("userData")) || [];
+    id = empresaId.empresa_id;
+    axios.get(`/reclamaciones/${id}`)
+        .then(res => {
+            console.log(res.data);
+            const reclamacionesHtml = res.data.map(element => `
+                <div class="reclamacion border-top border-bottom py-2 d-flex justify-content-between mb-3" id="reclamacion1">
+                    <h5>${element.reclamacion}</h5>
+                    <button class="btn btn-danger" onclick="eliminarRecla(${element.id})">Eliminar</button>
+                </div>`
+            );
+
+            document.getElementById("Reclamaciones").innerHTML = reclamacionesHtml.join('');
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+reclamaciones();
+
+function eliminarRecla(id) {
+    axios.delete(`/reclamaciones/${id}`)
+        .then(res => {
+            reclamaciones();
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error al eliminar la reclamación");
+        });
+}

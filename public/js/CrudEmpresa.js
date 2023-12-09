@@ -37,16 +37,18 @@ function mostrar() {
             table = "";
             res.data.forEach((element, index) => {
                 table += `<tr>
-                    <th scope="row">${index + 1}</th>
-                    <td>${element.nombre}</td>
-                    <td>${element.descripcion}</td>
-                    <td>${element.nit}</td>
-                    <td><img src="${element.imagen}" style="width: 50%;"></td>
-                    <td>
-                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modificarModal" onclick='leerModificacion(${JSON.stringify(element)})'>Modificar</a>
-                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick='leerModificacion(${JSON.stringify(element)})'>Inhabilitar</a>
-                    </td>
-                </tr>`;
+                <th scope="row">${index + 1}</th>
+                <td>${element.nombre}</td>
+                <td>${element.descripcion}</td>
+                <td>${element.nit}</td>
+                <td><img src="${element.imagen}" style="width: 50%;"></td>
+                <td>
+                    <div class="d-flex">
+                        <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#modificarModal" onclick='leerModificacion(${JSON.stringify(element)})'>Modificar</button>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal" onclick='leerModificacion(${JSON.stringify(element)})'>Inhabilitar</button>
+                    </div>
+                </td>
+            </tr>`;
             });
             document.getElementById("EmpresasCarga").innerHTML = table;
         })
