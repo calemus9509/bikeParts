@@ -56,8 +56,8 @@ function mostrar() {
             table = "";
             res.data.forEach((element, index) => {
                 const imagenesArray = JSON.parse(element.imagen);
-                const imagenesArrays = JSON.parse(element.logo);
                 const imagenesArrayss = JSON.parse(element.marca_aliada);
+                const imagenesArrays = JSON.parse(element.logo);
                 table += `<tr>
                     <th scope="row">${index + 1}</th>
                     <td>${element.nombre}</td>
@@ -67,10 +67,10 @@ function mostrar() {
                         imagenesArray[0]
                     }" style="max-width: 100px; max-height: 100px;"></td>
                     <td><img src="${
-                        imagenesArrays[0]
+                        imagenesArrayss[0]
                     }" style="max-width: 100px; max-height: 100px;"></td>
                     <td><img src="${
-                        imagenesArrayss[0]
+                        imagenesArrays[0]
                     }" style="max-width: 100px; max-height: 100px;"></td>
                     <td>
                         <div class="d-flex">
