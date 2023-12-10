@@ -41,7 +41,23 @@ function leerEmpresas() {
     });
 }
 
-// Función para guardar el ID de la empresa seleccionada en el localStorage
-function seleccionarEmpresa(idEmpresa) {
-  localStorage.setItem('empresaSeleccionada', idEmpresa);
-}
+// function getParameterByName(name, url) {
+//   if (!url) url = window.location.href;
+//   name = name.replace(/[\[\]]/g, "\\$&");
+//   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+//       results = regex.exec(url);
+//   if (!results) return null;
+//   if (!results[2]) return '';
+//   return decodeURIComponent(results[2].replace(/\+/g, " "));
+// }
+
+// // Verifica si hay un parámetro scrollTo en la URL
+// var scrollToElement = getParameterByName('scrollTo');
+
+// // Si hay un parámetro scrollTo, desplázate al elemento correspondiente
+// if (scrollToElement) {
+//   var targetElement = document.getElementById(scrollToElement);
+//   if (targetElement) {
+//     targetElement.scrollIntoView({ behavior: 'smooth' });
+//   }
+// }
