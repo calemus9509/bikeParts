@@ -106,6 +106,9 @@ Route::get('/recuperar', function () {
 Route::get('/error', function () {
     return view('Error');
 });
+Route::get('/nosotrosPro', function () {
+    return view('nosotrosPro');
+});
 
 
 Route::resource('/rols', RolController::class)->only(["index", "store", "update", "destroy"]);
