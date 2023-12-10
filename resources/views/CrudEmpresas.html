@@ -70,7 +70,7 @@
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="txt" name="txtNit" id="txtNit" class="form-control" placeholder=".">
+                    <input type="number" name="txtNit" id="txtNit" class="form-control" placeholder=".">
                     <label for="floatingInput">Nit:</label>
                 </div>
             </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="txt" name="txtTelefono" id="txtTelefono" class="form-control" placeholder=".">
+                    <input type="number" name="txtTelefono" id="txtTelefono" class="form-control" placeholder=".">
                     <label for="floatingInput">Telefono:</label>
                 </div>
             </div>
@@ -114,11 +114,12 @@
                 </div>
             </div>
             <div class="col-2">
-                <span class="fw-bolder text-white">Imagenes:</span>
+                <span class="fw-bolder text-white">Marcas Aliadas:</span>
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="file" name="txtImagen[]" id="txtImagen" multiple accept="image/*" class="form-control">
+                    <input type="file" name="txtAliadas[]" id="txtAliadas" multiple accept="image/*"
+                        class="form-control">
                 </div>
             </div>
         </div>
@@ -137,8 +138,9 @@
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="text" name="txtAdmin" id="txtAdmin" class="form-control" placeholder=".">
-                    <label for="floatingInput">Administrador a Cargo:</label>
+                    <select name="" id="txtAdmin" class="form-control">
+                        <option value="" selected disabled>Seleccionar</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -149,7 +151,7 @@
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="email" name="txtcorreo" id="txtcorreo" class="form-control" placeholder=".">
+                    <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" placeholder=".">
                     <label for="floatingInput">Correo:</label>
                 </div>
             </div>
@@ -158,11 +160,24 @@
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="text" name="txtinstagram" id="txtinstagram" class="form-control" placeholder=".">
+                    <input type="text" name="txtInstagram" id="txtInstagram" class="form-control" placeholder=".">
                     <label for="floatingInput">Instagram (Opcional):</label>
                 </div>
             </div>
         </div>
+
+        <div class="row mt-3">
+            <div class="col-2">
+                <span class="fw-bolder text-white">Vision:</span>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" name="txtVision" id="txtVision" class="form-control" placeholder=".">
+                    <label for="floatingInput">Vision:</label>
+                </div>
+            </div>
+        </div>
+
 
         <div class=" row my-3 justify-content-center">
             <div class="col-4 d-grid gap-2">
@@ -182,6 +197,8 @@
                             <th scope="col">Descripcion</th>
                             <th scope="col">Nit</th>
                             <th scope="col">Imagen</th>
+                            <th scope="col">logo</th>
+                            <th scope="col">marcas Aliadas</th>
                             <th scope="col">Herramientas</th>
                         </tr>
                     </thead>
