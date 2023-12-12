@@ -4,9 +4,16 @@ var id = 0;
 function crear() {
     axios.post("/empresas", {
         nombre: txtNombre.value,
-        descripcion: txtDescripcion.value,
+        direccion: txtDireccion.value,
         nit: txtNit.value,
-        imagen: txtImagen.value
+        telefono: txtTelefono.value,
+        admin_id: txtAdmin.value,
+        descripcion: txtDescripcion.value,
+        logo: txtLogo.value,
+        imagen: txtImagen.value,
+        vision: txtVision.value,
+        mision: txtMision.value,
+
     })
         .then(res => {
             console.log(res)
@@ -45,6 +52,23 @@ function mostrar() {
         .catch(err => {
             console.error(err);
         });
+    axios.get("/personas")
+    .then(res => {
+        const select = document.getElementById('txtAdmin');
+        const admin = res.data;
+
+        select.innerHTML = '<option selected disabled>Seleccionar</option>';
+
+        admin.forEach(res => {
+            const option = document.createElement('option');
+            option.value = res.id;
+            option.text = res.Nombre;
+            select.appendChild(option);
+        });
+    })
+    .catch(err => {
+        console.error(err); 
+    })
 }
 
 
@@ -55,6 +79,12 @@ function limpiar() {
     document.getElementById("txtDescripcion").value = "";
     document.getElementById("txtNit").value = "";
     document.getElementById("txtImagen").value = "";
+    document.getElementById("txtDireccion").value = "";
+    document.getElementById("txtTelefono").value = "";
+    document.getElementById("txtLogo").value = "";
+    document.getElementById("txtVision").value = "";
+    document.getElementById("txtMision").value = "";
+    document.getElementById("txtAdmin").value = "";
 }
 
 function leerModificacion(element) {
@@ -64,6 +94,29 @@ function leerModificacion(element) {
     txtDescripcion2.value = element.descripcion;
     txtNit2.value = element.nit;
     txtImagen2.value = element.imagen;
+    txtDireccion2.value = element.direccion;
+    txtLogo2.value = element.logo;
+    txtVision2.value = element.vision;
+    txtMision2.value = element.mision;
+    txtTelefono2.value = element.telefono;
+    axios.get("/personas")
+    .then(res => {
+        const select = document.getElementById('txtAdmin2');
+        const admin = res.data;
+
+        select.innerHTML = '<option selected disabled>Seleccionar</option>';
+
+        admin.forEach(res => {
+            const option = document.createElement('option');
+            option.value = res.id;
+            option.text = res.Nombre;
+            select.appendChild(option);
+        });
+        txtAdmin2.value = element.admin_id;
+    })
+    .catch(err => {
+        console.error(err); 
+    })
 }
 
 
@@ -71,9 +124,15 @@ function Modificar() {
     axios.put("/empresas/" + this.id, {
         id: this.id,
         nombre: txtNombre2.value,
-        descripcion: txtDescripcion2.value,
+        direccion: txtDireccion2.value,
         nit: txtNit2.value,
-        imagen: txtImagen2.value
+        telefono: txtTelefono2.value,
+        admin_id: txtAdmin2.value,
+        descripcion: txtDescripcion2.value,
+        logo: txtLogo2.value,
+        imagen: txtImagen2.value,
+        vision: txtVision2.value,
+        mision: txtMision2.value,
     })
         .then(res => {
 

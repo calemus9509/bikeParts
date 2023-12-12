@@ -1,9 +1,4 @@
-body {
-    
-    /* font-family: 'Josefin Sans', sans-serif; */
-}
-
-.fondo {
+.nueva-imagen {
     position: relative;
     margin: 0;
     padding: 0;
@@ -15,7 +10,7 @@ body {
 
 .nueva-imagen {
     position: absolute;
-    top: 60%;
+    top: 65%;
     /*  posición vertical */
     left: 50%;
     /*  posición horizontal  */

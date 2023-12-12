@@ -1,4 +1,58 @@
 
+
+function nosotros() {
+    const empresaId = localStorage.getItem('empresaSeleccionada');
+    axios.get(`/empresas/${empresaId}`)
+        .then(res => {
+            descripcion = "";
+            mision = "";
+            vision = "";
+
+            console.log(res.data);
+            descripcion += `<div class="col-md-7 text-center mb-3 mb-md-0">
+            <p>${res.data.descripcion}</p>
+        </div>
+        <div class="col-md-5 d-flex justify-content-center">
+            <img src="${res.data.imagen}" alt=""
+                class="img-fluid img-thumbnail" style="max-width: 55%;">
+        </div>`;
+
+            mision += `<div class="row">
+            <div>
+                <h1>Nuestra Misión</h1>
+                <div class="bg-primary" style="width: 30%; height: 8%;">
+
+                </div>
+            </div>
+            <div class="text-center my-5 container col-10">
+                <p>${res.data.mision}</p>
+            </div>
+        </div>`;
+
+        vision += ` <div class="row">
+        <div class="d-flex justify-content-end">
+            <h1>Nuestra Visión</h1>
+
+        </div>
+        <div class="bg-primary" style="width: 30%; height: 2%; margin-left: 69%;">
+        </div>
+        <div class="text-center my-5 container col-10">
+            <p>${res.data.vision}</p>
+        </div>
+    </div>
+</div>`;
+
+        
+        document.getElementById("descripcion").innerHTML = descripcion;
+        document.getElementById("mision").innerHTML = mision;
+        document.getElementById("vision").innerHTML = vision;
+        
+        })
+        .catch(err => {
+            console.error(err);
+        })
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
@@ -18,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
             autocompleteResults.style.display = "none";
         }
     });
+
+    nosotros();
 });
 
 // Modifica tu función de autocompletado en JavaScript
@@ -94,83 +150,3 @@ function mostrarResultadosAutocompletado(resultados) {
     }
 }
 
-function mostrarCategorias() {
-    axios.get("/categorias")
-        .then(res => {
-            
-            var cardsHTML = "";
-            res.data.forEach(element => {
-                cardsHTML += `
-            <div class="col-md-2 mb-5 mt-2 d-flex justify-content-center">
-                <div class="d-flex flex-column align-items-center p-3 mb-5"
-                    style="height: 200px; width: 350px; position: relative;">
-
-                    <div class="card text-bg-dark border-primary border-3 rounded">
-                    <a onclick="mostrarId(${element.idcategorias})" >
-                        <img src="img/llanta.jpg" alt="Amortiguador"
-                            style="width: 300px; height: 300px; object-fit: cover;">
-                        <div class="card-img-overlay">
-
-                            <h5 class="card-title bg-black rounded text-center" style="color: white;">${element.nombre}</h5>
-                            <p class="card-text"></p>
-                        </div>
-
-                    </a>
-                    </div>
-                </div>
-            </div>
-            `;
-
-            });
-
-            document.getElementById("mostrarCategorias").innerHTML = cardsHTML;
-        })
-        .catch(err => {
-            console.error(err);
-        });
-}
-
-
-
-function mostrarId(categoriaId) {
-    localStorage.setItem('idCategory', categoriaId);
-    window.location.href = "/productos"
-}
-
-mostrarCategorias()
-
-function mostrarProductosAleatorios(){
-     // Obtener el ID de la empresa desde el localStorage
-     const empresaId = localStorage.getItem('empresaSeleccionada');
- 
-     axios.get(`/obtener-productos?empresa=${empresaId}`)
-         .then(res => {
-           
-             var productos = res.data; // Solo la información de paginación
-             var card = "";
- 
-             productos.data.slice(0, 4).forEach(element => {
-                 card += `<div class="card mb-3" style="width: 17rem;">
-                 <img src="img/carrusel1.jpg" class="card-img-top" alt="..."
-                     style="object-fit: cover; height: 250px;object-position: center center;">
-                 <div class="card-body text-center">
-                     <h3 class="card-title">${element.nombre}-${element.marca}</h3>
-                     <h5>Precio: $${element.precio}</h5>
-                     <a href="/detalle" onclick="mostrarDetalle(${element.idproducto})" class="btn btn-primary">Ir</a>
-                 </div>
-             </div>`;
-             });
- 
-             document.getElementById("productosAleatorios").innerHTML = card;
-         })
-         .catch(err => {
-             console.error(err);
-         });
-}
-
-mostrarProductosAleatorios()
-
-function mostrarDetalle(idproducto) {
-    // Guarda el ID en el localStorage
-    localStorage.setItem('productoId', idproducto);
-}

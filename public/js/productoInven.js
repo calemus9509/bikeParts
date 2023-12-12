@@ -1,77 +1,45 @@
 var id = 0;
 
-//trae toodo lo de producto
+function obtenerInformacionUsuario() {
+  const userData = localStorage.getItem('userData');
+  return userData ? JSON.parse(userData) : null;
+}
+
 function read(url = "producto") {
   axios
     .get(url)
     .then(function (response) {
+      console.log(response.data);  // Imprime la respuesta en la consola
+
       let productos = "";
-      response.data.forEach((element, index) => {
-        productos += `<tr>`;
-        productos += `<th scope='row'>${index + 1} </th>`;
-        productos += `<td>${element.nombre} </td>`;
-        productos += `<td>${element.cantidad}</td>`;
-        productos += `<td>${element.descripcion}</td>`;
-        productos += `<td>${element.precio}</td>`;
-        productos += `<td>${element.marca}</td>`;
-        productos += `<td>${element.nombreCategoria}</td>`;
-        productos += `<td>${element.imagenUno}</td>`;
-        productos += `<td>
-        <a onclick="leerModi(${element.idproducto})" class='btn btn-outline-warning'data-bs-toggle="modal"data-bs-target="#modificarModal">Modificar</a>  
-                    <a onclick="leerEliminar(${element.idproducto},'${element.nombre}')" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
-                  </td>`;
-        productos += `</tr>`;
-      });
+      // Verifica si hay productos en la respuesta
+      if (response.data.productos && response.data.productos.length > 0) {
+        response.data.productos.forEach((element, index) => {
+          productos += `<tr>`;
+          productos += `<th scope='row'>${index + 1} </th>`;
+          productos += `<td>${element.nombre} </td>`;
+          productos += `<td>${element.cantidad}</td>`;
+          productos += `<td>${element.descripcion}</td>`;
+          productos += `<td>${element.precio}</td>`;
+          productos += `<td>${element.marca}</td>`;
+          productos += `<td>${element.nombreCategoria}</td>`;
+          productos += `<td>${element.imagenUno}</td>`;
+          productos += `<td>
+          <a onclick="leerModi(${element.idproducto})" class='btn btn-outline-warning' data-bs-toggle="modal" data-bs-target="#modificarModal">Modificar</a>  
+          <a onclick="leerEliminar(${element.idproducto},'${element.nombre}')" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
+          </td>`;
+          productos += `</tr>`;
+        });
+      } else {
+        // Si no hay productos, podrías mostrar un mensaje o realizar alguna otra acción
+        productos = `<tr><td colspan="8">No hay productos disponibles.</td></tr>`;
+      }
       tableBodyInventario.innerHTML = productos;
     })
     .catch(function (error) {
       console.log(error);
     });
-  //funcion del datatable
-  new DataTable("#tablaSimple", {
-    retrieve: true,
-    language: {
-      url: "./json/es.json",
-    },
-    dom: "Bfrtip",
-    buttons: [
-      {
-        extend: "colvis",
-        text: "<i class='fa-solid fa-filter fa-beat'></i>",
-        titleAttr: "Filtrar",
-        className: "filtro",
-      },
-      {
-        extend: "excel",
-        text: "<i class='fa-solid fa-file-excel fa-bounce'></i>",
-        titleAttr: "Excel",
-        className: "excel",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
-      },
-      {
-        extend: "print",
-        text: "<i class='fa-solid fa-print fa-bounce'></i>",
-        titleAttr: "Imprimir",
-        className: "imprimir",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
-      },
-      {
-        download: "open",
-        extend: "pdf",
-        text: "<i class='fa-solid fa-file-pdf fa-bounce'></i>",
-        titleAttr: "PDF",
-        className: "pdf",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
-      },
-      {
-        extend: "copy",
-        text: "<i class='fa-solid fa-copy fa-bounce'></i>",
-        titleAttr: "Copiar",
-        className: "copy",
-        exportOptions: { columns: [0, 1, 2, 3, 4, 5, 6, 7] },
-      },
-    ],
-  });
+  // Resto de tu función read
 }
 //modificar producto
 function modificar() {

@@ -32,12 +32,7 @@ class AuthController extends Controller
     }
 
 
-
-
-
-
-
-
+    
     public function login(Request $request)
     {
         $Usuario = $request->input('Usuario');
@@ -55,12 +50,18 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'message' => 'Contraseña incorrecta']);
         }
 
+        // Obtener información de la empresa asociada al usuario
+        $userWithCompany = Persona::select('personas.*', 'empresas.id as empresa_id', 'empresas.nombre as nombre_empresa')
+            ->join('empresas', 'personas.id', '=', 'empresas.admin_id')
+            ->where('personas.id', $user->id)
+            ->first();
 
-        $request->session()->put('user', $user);
+        // Almacena la información de la empresa en la sesión
+        $request->session()->put('user', $userWithCompany);
 
         // Ahora, puedes crear tu lógica de sesión aquí, si es necesario
 
-        return response()->json(['success' => true, 'user' => $user]);
+        return response()->json(['success' => true, 'user' => $userWithCompany]);
     }
 
 

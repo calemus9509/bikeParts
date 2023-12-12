@@ -25,6 +25,7 @@ class Producto extends Model
         'descripcion',
         'precio',
         'categoriaF',
+        'empresa_id',
         'estado',
         'marca',
         'imagenUno',

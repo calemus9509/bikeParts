@@ -9,6 +9,7 @@
     <script src="..\js\axios.min.js"></script>
     <script src="..\js\datatables.js"></script>
     <script src="..\js\productoForm.js"></script>
+    <script src="js/Verificacion2.js"></script>
     <title>Inventario</title>
 </head>
 
@@ -118,6 +119,19 @@
         </div>
 
     </div>
+
+    <div class="row mt-3">
+        <div class="col-2">
+            <span class="fw-bolder text-white">Empresa:</span>
+        </div>
+        <div class="col-4">
+            <div class="form-floating">
+                <input type="text" id="txtEmpresa" class="form-control" disabled>
+                <label for="txtEmpresa">Empresa:</label>
+            </div>
+        </div>
+    </div>
+    
     <div class=" row my-3 justify-content-center">
         <div class="col-4 d-grid gap-2">
             <a href="/inventario" onclick="registrar()" class="btn btn-outline-warning">Registar</a>

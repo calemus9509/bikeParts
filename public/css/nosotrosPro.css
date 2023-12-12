@@ -1,8 +1,8 @@
 body {
-    
-    /* font-family: 'Josefin Sans', sans-serif; */
+    max-width: 100%;
+    overflow-x: hidden;
+    /* font-family: 'Josefin Sans', sans-serif;  */
 }
-
 .fondo {
     position: relative;
     margin: 0;

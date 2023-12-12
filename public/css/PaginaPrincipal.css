@@ -1,45 +1,209 @@
 .vertical-line {
-    border-left: 5px solid;
-    /* Color primario de Bootstrap */
-    height: 75px;
-    /* Ajusta la altura según tus necesidades */
-    margin: 0 10px;
-    /* Espacio entre la línea y los íconos */
-    opacity: 1;
-    /* Anula la opacidad predeterminada */
+  border-left: 5px solid;
+  /* Color primario de Bootstrap */
+  height: 75px;
+  /* Ajusta la altura según tus necesidades */
+  margin: 0 10px;
+  /* Espacio entre la línea y los íconos */
+  opacity: 1;
+  /* Anula la opacidad predeterminada */
 }
 
 /* Estilo inicial para la imagen */
 .img-responsive {
-    width: 46%;
-    padding: 15px;
+  width: 46%;
+  padding: 15px;
 }
 
 .dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5); /* Color de las bolitas inactivas con transparencia */
-    margin: 0 5px; /* Espacio entre las bolitas */
-    cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* Color de las bolitas inactivas con transparencia */
+  margin: 0 5px;
+  /* Espacio entre las bolitas */
+  cursor: pointer;
 }
+
 .carousel-item img {
-    max-height: 380px; /* Establece la altura máxima deseada */
-    width: auto; /* Permite que el ancho se ajuste automáticamente */
-    margin: 0 auto; /* Centra horizontalmente las imágenes */
+  max-height: 380px;
+  /* Establece la altura máxima deseada */
+  width: auto;
+  /* Permite que el ancho se ajuste automáticamente */
+  margin: 0 auto;
+  /* Centra horizontalmente las imágenes */
+}
+
+.search-container {
+  position: relative;
+  width: 500px;
+  /* Ancho deseado para tu input */
+  margin: 0 auto;
+  /* Centra el contenedor */
+}
+
+#searchInput {
+  flex: 1;
+  /* Para que el input ocupe todo el espacio disponible */
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  /* Grosor y color del borde */
+  border-radius: 5px;
+  /* Bordes redondeados */
+}
+
+.autocomplete-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-width: 500px;
+  /* Ajusta el ancho según sea necesario */
+  border: 1px solid #ddd;
+  /* Grosor y color del borde */
+  border-top: none;
+  display: none;
+  max-height: 200px;
+  /* Ajusta según sea necesario */
+  overflow-y: auto;
+  background-color: #fff;
+  z-index: 1;
+  margin-top: 5px;
+  /* Espacio entre el input y el cuadrito */
 }
 
 
+.autocomplete-results div {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.autocomplete-results div:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-results div:hover {
+  background-color: #f1f1f1;
+}
 
 /* Estilo para pantallas con 1060px de ancho o menos */
 @media (max-width: 1060px) {
-    .img-responsive {
-        width: 70%;
-    }
+  .img-responsive {
+    width: 70%;
+  }
 }
+
 /* Estilo para pantallas con 663px de ancho o menos */
 @media (max-width: 663px) {
-    .img-responsive {
-        width: 110%;
-    }
+  .img-responsive {
+    width: 90%;
+  }
+}
+
+@media (max-width: 915px) {
+
+  .fa-circle-user,
+  .fa-cart-shopping {
+    width: 35px;
+    /* Ajusta el tamaño para pantallas menores de 630px */
+  }
+
+  .vertical-line {
+    height: 80px;
+  }
+}
+
+@media (max-width: 815px) {
+
+  .fa-circle-user,
+  .fa-cart-shopping {
+    width: 30px;
+    /* Ajusta el tamaño para pantallas menores de 630px */
+  }
+
+  .vertical-line {
+    height: 60px;
+  }
+}
+
+@media (max-width: 630px) {
+  .icon-container {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .icon-container .col-2,
+  .icon-container .col-8,
+  .icon-container .col-2 {
+    width: 100%;
+  }
+
+  .img-responsive {
+    width: 20%;
+    margin: 0 auto; /* Esto centra la imagen horizontalmente */
+  }
+
+  .fa-circle-user,
+  .fa-cart-shopping {
+    width: 45px; /* Ajusta el tamaño para pantallas menores de 630px */
+  }
+
+  .vertical-line {
+    height: 70px;
+  }
+}
+
+/* Estilos para pantallas muy pequeñas (menor de 500px) */
+@media (max-width: 500px) {
+  #searchBar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #searchBar .col-2,
+  #searchBar .col-8,
+  #searchBar .col-2 {
+    width: 100%;
+  }
+
+  #navBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #navBar .col-4 {
+    width: 100%;
+  }
+
+  .img-responsive {
+    width: 27%;
+    margin: 0 auto; /* Esto centra la imagen horizontalmente */
+  }
+
+  .fa-circle-user,
+  .fa-cart-shopping {
+    width: 37px;
+    /* Ajusta el tamaño para pantallas menores de 630px */
+  }
+
+  .vertical-line {
+    height: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .img-responsive {
+    width: 27%;
+  }
+}
+
+@media (max-width: 300px) {
+  .img-responsive {
+    width: 40%;
+  }
 }

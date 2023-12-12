@@ -100,6 +100,10 @@ Route::get('/error', function () {
     return view('Error');
 });
 
+Route::get('/nosotrosPro', function () {
+    return view('nosotrosPro');
+});
+
 
 Route::resource('/rols', RolController::class)->only(["index", "store", "update", "destroy"]);
 Route::resource('/personas', PersonaController::class)->only(["index", "store", "update", "destroy"]);
@@ -123,6 +127,7 @@ Route::post('/reset-password/{token}', [RecuperarContraseñaController::class, '
 
 Route::get('/obtener-productos', [ProductoController::class, 'obtenerProductos']);
 
+Route::get('/buscar-autocompletado', [ProductoController::class, 'buscarAutocompletado']);
 
 Route::get('/obtener-producto/{idproducto}', [ProductoController::class, 'encontrarProducto']);
 
@@ -131,4 +136,21 @@ Route::get('/categorias', [CategoriaController::class, 'index']);
 
 Route::get('/obtener-productos/{categoriaId}', [ProductoController::class, 'obtenerProductosPorCategoria']);
 
+
+
+
+
+
+
+
+
+
+
+
 Route::resource('/empresas', EmpresaController::class)->only(["index", "store", "update", "destroy"]);
+Route::get('/empresas/{empresaId}',[EmpresaController::class, "empresaPorId"]);
+
+
+
+
+

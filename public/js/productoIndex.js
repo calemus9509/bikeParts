@@ -1,25 +1,41 @@
+function obtenerInformacionUsuario() {
+  const userData = localStorage.getItem('userData');
+  return userData ? JSON.parse(userData) : null;
+}
+
 function readI(url = "producto") {
   axios
     .get(url)
     .then(function (response) {
-      let producto = "";
-      response.data.forEach((element) => {
-        producto += `<tr>`;
-        producto += `<td>${element.nombre} </td>`;
-        producto += `<td>${element.cantidad}</td>`;
-        producto += `<td>${element.descripcion}</td>`;
-        producto += `<td>${element.precio}</td>`;
-        producto += `<td>${element.marca}</td>`;
-        producto += `<td>${element.nombreCategoria}</td>`;
-        producto += `<td>${element.imagenUno}</td>`;
-        producto += `</tr>`;
-      });
+      let productos = "";
+      const userData = obtenerInformacionUsuario();
+
+      // Verifica si hay productos en la respuesta
+      if (response.data.productos && response.data.productos.length > 0) {
+        response.data.productos.forEach(element => {
+          // Verifica si el producto pertenece a la empresa del usuario
+          if (element.empresa_id === userData.empresa_id) {
+            productos += `<tr>`;
+            productos += `<td>${element.nombre} </td>`;
+            productos += `<td>${element.cantidad}</td>`;
+            productos += `<td>${element.descripcion}</td>`;
+            productos += `<td>${element.precio}</td>`;
+            productos += `<td>${element.marca}</td>`;
+            productos += `<td>${element.nombreCategoria}</td>`;
+            productos += `<td>${element.imagenUno}</td>`;
+            productos += `</tr>`;
+          }
+        });
+      } else {
+        // Si no hay productos, podrías mostrar un mensaje o realizar alguna otra acción
+        productos = `<tr><td colspan="7">No hay productos disponibles.</td></tr>`;
+      }
 
       // Limpiar el cuerpo de la tabla antes de actualizar
       $("#tablaIndex tbody").empty();
 
       // Agregar nuevas filas a la tabla
-      $("#tablaIndex tbody").append(producto);
+      $("#tablaIndex tbody").append(productos);
 
       // Inicializar DataTables después de cargar los datos
       $("#tablaIndex").DataTable({
@@ -64,6 +80,7 @@ function readI(url = "producto") {
       console.log(error);
     });
 }
+
 
 // Llamada a la función
 readI();
