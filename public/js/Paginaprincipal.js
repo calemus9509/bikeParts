@@ -191,15 +191,86 @@ function nosotros() {
         .get(`/empresas/${empresaId}`)
         .then((res) => {
             console.log(res);
+            const imagenesArrayss = JSON.parse(res.data.marca_aliada);
+            const imgC = JSON.parse(res.data.imagen);
+            const logoP = JSON.parse(res.data.logo);
             footer = "";
+            marca = "";
+            carrusel = "";
+            log = "";
+            log2 = "";
 
             footer += `<h3>Información de Contacto</h3>
             <p>Teléfono: +57-${res.data.telefono}</p>
             <p>Email: ${res.data.correo}</p>
             <p>Dirección: ${res.data.direccion}</p>
             <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+            
+            marca += `<div class="slide-track mb-5 mt-5">
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[0]}" alt="">
+            </div>
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[1]}" alt="">
+            </div>
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[2]}" alt="">
+            </div>
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[3]}" alt="">
+            </div>
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[4]}" alt="">
+            </div>
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[5]}" alt="">
+            </div>
+            <div class="slide  ms-5 me-5">
+                <img src="${imagenesArrayss[6]}" alt="">
+            </div>
+
+            <div class="slide ms-5 me-5">
+            <img src="${imagenesArrayss[0]}" alt="">
+        </div>
+        <div class="slide  ms-5 me-5">
+            <img src="${imagenesArrayss[1]}" alt="">
+        </div>
+        <div class="slide ms-5 me-5">
+            <img src="${imagenesArrayss[2]}" alt="">
+        </div>
+        <div class="slide ms-5 me-5">
+            <img src="${imagenesArrayss[3]}" alt="">
+        </div>
+        <div class="slide  ms-5 me-5">
+            <img src="${imagenesArrayss[4]}" alt="">
+        </div>
+        <div class="slide  ms-5 me-5">
+            <img src="${imagenesArrayss[5]}" alt="">
+        </div>
+        <div class="slide  ms-5 me-5">
+            <img src="${imagenesArrayss[6]}" alt="">
+        </div>
+
+        </div>`;
+
+            carrusel += `<div class="carousel-item active">
+            <img src="${imgC[0]}" class="d-block w-100 object-fit-cover" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="${imgC[1]}" class="d-block w-100 object-fit-cover" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="${imgC[2]}" class="d-block w-100 object-fit-cover" alt="...">
+        </div>`;
+        
+            log += `<img src="${logoP[0]}" alt="" class="img-responsive">`;
+            log2 += `<img src="${logoP[0]}" style="width: 30%;" alt="">`;
 
             document.getElementById("footer").innerHTML = footer;
+            document.getElementById("mostrarMarcasAliadas").innerHTML = marca;
+            document.getElementById("carrusel").innerHTML = carrusel;
+            document.getElementById("logo").innerHTML = log;
+            document.getElementById("logo2").innerHTML = log2;
         })
         .catch((err) => {
             console.error(err);
@@ -220,36 +291,45 @@ function mostrarcantidadcarrito() {
 }
 setInterval(mostrarcantidadcarrito, 500);
 
-// onclicks del modal
-function retirodepagina() {
-    window.location.href = "/";
-    localStorage.removeItem("productos");
-}
-// function noretiro() {
-//     window.location.href = "/carrito";
-// }
+
+// funcion de la alerta de retiro
 function validacioncarrito() {
     const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $("#exampleModal").modal("show");
+        Swal.fire({
+            title: '¿Estas Seguro?',
+            text: 'Si te retiras de esta tienda, el carrito sera vaciado!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Retirarme',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            // Verifica cuál botón se presionó
+            if (result.isConfirmed) {
+                window.location.href = "/";
+                localStorage.removeItem("productos");
+            }
+        });
     } else {
         window.location.href = "/";
     }
 }
 
-
-function enviarRecla(){
+function enviarRecla() {
     const empresaId = localStorage.getItem("empresaSeleccionada");
-    axios.post("/reclamaciones", {
-        reclamacion: txtRecla.value,
-        empre_id: empresaId,
-    })
-    .then(res => {
-        console.log(res)
-        txtRecla.value = "";
-        alert("reclamacion o sugerencia enviada");
-    })
-    .catch(err => {
-        console.error(err); 
-    })
+    axios
+        .post("/reclamaciones", {
+            reclamacion: txtRecla.value,
+            empre_id: empresaId,
+        })
+        .then((res) => {
+            console.log(res);
+            txtRecla.value = "";
+            alert("reclamacion o sugerencia enviada");
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }

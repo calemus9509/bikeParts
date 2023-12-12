@@ -57,6 +57,7 @@ class EmpresaController extends Controller
             'mision' => $request->mision,
             'vision' => $request->vision,
             'telefono' => $request->telefono,
+            'correo' => $request->correo,
             'nit' => $request->nit,
             'instagram' => $request->instagram,
             'admin_id' => $request->admin_id,

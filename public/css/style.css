@@ -73,3 +73,15 @@
     margin-right: 150px;
     /* espacio entre enlaces */
 }
+
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+.card-title, .card-text, .btn {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-title, .card:hover .card-text, .card:hover .btn {
+    transform: translateY(-3px); /* Mueve ligeramente hacia arriba */
+}

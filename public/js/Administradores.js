@@ -157,7 +157,6 @@ function readUpdate(id){
     .catch(error => {
         console.error(error);
     });
-    txtUsuario2.value = id.Usuario;
     txtCorreo2.value = id.Correo;
 }
 
@@ -170,7 +169,6 @@ function modificar(){
         Telefono: txtTelefono2.value,
         rol_id: txtRol2.value,
         Correo: txtCorreo2.value,
-        Usuario: txtUsuario2.value,
     })
     .then(res => {
         console.log(res)

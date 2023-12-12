@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
 use App\Models\Producto;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +24,7 @@ class ProductoController extends Controller
         }
 
         // Obtén los productos paginados directamente desde la base de datos
-        $productos = $query->paginate(6); // Cambia el número 6 según la cantidad deseada por página
+        $productos = $query->paginate(12); // Cambia el número 6 según la cantidad deseada por página
 
         return response()->json($productos);
     }
@@ -148,22 +146,6 @@ class ProductoController extends Controller
             'empresa_id' => $request->empresa_id,
             'imagenes' => json_encode($uploadedFiles),
         ]);
-
-        // try {
-        //     // Verificar si se proporcionó una categoría en la solicitud
-        //     if ($request->has('categoriaF')) {
-        //         // Buscar la categoría por el ID proporcionado
-        //         $categoria = Categoria::findOrFail($request->categoriaF);
-        //         $producto->categoria()->associate($categoria);
-        //     }
-        //     // Guardar el producto
-
-        //     // Devolver una respuesta JSON con el producto creado
-        //     return response()->json($producto, 201);
-        // } catch (ModelNotFoundException $e) {
-        //     // Manejar el caso en que la categoría no fue encontrada
-        //     return response()->json(['error' => 'La categoría no fue encontrada.'], 404);
-        // }
         $producto->save();
     }
 
@@ -204,7 +186,7 @@ class ProductoController extends Controller
         }
 
         // Obtén los productos paginados directamente desde la base de datos
-        $productos = $query->paginate(6); // Cambia el número 6 según la cantidad deseada por página
+        $productos = $query->paginate(12); // Cambia el número 6 según la cantidad deseada por página
 
         return response()->json($productos);
     }

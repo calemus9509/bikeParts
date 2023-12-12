@@ -136,29 +136,6 @@ function selCategorias() {
         });
 }
 
-//modificar producto
-function modificar() {
-    axios
-        .put(`/producto/${idproducto}`, {
-            idproducto: idproducto,
-            nombre: txtNombreMod.value,
-            cantidad: txtCantidadMod.value,
-            descripcion: txtDescripcionMod.value,
-            precio: txtPrecioMod.value,
-            marca: txtMarcaMod.value,
-            categoriaF: txtCategoriaMod.value,
-        })
-        .then(function (response) {
-            console.log(response);
-            read();
-            clear();
-            // mostrarAlerta("Modificado correctamente");
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
 //mostrar en el modal lo seleccionado
 function leerModi(id) {
     console.log(id);
@@ -189,21 +166,39 @@ function leerModi(id) {
         });
 }
 
+//modificar producto
+function modificar() {
+    axios
+        .put(`/producto/${idproducto}`, {
+            idproducto: idproducto,
+            nombre: txtNombreMod.value,
+            cantidad: txtCantidadMod.value,
+            descripcion: txtDescripcionMod.value,
+            precio: txtPrecioMod.value,
+            marca: txtMarcaMod.value,
+            categoriaF: txtCategoriaMod.value,
+        })
+        .then(function (response) {
+            mostrarAlerta("Modificado correctamente");
+            read();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
 //eliminar producto
 function eliminar() {
-    let respuesta = confirm("Seguro de eliminar el siguiente producto?");
-    if (respuesta) {
-        axios
-            .delete(`/producto/${idproducto}`)
-            .then(function (response) {
-                console.log(response);
-                read();
-                clear();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+    axios
+        .delete(`/producto/${idproducto}`)
+        .then(function (response) {
+            // console.log(response);
+            mostrarAlerta2("Eliminado correctamente");
+            read();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 function leerEliminar(id, nombre) {
@@ -212,11 +207,11 @@ function leerEliminar(id, nombre) {
 }
 
 selCategorias();
-
-function clear() {
-    txtNombre.value = "";
-    txtCantidad.value = "";
-    txtPrecio.value = "";
-}
-
 read();
+
+function mostrarAlerta(mensaje) {
+    alertify.success(mensaje);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.error(mensaje);
+}

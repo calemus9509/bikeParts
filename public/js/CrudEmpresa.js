@@ -36,13 +36,13 @@ function crear() {
         .post("/empresas", formData, {})
         .then(function (res) {
             console.log(res);
-            alert("empresa Creada!");
+            mostrarAlerta("Empresa Creada!");
             mostrar();
             limpiar();
         })
         .catch((err) => {
             console.error(err);
-            alert("fallo al crear la empresa");
+            mostrarAlerta2("fallo al crear la empresa");
         });
 }
 
@@ -67,10 +67,10 @@ function mostrar() {
                         imagenesArray[0]
                     }" style="max-width: 100px; max-height: 100px;"></td>
                     <td><img src="${
-                        imagenesArrayss[0]
+                        imagenesArrays[0]
                     }" style="max-width: 100px; max-height: 100px;"></td>
                     <td><img src="${
-                        imagenesArrays[0]
+                        imagenesArrayss[2]
                     }" style="max-width: 100px; max-height: 100px;"></td>
                     <td>
                         <div class="d-flex">
@@ -123,7 +123,8 @@ function limpiar() {
     document.getElementById("txtVision").value = "";
     document.getElementById("txtMision").value = "";
     document.getElementById("txtAdmin").value = "";
-    document.getElementById("txtcorreo").value = "";
+    document.getElementById("txtCorreo").value = "";
+    document.getElementById("txtAliadas").value = "";
     document.getElementById("txtInstagram").value = "";
 }
 
@@ -133,9 +134,7 @@ function leerModificacion(element) {
     txtNombre2.value = element.nombre;
     txtDescripcion2.value = element.descripcion;
     txtNit2.value = element.nit;
-    txtImagen2.value = element.imagen;
     txtDireccion2.value = element.direccion;
-    txtLogo2.value = element.logo;
     txtVision2.value = element.vision;
     txtMision2.value = element.mision;
     txtTelefono2.value = element.telefono;
@@ -172,21 +171,18 @@ function Modificar() {
             telefono: txtTelefono2.value,
             admin_id: txtAdmin2.value,
             descripcion: txtDescripcion2.value,
-            logo: txtLogo2.value,
-            imagen: txtImagen2.value,
             vision: txtVision2.value,
             mision: txtMision2.value,
             correo: txtcorreo2.value,
             instagram: txtinstagram2.value,
         })
         .then((res) => {
-            console.log(res);
-            alert("modificado");
+            mostrarAlerta("modificado correctamente");
             mostrar();
         })
         .catch((err) => {
             console.error(err);
-            alert("error al modificar ");
+            mostrarAlerta2("error al modificar ");
         });
 }
 
@@ -195,11 +191,17 @@ function eliminar() {
         .delete("/empresas/" + this.id)
         .then((res) => {
             console.log(res);
-            alert("Eliminado");
+            mostrarAlerta2("Eliminado correctamente");
             mostrar();
         })
         .catch((err) => {
             console.error(err);
-            alert("error al eliminar");
         });
+}
+
+function mostrarAlerta(mensaje) {
+    alertify.success(mensaje);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.error(mensaje);
 }

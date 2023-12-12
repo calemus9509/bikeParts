@@ -13,36 +13,16 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="css/alertify.css" />
     <script src="js/alertify.js"></script>
+      <!-- cdn de sweetalert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body onload="mostrarcantidadcarrito()">
-    <!-- modal para confirmar retiro y eliminacion del carrito -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Esta seguro de regresar a la Pagina Principal?
-                    se eliminaran todos los productos del carrito
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        onclick="noretiro()">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container-fluid">
         <!-- buscador -->
         <div class="row icon-container">
-            <a href="/" class="col-2 d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            onclick="validacioncarrito()">
-                <img src="img/bikeParts.png" alt="" class="img-responsive">
+            <a class="col-2 d-flex justify-content-end"
+             onclick="validacioncarrito()" id="logo">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
                 <div class="search-container d-flex align-items-center">
@@ -93,22 +73,12 @@
         
 
         <!-- footer -->
-        <div class="row bg-black text-white">
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Información de Contacto</h3>
-                <p>Teléfono: +123456789</p>
-                <p>Email: info@example.com</p>
-                <p>Dirección: 123 Calle Principal</p>
+        <div class="row bg-black text-white mt-3">
+            <div class="col-lg-4 col-12 mt-3 mb-3 d-flex justify-content-center" id="logo2">
+                
             </div>
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Redes Sociales</h3>
-                <ul>
-                    <li><a href="https://web.facebook.com/profile.php?id=100041777677632"
-                            style="text-decoration: none;">Facebook</a></li>
-                    <li><a href="#" style="text-decoration: none;">Twitter</a></li>
-                    <li><a href="https://www.instagram.com/jaime_montoya08/"
-                            style="text-decoration: none;">Instagram</a></li>
-                </ul>
+            <div class="col-lg-4 col-12 mt-3 mb-3" id="footer">
+                
             </div>
             <div class="col-lg-4 col-12 mt-3 mb-3">
                 <h3>Sugerencias y Reclamaciones</h3>

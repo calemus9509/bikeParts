@@ -32,27 +32,21 @@ function MostrarProductos(pagina = 1) {
 
                     productos.forEach((element) => {
                         const imagenesArray = JSON.parse(element.imagenes);
-                        card += `<div class="col-md-4 mb-3">
-                    <div class="card" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="${imagenesArray[0]}" class="img-fluid rounded-start" alt="..."
-                                    style="object-fit: cover; height: 250px;object-position: center center;">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">${element.nombre}-${element.marca}</h5>
-                                    <p class="card-text text-primary">${element.descripcion}</p>
-                                    <h3>Precio: $${element.precio}</h3>
-                                    <div class="d-flex" style="flex-direction: row;">
-                                        <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-                                        <button onclick="agregaralcarrito(${element.idproducto})" class="btn btn-primary ms-3">COMPRAR</button>
-                                    </div>
-                                </div>
+                        card += `<div class="col-md-3 mb-4">
+                        <div class="card h-100" style="width: 18rem;" onmouseover="hoverCard2(this)" onmouseout="unhoverCard2(this)">
+                        <img src="${imagenesArray[0]}" class="card-img-top" alt="..." style="object-fit: cover;  height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">${element.nombre}-${element.marca}L</h5>
+                            <p class="card-text text-primary">${element.descripcion}</p>
+                            <h3>Precio: $${element.precio}</h3>
+                            <div class="d-flex" style="flex-direction: row;">
+                                <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
+                                <a class="btn btn-primary ms-3" onclick="agregaralcarrito(${element.idproducto})">COMPRAR</a>
                             </div>
                         </div>
                     </div>
-                </div>`;
+                    </div>
+                    </div>`;
                     });
 
                     document.getElementById("productos").innerHTML = card;
@@ -88,26 +82,21 @@ function MostrarProductos(pagina = 1) {
 
                 productos.data.forEach((element) => {
                     const imagenesArray = JSON.parse(element.imagenes);
-                    card += `<div class="col-md-4 mb-3">
-                    <div class="card" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="${imagenesArray[0]}" class="img-fluid rounded-start" alt="..."
-                                    style="object-fit: cover; height: 250px;object-position: center center;">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">${element.nombre}-${element.marca}</h5>
-                                    <p class="card-text text-primary">${element.descripcion}</p>
-                                    <h3>Precio: $${element.precio}</h3>
-                                    <div class="d-flex" style="flex-direction: row;">
-                                        <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-                                        <button onclick="agregaralcarrito(${element.idproducto})" class="btn btn-primary ms-3">COMPRAR</button>
-                                    </div>
-                                </div>
-                            </div>
+                    console.log(imagenesArray);
+                    card += `<div class="col-md-3 mb-4">
+                    <div class="card h-100" style="width: 18rem;" onmouseover="hoverCard2(this)" onmouseout="unhoverCard2(this)">
+                    <img src="${imagenesArray[0]}" class="card-img-top" alt="..." style="object-fit: cover;  height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.nombre}-${element.marca}L</h5>
+                        <p class="card-text text-primary">${element.descripcion}</p>
+                        <h3>Precio: $${element.precio}</h3>
+                        <div class="d-flex" style="flex-direction: row;">
+                            <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
+                            <a class="btn btn-primary ms-3" onclick="agregaralcarrito(${element.idproducto})">COMPRAR</a>
                         </div>
                     </div>
+                </div>
+                </div>
                 </div>`;
                 });
 
@@ -159,6 +148,19 @@ function unhoverCard(card) {
 }
 // fin de efectos
 
+// efectos de la cartas de productos
+function hoverCard2(card) {
+    card.style.transform = "scale(1.05)";
+    card.style.border = "2px solid blue";
+}
+
+function unhoverCard2(card) {
+    card.style.transform = "scale(1)";
+    card.style.border = "";
+}
+// fin de efectos de cartas de productos
+
+
 function handleOrdenSelection(orden) {
     // Guarda la elección del usuario en el localStorage
     localStorage.setItem("ordenSeleccionado", orden);
@@ -205,26 +207,20 @@ function filtrarPorCategoria(categoriaId) {
 
                 productos.forEach((element) => {
                     const imagenesArray = JSON.parse(element.imagenes);
-                    card += `<div class="col-md-4 mb-3">
-                    <div class="card" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="${imagenesArray[0]}" class="img-fluid rounded-start" alt="..."
-                                    style="object-fit: cover; height: 250px;object-position: center center;">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">${element.nombre}-${element.marca}</h5>
-                                    <p class="card-text text-primary">${element.descripcion}</p>
-                                    <h3>Precio: $${element.precio}</h3>
-                                    <div class="d-flex" style="flex-direction: row;">
-                                        <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-                                        <button onclick="agregaralcarrito(${element.idproducto})" class="btn btn-primary ms-3">COMPRAR</button>
-                                    </div>
-                                </div>
-                            </div>
+                    card += `<div class="col-md-3 mb-4">
+                    <div class="card h-100" style="width: 18rem;" onmouseover="hoverCard2(this)" onmouseout="unhoverCard2(this)">
+                    <img src="${imagenesArray[0]}" class="card-img-top" alt="..." style="object-fit: cover;  height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.nombre}-${element.marca}L</h5>
+                        <p class="card-text text-primary">${element.descripcion}</p>
+                        <h3>Precio: $${element.precio}</h3>
+                        <div class="d-flex" style="flex-direction: row;">
+                            <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
+                            <a class="btn btn-primary ms-3" onclick="agregaralcarrito(${element.idproducto})">COMPRAR</a>
                         </div>
                     </div>
+                </div>
+                </div>
                 </div>`;
                 });
 
@@ -398,13 +394,13 @@ function agregaralcarrito(id) {
                 if (!carrito.includes(id)) {
                     carrito.push(id);
 
-                    mostrarAlerta("Producto agregado al carrito");
+                    alertaggcarrito()
                     localStorage.productos = JSON.stringify(carrito);
                 } else {
-                    mostrarAlerta2("El producto ya está en el carrito");
+                    alertaggcarrito2()
                 }
             } else {
-                mostrarAlerta2("Este producto no está disponible en stock.");
+                alertaggcarrito3()
             }
         })
         .catch((err) => {
@@ -422,7 +418,12 @@ function nosotros() {
         .get(`/empresas/${empresaId}`)
         .then((res) => {
             console.log(res);
+            const imagenesArrayss = JSON.parse(res.data.marca_aliada);
+            const logoP = JSON.parse(res.data.logo);
             footer = "";
+            marca = "";
+            log = "";
+            log2 = "";
 
             footer += `<h3>Información de Contacto</h3>
             <p>Teléfono: +57-${res.data.telefono}</p>
@@ -430,21 +431,67 @@ function nosotros() {
             <p>Dirección: ${res.data.direccion}</p>
             <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
 
+            marca += `<!-- Imagen 1 -->
+            <img src="${imagenesArrayss[0]}" alt="" style="width: 100%; max-width: 350px; height: auto; margin-bottom: 15px;">
+            
+            <!-- Imagen 2 -->
+            <img src="${imagenesArrayss[1]}" alt="" style="width: 100%; max-width: 350px; height: auto; margin-bottom: 15px;">
+            
+            <!-- Imagen 3 -->
+            <img src="${imagenesArrayss[2]}" alt="" style="width: 100%; max-width: 350px; height: auto; margin-bottom: 15px;">`
+
+            log += `<img src="${logoP[0]}" alt="" class="img-responsive">`;
+            log2 += `<img src="${logoP[0]}" style="width: 30%;" alt="">`;
+
             document.getElementById("footer").innerHTML = footer;
+            document.getElementById("mostrarMarcasAliadas").innerHTML = marca;
+            document.getElementById("logo").innerHTML = log;
+            document.getElementById("logo2").innerHTML = log2;
         })
         .catch((err) => {
             console.error(err);
         });
 }
 nosotros();
-function mostrarAlerta(mensaje) {
-    alertify.set("notifier", "position", "top-center");
-    alertify.success(mensaje, 3);
+
+// funciones de sweetalert2
+// agregado al carrito
+function alertaggcarrito() {
+    Swal.fire({
+        title: 'Producto Agregado Correctamente al Carrito',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+        position: 'top-end', // Posiciona la notificación en la esquina superior derecha
+        timer: 2000, // Cierra automáticamente después de 3 segundos
+        toast: true, // Establece el modo "toast" para notificaciones pequeñas
+        showConfirmButton: false // No muestra el botón de confirmación
+    });
 }
-function mostrarAlerta2(mensaje) {
-    alertify.set("notifier", "position", "top-center");
-    alertify.error(mensaje, 3); // Duración de 3 segundos
+// ya esta agregado al carrito
+function alertaggcarrito2() {
+    Swal.fire({
+        title: 'Producto ya en el Carrito',
+        icon: 'warning',
+        confirmButtonText: 'Ok',
+        position: 'top-end', // Posiciona la notificación en la esquina superior derecha
+        timer: 2000, // Cierra automáticamente después de 3 segundos
+        toast: true, // Establece el modo "toast" para notificaciones pequeñas
+        showConfirmButton: false // No muestra el botón de confirmación
+    });
 }
+// no hay stock del producto
+function alertaggcarrito3() {
+    Swal.fire({
+        title: 'Producto Sin Stock',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        position: 'top-end', // Posiciona la notificación en la esquina superior derecha
+        timer: 2000, // Cierra automáticamente después de 3 segundos
+        toast: true, // Establece el modo "toast" para notificaciones pequeñas
+        showConfirmButton: false // No muestra el botón de confirmación
+    });
+}
+
 function mostrarcantidadcarrito() {
     const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     tamañocarrito = `${carrito.length}+`;
@@ -453,18 +500,26 @@ function mostrarcantidadcarrito() {
 }
 setInterval(mostrarcantidadcarrito, 500);
 
-// onclicks del modal
-function retirodepagina() {
-    window.location.href = "/";
-    localStorage.removeItem("productos");
-}
-// function noretiro() {
-//     window.location.href = "/carrito";
-// }
+// funcion de la alerta de retiro
 function validacioncarrito() {
     const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $("#exampleModal").modal("show");
+        Swal.fire({
+            title: '¿Estas Seguro?',
+            text: 'Si te retiras de esta tienda, el carrito sera vaciado!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Retirarme',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            // Verifica cuál botón se presionó
+            if (result.isConfirmed) {
+                window.location.href = "/";
+                localStorage.removeItem("productos");
+            }
+        });
     } else {
         window.location.href = "/";
     }
