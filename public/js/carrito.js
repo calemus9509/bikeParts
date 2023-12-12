@@ -17,8 +17,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (carrito.length > 0) {
         // ejecutamos la funcion donde extraeremos los detalles de cada producto
         mostrarcarrito(carrito);
-    } else {
-        console.error("No hay nada agregado al carrito");
+    }else {
+        Swal.fire({
+            title: 'NO HAY PRODUCTOS EN EL CARRITO',
+            text: 'puedes navegar por la seccion de productos y encontrar lo que estas buscando!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ver Productos',
+            cancelButtonText: 'Ir a Bikeparts'
+        }).then((result) => {
+            // Verifica cuál botón se presionó
+            if (result.isConfirmed) {
+                window.location.href = "/productos";
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                window.location.href = "/";
+            }
+        });
     }
 
     // Maneja el evento de cambio en el input de búsqueda
@@ -131,12 +147,14 @@ function mostrarcarrito(carrito) {
             .get(`/obtener-producto/${idProducto}`)
             .then(function (res) {
                 var producto = res.data.producto;
+                const imgCarrito = JSON.parse(producto.imagenes);
+                console.log(imgCarrito);
                 let tamañocar = `${carrito.length}`;
 
                 detallecarrito += `<div class="card mb-3  border-dark" style="max-width: 750px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://tiendaonlinebmw.vtexassets.com/arquivos/ids/158586-800-auto?v=637498647336900000&width=800&height=auto&aspect=true" class="img-fluid rounded-start w-100" alt="...">
+                        <img src="${imgCarrito[0]}" class="img-fluid rounded-start w-100" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -260,10 +278,10 @@ function eliminardelcarrito(id) {
     carrito = JSON.parse(localStorage.getItem("productos")) || [];
 
     let index = carrito.indexOf(id);
+    alertaeliminarcarrito()
 
     if (index !== -1) {
         carrito.splice(index, 1);
-        mostrarAlerta("El producto se elimino con exito");
 
         if (carrito.length === 0) {
             // Si el carrito está vacío, establecer contenido y totalGlobal en cero
@@ -300,7 +318,13 @@ async function enviarCarritoPorWhatsApp(producto, index) {
 
     // Verifica si el carrito está vacío
     if (carritoActualizado.length === 0) {
-        alert("No hay productos en el carrito.");
+        Swal.fire({
+            icon: 'info',
+            title: 'Carrito vacío',
+            text: 'No hay productos en el carrito.',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
         return;
     }
 
@@ -326,7 +350,7 @@ async function enviarCarritoPorWhatsApp(producto, index) {
 
     // Formatea la información del carrito para enviarla por WhatsApp
     let mensajeWhatsApp =
-        "¡Gracias Por Elegir a BIKEPARTS!\nDetalles del carrito:\nTotal Compra:" +
+        "¡Gracias Por Elegir a BIKEPARTS!\nDetalles del carrito:\nTotal Compra: $" +
         totalGlobal +
         "\n";
 
@@ -343,7 +367,7 @@ async function enviarCarritoPorWhatsApp(producto, index) {
     });
 
     // Número de teléfono al que se enviará el mensaje (incluyendo el prefijo internacional)
-    const numeroDestino = "+573217361556";
+    const numeroDestino = `+57${telefonoEmpresa}`;
     //  +573217361556 lemus
     // +573185958871 kevin
     //  +573102445188 Jaime
@@ -352,9 +376,16 @@ async function enviarCarritoPorWhatsApp(producto, index) {
     const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(
         mensajeWhatsApp
     )}`;
-    const confirmacion = window.confirm(
-        "Este Pedido se enviará atraves de whatsapp, Si aceptas, los productos se eliminaran del carrito, ¿estas de acuerdo?"
-    );
+    const { value: confirmacion } = await Swal.fire({
+        title: 'Confirmación',
+        text: 'Este Pedido se enviará a través de WhatsApp. Si aceptas, los productos se eliminarán del carrito. ¿Estás de acuerdo?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, estoy de acuerdo',
+        cancelButtonText: 'Cancelar'
+    });
 
     // Verifica si el usuario confirmó
     if (confirmacion) {
@@ -367,46 +398,74 @@ async function enviarCarritoPorWhatsApp(producto, index) {
     }
 }
 
-// onclicks del modal
-function retirodepagina() {
-    window.location.href = "/";
-    localStorage.removeItem("productos");
-}
+// funcion de la alerta de retiro
 function validacioncarrito() {
     const carrito = JSON.parse(localStorage.getItem("productos")) || [];
     if (carrito.length >= 1) {
-        $("#exampleModal").modal("show");
+        Swal.fire({
+            title: '¿Estas Seguro?',
+            text: 'Si te retiras de esta tienda, el carrito sera vaciado!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Retirarme',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            // Verifica cuál botón se presionó
+            if (result.isConfirmed) {
+                window.location.href = "/";
+                localStorage.removeItem("productos");
+            }
+        });
     } else {
         window.location.href = "/";
     }
 }
 
+
+
+let telefonoEmpresa; 
 function nosotros() {
     const empresaId = localStorage.getItem("empresaSeleccionada");
     axios
         .get(`/empresas/${empresaId}`)
         .then((res) => {
             console.log(res);
+            const logoP = JSON.parse(res.data.logo);
             footer = "";
+            log = "";
+            log2 = "";
+            telefonoEmpresa = res.data.telefono;
 
             footer += `<h3>Información de Contacto</h3>
             <p>Teléfono: +57-${res.data.telefono}</p>
             <p>Email: ${res.data.correo}</p>
             <p>Dirección: ${res.data.direccion}</p>
             <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+            log += `<img src="${logoP[0]}" alt="" class="img-responsive">`;
+            log2 += `<img src="${logoP[0]}" style="width: 30%;" alt="">`;
 
             document.getElementById("footer").innerHTML = footer;
+            document.getElementById("logo").innerHTML = log;
+            document.getElementById("logo2").innerHTML = log2;
         })
         .catch((err) => {
             console.error(err);
         });
 }
 nosotros();
-
 // funciones de alertas
-function mostrarAlerta(mensaje) {
-    alertify.set("notifier", "position", "top-center");
-    alertify.error(mensaje, 3);
+function alertaeliminarcarrito() {
+    Swal.fire({
+        title: 'Producto Eliminado del Carrito',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        position: 'top-end', // Posiciona la notificación en la esquina superior derecha
+        timer: 2000, // Cierra automáticamente después de 3 segundos
+        toast: true, // Establece el modo "toast" para notificaciones pequeñas
+        showConfirmButton: false // No muestra el botón de confirmación
+    });
 }
 
 function actualizarpagina() {

@@ -2,6 +2,11 @@ function registrar() {
     const formData = new FormData();
     const files = document.getElementById("txtImagenes").files;
 
+    if (files.length > 4) {
+        mostrarAlerta2("Selecciona un máximo de 4 imágenes.");
+        return; // Detener la ejecución si hay más de 4 imágenes
+    }
+
     // Agregar imágenes al formulario solo si hay imágenes seleccionadas
     if (files.length > 0) {
         for (let i = 0; i < files.length; i++) {
@@ -20,13 +25,17 @@ function registrar() {
     axios
         .post("producto", formData, {})
         .then(function (response) {
-            console.log(response);
-            alert("Producto Creado!");
-
-            clear();
+            mostrarAlerta("Producto Creado")
+            txtNombre.value = "";
+            txtCantidad.value = "";
+            txtDescripcion.value = "";
+            txtPrecio.value = "";
+            txtMarca.value = "";
+            txtCategoria.value = "";
+            txtImagenes.value = "";
         })
         .catch(function (error) {
-            console.log(error);
+            mostrarAlerta2("Producto no creado exitósamente")
         });
 }
 
@@ -69,6 +78,11 @@ function foraneas() {
         });
 }
 
-function clear() {}
-
 foraneas();
+
+function mostrarAlerta(mensaje) {
+    alertify.success(mensaje);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.error(mensaje);
+}

@@ -36,6 +36,20 @@ class AuthController extends Controller
         return response()->json(['success' => true, 'message' => 'Contraseña cambiada correctamente']);
     }
 
+    public function cambiarUsuario(Request $request)
+    {
+        $nuevoUsuario = $request->input('nuevoUsuario');
+
+        // Obtener el usuario de la sesión manualmente
+        $user = $request->session()->get('user');
+
+        // Actualizar el nuevo Usuario en la base de datos
+        $user->Usuario = $nuevoUsuario;
+        $user->save();
+
+        return response()->json(['success' => true, 'message' => 'Usuario cambiado con éxito']);
+    }
+
 
 
     public function login(Request $request)

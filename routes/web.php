@@ -109,6 +109,9 @@ Route::get('/error', function () {
 Route::get('/nosotrosPro', function () {
     return view('nosotrosPro');
 });
+Route::get('/formularioU', function () {
+    return view('FormularioCU');
+});
 
 
 Route::resource('/rols', RolController::class)->only(["index", "store", "update", "destroy"]);
@@ -122,6 +125,7 @@ Route::get('/check-session', [AuthController::class, 'checkSession']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::post('/cambiar-contrasena', [AuthController::class, 'cambiarContrasena']);
+Route::post('/cambiar-usuario', [AuthController::class, 'cambiarUsuario']);
 
 
 Route::get('/restablecer/{token}', [RecuperarContraseñaController::class, 'mostrarFormularioRestablecerContraseña']);
