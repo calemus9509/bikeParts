@@ -81,8 +81,14 @@ Route::get('/nosotros', function () {
     return view('Nosotros');
 });
 Route::get('/login', function () {
-    $response = response(view('Login'));
+    // Verificar si el usuario ya ha iniciado sesión
+    if (session('user')) {
+        // Si ya ha iniciado sesión, redirigir a /indexAdmin
+        return redirect('/indexAdmin');
+    }
 
+    // Si no ha iniciado sesión, mostrar la página de inicio de sesión
+    $response = response(view('Login'));
     return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
 });
 Route::get('/administradores-clientes', function () {
@@ -131,6 +137,8 @@ Route::get('/buscar-autocompletado', [ProductoController::class, 'buscarAutocomp
 
 Route::get('/obtener-producto/{idproducto}', [ProductoController::class, 'encontrarProducto']);
 
+Route::get('/obtener-productos-ordenados/{orden}', [ProductoController::class, 'obtenerProductosOrdenados']);
+
 Route::get('/categorias', [CategoriaController::class, 'index']);
 
 
@@ -148,9 +156,13 @@ Route::get('/obtener-productos/{categoriaId}', [ProductoController::class, 'obte
 
 
 Route::resource('/empresas', EmpresaController::class)->only(["index", "store", "update", "destroy"]);
+<<<<<<< HEAD
 Route::get('/empresas/{empresaId}',[EmpresaController::class, "empresaPorId"]);
 
 
 
 
 
+=======
+Route::get('/empresas/{empresaId}', [EmpresaController::class, "empresaPorId"]);
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8

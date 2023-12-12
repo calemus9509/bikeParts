@@ -1,6 +1,10 @@
 let detallecarrito = '';
 let totalGlobal = 0;
 let carrito = [];
+<<<<<<< HEAD
+=======
+let tamañocar = '';
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtén el input de búsqueda
@@ -132,6 +136,7 @@ function mostrarcarrito(carrito) {
         axios.get(`/obtener-producto/${idProducto}`)
             .then(function (res) {
                 var producto = res.data.producto
+<<<<<<< HEAD
                 console.log(producto);
 
                 detallecarrito += `<div class="card mb-3" style="background-color: rgb(209, 206, 206);">
@@ -155,6 +160,33 @@ function mostrarcarrito(carrito) {
                         </div>
                     </div>
                 </div>`
+=======
+                let tamañocar = `${carrito.length}`
+                console.log(producto);
+
+                detallecarrito += `<div class="card mb-3  border-dark" style="max-width: 750px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://tiendaonlinebmw.vtexassets.com/arquivos/ids/158586-800-auto?v=637498647336900000&width=800&height=auto&aspect=true" class="img-fluid rounded-start w-100" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">${producto.nombre} - ${producto.marca} </h2>
+                            <p class="card-text">${producto.descripcion}</p>
+                            <h4 class="mb-3 text-primary" id="precio${index}">Precio: $${producto.precio}</h4>
+        
+                            <div class="d-flex justify-content-between align-items-center">
+                            <!-- Botón de eliminar y campo de cantidad -->
+                                <button class="btn btn-danger" onclick="eliminardelcarrito(${producto.idproducto})">Eliminar</button>
+                                <div class="input-group" style="width: 120px;">
+                                <input type="number" class="form-control border-dark" value="1" min="1" id="cantidadporca${index}" oninput='actCantidad(${JSON.stringify(producto)}, ${index})'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
                 // sumamos el precio unitario para el primer subtotal
                 totalGlobal += producto.precio;
@@ -162,6 +194,11 @@ function mostrarcarrito(carrito) {
                 // Asigna el contenido de "detallecarrito" al elemento con id "detallecarrito"
                 document.getElementById("detallecarrito").innerHTML = detallecarrito;
                 document.getElementById("total").innerHTML = "$" + totalGlobal;
+<<<<<<< HEAD
+=======
+                document.getElementById("cantidadItems").innerHTML = tamañocar + "+";
+                document.getElementById("totalPRO").innerHTML = tamañocar;
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
             })
             .catch(function (error) {
@@ -175,6 +212,13 @@ function mostrarcarrito(carrito) {
 function actCantidad(producto, index) {
     let cantidadInput = document.getElementById(`cantidadporca${index}`);
     let cantidadNueva = parseInt(cantidadInput.value, 10);
+<<<<<<< HEAD
+=======
+    // Verificar si el campo del input está vacío y establecer cantidadNueva a 1
+    if (!cantidadInput.value || cantidadNueva === 0) {
+        cantidadNueva = 1;
+    }
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
     // Obtener la cantidad anterior almacenada en un atributo data-prev-cantidad
     let cantidadAnterior = parseInt(cantidadInput.getAttribute("data-prev-cantidad"), 10) || 1;
@@ -203,19 +247,34 @@ function eliminardelcarrito(id) {
 
     if (index !== -1) {
         carrito.splice(index, 1);
+<<<<<<< HEAD
         console.log("Producto eliminado del array:", id);
+=======
+        mostrarAlerta('El producto se elimino con exito')
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
         if (carrito.length === 0) {
             // Si el carrito está vacío, establecer contenido y totalGlobal en cero
             detallecarrito = '';
             totalGlobal = 0;
+<<<<<<< HEAD
             document.getElementById("detallecarrito").innerHTML = detallecarrito;
             document.getElementById("total").innerHTML = "$" + totalGlobal;
+=======
+            tamañocar = '';
+            document.getElementById("detallecarrito").innerHTML = detallecarrito;
+            document.getElementById("total").innerHTML = "$" + totalGlobal;
+            document.getElementById("cantidadItems").innerHTML = tamañocar + "+";
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             localStorage.removeItem('productos');
         } else {
             // Si el carrito no está vacío, actualizar la interfaz de usuario
             localStorage.productos = JSON.stringify(carrito);
+<<<<<<< HEAD
             mostrarcarrito(carrito);
+=======
+            setTimeout(actualizarpagina, 1000);   
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
         }
     } else {
         console.log("El producto no se encontró en el array");
@@ -225,4 +284,108 @@ function eliminardelcarrito(id) {
 function completarCompra() {
     // Enviar detalles del carrito por WhatsApp
     enviarCarritoPorWhatsApp(carrito);
+<<<<<<< HEAD
+=======
+}
+
+// Función para enviar el carrito por WhatsApp utilizando Click to Chat
+async function enviarCarritoPorWhatsApp(producto, index) {
+
+    // Obtén la información del carrito actualizada (solo los IDs)
+    const carritoActualizado = JSON.parse(localStorage.getItem('productos')) || [];
+
+    // Array para almacenar los detalles completos de los productos
+    const detallesProductos = [];
+
+    // Itera sobre los IDs del carrito y obtén los detalles de cada producto
+    for (const idProducto of carritoActualizado) {
+        try {
+            // Llamada a la función del controlador para obtener detalles del producto
+            const response = await axios.get(`/obtener-producto/${idProducto}`);
+            const producto = response.data.producto;
+
+            // Agrega los detalles del producto al array
+            detallesProductos.push(producto);
+        } catch (error) {
+            console.error(`Error al obtener detalles del producto ${idProducto}:`, error);
+        }
+    }
+
+    // Formatea la información del carrito para enviarla por WhatsApp
+    let mensajeWhatsApp = '¡Gracias Por Elegir a BIKEPARTS!\nDetalles del carrito:\nTotal Compra:' + totalGlobal + '\n';
+
+    detallesProductos.forEach((producto, index) => {
+        // Obtén la cantidad seleccionada por el usuario
+        const cantidadInput = document.getElementById(`cantidadporca${index}`);
+        const cantidadElegida = parseInt(cantidadInput.value, 10);
+
+
+        mensajeWhatsApp += `${index + 1}. ${producto.nombre} - ${producto.marca}\n`;
+        mensajeWhatsApp += `   Precio x unidad: $${producto.precio}\n`;
+        mensajeWhatsApp += `   Cantidad: ${cantidadElegida}\n\n`;
+
+    });
+
+    // Número de teléfono al que se enviará el mensaje (incluyendo el prefijo internacional)
+    const numeroDestino = '+573217361556';
+    //  +573217361556 lemus
+    // +573185958871 kevin
+    //  +573102445188 Jaime
+
+    // Generar el enlace "Click to Chat" de WhatsApp
+    const enlaceWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(mensajeWhatsApp)}`;
+
+    console.log(mensajeWhatsApp);
+    // Abrir una nueva ventana o redirigir a la URL del enlace
+    window.open(enlaceWhatsApp, '_blank');
+}
+
+
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+}
+
+function nosotros() {
+    const empresaId = localStorage.getItem('empresaSeleccionada');
+    axios.get(`/empresas/${empresaId}`)
+        .then(res => {
+            console.log(res);
+            footer = "";
+
+            footer += `<h3>Información de Contacto</h3>
+            <p>Teléfono: +57-${res.data.telefono}</p>
+            <p>Email: ${res.data.correo}</p>
+            <p>Dirección: ${res.data.direccion}</p>
+            <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+            document.getElementById("footer").innerHTML = footer;
+        })
+        .catch(err => {
+            console.error(err);
+        })
+}
+nosotros();
+
+// funciones de alertas
+function mostrarAlerta(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.error(mensaje, 3);
+}
+
+function actualizarpagina() {
+    location.reload()
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 }

@@ -15,7 +15,11 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::where('estado', 'A')->get();
         return response()->json($empresa);
+<<<<<<< HEAD
         // return Empresa::all();
+=======
+
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     }
 
     public function store(Request $request)
@@ -35,6 +39,7 @@ class EmpresaController extends Controller
         $tienda->save();
     }
 
+<<<<<<< HEAD
     /**
      * Obtener la misión de la empresa.
      */
@@ -42,5 +47,14 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($empresaId);
         return response()->json(['mision' => $empresa->mision,'vision' => $empresa->vision, 'descripcion' => $empresa->descripcion, 'imagen' => $empresa->imagen]);
+=======
+    // public function empresaPorId($empresaId) {
+    //     $empresa = Empresa::findOrFail($empresaId);
+    //     return response()->json(['mision' => $empresa->mision, 'vision' => $empresa->vision, 'descripcion' => $empresa->descripcion, 'imagen' => $empresa->imagen]);
+    // }
+    public function empresaPorId($empresaId) {
+        $empresa = Empresa::findOrFail($empresaId);
+        return response()->json($empresa);
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     }
 }

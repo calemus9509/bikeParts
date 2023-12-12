@@ -1,4 +1,5 @@
 function MostrarProductos(pagina = 1) {
+<<<<<<< HEAD
     productoFiltro = localStorage.getItem('idCategory');
     const empresaId = localStorage.getItem('empresaSeleccionada');
 
@@ -15,6 +16,41 @@ function MostrarProductos(pagina = 1) {
 
                 productos.forEach(element => {
                     card += `<div class="col-md-4 mb-3">
+=======
+    productoFiltro = localStorage.getItem("idCategory");
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    const orden = localStorage.getItem("ordenSeleccionado");
+    console.log(orden);
+    if (productoFiltro && productoFiltro >= 0) {
+        axios
+            .get(
+                `/obtener-productos/${productoFiltro}?empresa=${empresaId}&page=${pagina}&orden=${orden}`
+            )
+            .then((res) => {
+                console.log(res.data);
+                var productos = res.data;
+                // Encuentra el elemento padre que contiene el fragmento que deseas eliminar
+                var padre = document.querySelector(
+                    ".col.d-flex.justify-content-end"
+                );
+
+                // Verifica si el elemento padre existe antes de intentar eliminar
+                if (padre) {
+                    // Elimina todos los elementos hijos del padre
+                    while (padre.firstChild) {
+                        padre.removeChild(padre.firstChild);
+                    }
+                } else {
+                    console.error("No se encontraron elementos para eliminar.");
+                }
+
+                // Verificar si hay productos antes de intentar acceder a la propiedad 'data'
+                if (productos && productos.length > 0) {
+                    var card = "";
+
+                    productos.forEach((element) => {
+                        card += `<div class="col-md-4 mb-3">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                     <div class="card" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4">
@@ -28,13 +64,14 @@ function MostrarProductos(pagina = 1) {
                                     <h3>Precio: $${element.precio}</h3>
                                     <div class="d-flex" style="flex-direction: row;">
                                         <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-                                        <a class="btn btn-primary">COMPRAR</a>
+                                        <a class="btn btn-primary" onclick="agregaralcarrito(${element.idproducto})">COMPRAR</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>`;
+<<<<<<< HEAD
                 });
 
                 document.getElementById("productos").innerHTML = card;
@@ -83,8 +120,35 @@ function MostrarProductos(pagina = 1) {
                         </div>
                     </div>
                 </div>`;
-            });
+=======
+                    });
 
+                    document.getElementById("productos").innerHTML = card;
+
+                    // Eliminar la paginación
+                    document.getElementById("paginacion").innerHTML = "";
+
+                    document
+                        .getElementById("productos")
+                        .scrollIntoView({ behavior: "smooth" });
+                } else {
+                    // Manejar el caso cuando no hay productos
+                    console.error(
+                        "No se encontraron productos para la categoría seleccionada."
+                    );
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
+            });
+    } else {
+        // Configurar la URL de la solicitud de productos
+        let url = empresaId
+            ? `/obtener-productos-ordenados/${orden}?empresa=${empresaId}&page=${pagina}`
+            : `/obtener-productos?page=${pagina}&orden=${orden}`;
+
+<<<<<<< HEAD
             document.getElementById("productos").innerHTML = card;
 
             // Actualizar la paginación si es necesario
@@ -134,9 +198,16 @@ function filtrarPorCategoria(categoriaId) {
 
             // Verificar si hay productos antes de intentar acceder a la propiedad 'data'
             if (productos && productos.length > 0) {
+=======
+        axios
+            .get(url)
+            .then((res) => {
+                console.log(res);
+                var productos = res.data; // Solo la información de paginación
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 var card = "";
 
-                productos.forEach(element => {
+                productos.data.forEach((element) => {
                     card += `<div class="col-md-4 mb-3">
                     <div class="card" style="max-width: 540px;">
                         <div class="row g-0">
@@ -151,7 +222,106 @@ function filtrarPorCategoria(categoriaId) {
                                     <h3>Precio: $${element.precio}</h3>
                                     <div class="d-flex" style="flex-direction: row;">
                                         <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
-                                        <a class="btn btn-primary">COMPRAR</a>
+                                        <button onclick="agregaralcarrito(${element.idproducto})" class="btn btn-primary ms-3">COMPRAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                });
+
+                document.getElementById("productos").innerHTML = card;
+
+                // Actualizar la paginación si es necesario
+                if (productos.total > productos.per_page) {
+                    actualizarPaginacion(productos);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
+    axios
+        .get("/categorias")
+        .then((res) => {
+            var card2 = "";
+            res.data.forEach((element) => {
+                card2 += `<div class="card m-2" style="width: 14rem;">
+                    <img src="img/llanta.jpg" class="card-img-top custom-image" alt="...">
+                    <a class="text-black" style="text-decoration: none;cursor: pointer;" onclick="filtrarPorCategoria(${element.idcategorias})">
+        <h3 class="text-center">${element.nombre}</h3>
+    </a>
+                </div>`;
+            });
+            document.getElementById("categoriasss").innerHTML = card2;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+
+function handleOrdenSelection(orden) {
+    // Guarda la elección del usuario en el localStorage
+    localStorage.setItem("ordenSeleccionado", orden);
+
+    // Obtiene la página actual del localStorage
+    const paginaActual = localStorage.getItem("paginaActual") || 1;
+
+    // Llama a la función MostrarProductos con la nueva elección del orden y la página actual
+    MostrarProductos(paginaActual, orden);
+}
+
+function eliminarIdCategory() {
+    localStorage.removeItem("idCategory");
+    localStorage.removeItem("ordenSeleccionado");
+}
+
+function filtrarPorCategoria(categoriaId) {
+    // Obtener el ID de la empresa desde el localStorage
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+
+    axios
+        .get(`/obtener-productos/${categoriaId}?empresa=${empresaId}`)
+        .then((res) => {
+            console.log(res.data);
+            var productos = res.data;
+            // Encuentra el elemento padre que contiene el fragmento que deseas eliminar
+            var padre = document.querySelector(
+                ".col.d-flex.justify-content-end"
+            );
+
+            // Verifica si el elemento padre existe antes de intentar eliminar
+            if (padre) {
+                // Elimina todos los elementos hijos del padre
+                while (padre.firstChild) {
+                    padre.removeChild(padre.firstChild);
+                }
+            } else {
+                console.error("No se encontraron elementos para eliminar.");
+            }
+
+            // Verificar si hay productos antes de intentar acceder a la propiedad 'data'
+            if (productos && productos.length > 0) {
+                var card = "";
+
+                productos.forEach((element) => {
+                    card += `<div class="col-md-4 mb-3">
+                    <div class="card" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="img/duke.jpg" class="img-fluid rounded-start" alt="..."
+                                    style="object-fit: cover; height: 250px;object-position: center center;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">${element.nombre}-${element.marca}</h5>
+                                    <p class="card-text text-primary">${element.descripcion}</p>
+                                    <h3>Precio: $${element.precio}</h3>
+                                    <div class="d-flex" style="flex-direction: row;">
+                                        <button class="btn btn-dark" onclick="mostrarDetalle(${element.idproducto})">SABER MÁS</button>
+                                        <button onclick="agregaralcarrito(${element.idproducto})" class="btn btn-primary ms-3">COMPRAR</button>
                                     </div>
                                 </div>
                             </div>
@@ -163,58 +333,67 @@ function filtrarPorCategoria(categoriaId) {
                 document.getElementById("productos").innerHTML = card;
 
                 // Eliminar la paginación
-                document.getElementById("paginacion").innerHTML = '';
+                document.getElementById("paginacion").innerHTML = "";
 
-                document.getElementById("productos").scrollIntoView({ behavior: 'smooth' });
+                document
+                    .getElementById("productos")
+                    .scrollIntoView({ behavior: "smooth" });
             } else {
                 // Manejar el caso cuando no hay productos
-                console.error('No se encontraron productos para la categoría seleccionada.');
+                console.error(
+                    "No se encontraron productos para la categoría seleccionada."
+                );
             }
         })
-        .catch(err => {
+        .catch((err) => {
             console.error(err);
         });
 }
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 // Modifica la función para mostrar el detalle
 function mostrarDetalle(idproducto) {
     // Guarda el ID en el localStorage
-    localStorage.setItem('productoId', idproducto);
+    localStorage.setItem("productoId", idproducto);
 
     // Redirige a la página de detalles
-    window.location.href = '/detalle';
+    window.location.href = "/detalle";
 }
 
-
-
-function actualizarPaginacion(productos) {
-    var paginationContainer = document.querySelector('#paginacion');
-    paginationContainer.innerHTML = '';
+function actualizarPaginacion(productos, orden) {
+    var paginationContainer = document.querySelector("#paginacion");
+    paginationContainer.innerHTML = "";
 
     for (var i = 1; i <= productos.last_page; i++) {
-        var pageItem = document.createElement('li');
-        pageItem.className = 'page-item';
-        var pageLink = document.createElement('a');
-        pageLink.className = 'page-link';
-        pageLink.href = '';
+        var pageItem = document.createElement("li");
+        pageItem.className = "page-item";
+        var pageLink = document.createElement("a");
+        pageLink.className = "page-link";
+        pageLink.href = "";
         pageLink.textContent = i;
         pageItem.appendChild(pageLink);
         paginationContainer.appendChild(pageItem);
 
-        pageLink.addEventListener('click', function (e) {
+        pageLink.addEventListener("click", function (e) {
             e.preventDefault();
             var paginaSeleccionada = parseInt(this.textContent);
-            MostrarProductos(paginaSeleccionada);
+            MostrarProductos(paginaSeleccionada, orden);
         });
     }
 }
 
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', function () {
+=======
+document.addEventListener("DOMContentLoaded", function () {
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
 
@@ -238,16 +417,29 @@ document.addEventListener('DOMContentLoaded', function () {
     MostrarProductos();
 });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 // Modifica tu función de autocompletado en JavaScript
 function buscarAutocompletado(termino) {
     // Obtén el contenedor de resultados
     var autocompleteResults = document.getElementById("autocompleteResults");
 
     // Realiza una solicitud al servidor para obtener resultados de autocompletado
+<<<<<<< HEAD
     axios.get(`/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem('empresaSeleccionada')}`)
         .then(res => {
+=======
+    axios
+        .get(
+            `/buscar-autocompletado?termino=${termino}&empresa=${localStorage.getItem(
+                "empresaSeleccionada"
+            )}`
+        )
+        .then((res) => {
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             // Muestra los resultados en la consola
             mostrarResultadosAutocompletado(res.data);
 
@@ -260,14 +452,21 @@ function buscarAutocompletado(termino) {
 
             console.log("Resultados de la búsqueda:", res.data);
         })
+<<<<<<< HEAD
         .catch(err => {
+=======
+        .catch((err) => {
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             console.error(err);
         });
 }
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 function mostrarResultadosAutocompletado(resultados) {
     var autocompleteResults = document.getElementById("autocompleteResults");
     autocompleteResults.innerHTML = ""; // Limpia los resultados anteriores
@@ -278,7 +477,11 @@ function mostrarResultadosAutocompletado(resultados) {
         var resultsContainer = document.createElement("div");
 
         // Crea elementos para cada resultado y agrégales al contenedor
+<<<<<<< HEAD
         resultados.forEach(resultado => {
+=======
+        resultados.forEach((resultado) => {
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             var resultItem = document.createElement("div");
             resultItem.className = "card";
             resultItem.innerHTML = `
@@ -292,8 +495,13 @@ function mostrarResultadosAutocompletado(resultados) {
             // Agrega un evento de clic al resultado
             resultItem.addEventListener("click", function () {
                 // Al hacer clic, guarda el ID en localStorage y redirige a la página de detalles
+<<<<<<< HEAD
                 localStorage.setItem('productoId', resultado.idproducto);
                 window.location.href = '/detalle';
+=======
+                localStorage.setItem("productoId", resultado.idproducto);
+                window.location.href = "/detalle";
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             });
 
             resultsContainer.appendChild(resultItem);
@@ -314,4 +522,79 @@ function mostrarResultadosAutocompletado(resultados) {
         // Si no hay resultados, oculta el contenedor
         autocompleteResults.style.display = "none";
     }
+<<<<<<< HEAD
+=======
+}
+
+// TODO LO RELACIONADO CON EL CARRITO DE COMPRAS EN ESTE BLOQUE ->
+var carrito = [];
+
+function agregaralcarrito(id) {
+    // Verificar si el ID ya está en el carrito
+    if (!carrito.includes(id)) {
+        carrito.push(id);
+        mostrarAlerta('Producto agregado al carrito');
+        localStorage.productos = JSON.stringify(carrito);
+    } else {
+        mostrarAlerta2('El producto ya está en el carrito');
+    }
+}
+
+carrito = JSON.parse(localStorage.getItem("productos")) || [];
+
+// <- TODO LO RELACIONADO CON EL CARRITO DE COMPRAS EN ESTE BLOQUE
+
+function nosotros() {
+    const empresaId = localStorage.getItem("empresaSeleccionada");
+    axios
+        .get(`/empresas/${empresaId}`)
+        .then((res) => {
+            console.log(res);
+            footer = "";
+
+            footer += `<h3>Información de Contacto</h3>
+            <p>Teléfono: +57-${res.data.telefono}</p>
+            <p>Email: ${res.data.correo}</p>
+            <p>Dirección: ${res.data.direccion}</p>
+            <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+            document.getElementById("footer").innerHTML = footer;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+nosotros();
+function mostrarAlerta(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.success(mensaje, 3);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.error(mensaje, 3); // Duración de 3 segundos
+}
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamañocarrito = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamañocarrito);
+}
+setInterval(mostrarcantidadcarrito, 500)
+
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 }

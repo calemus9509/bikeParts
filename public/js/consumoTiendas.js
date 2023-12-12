@@ -41,6 +41,7 @@ function leerEmpresas() {
     });
 }
 
+<<<<<<< HEAD
 // function getParameterByName(name, url) {
 //   if (!url) url = window.location.href;
 //   name = name.replace(/[\[\]]/g, "\\$&");
@@ -61,3 +62,9 @@ function leerEmpresas() {
 //     targetElement.scrollIntoView({ behavior: 'smooth' });
 //   }
 // }
+=======
+// Función para guardar el ID de la empresa seleccionada en el localStorage
+function seleccionarEmpresa(idEmpresa) {
+  localStorage.setItem('empresaSeleccionada', idEmpresa);
+}
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8

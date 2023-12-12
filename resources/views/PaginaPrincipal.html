@@ -14,12 +14,39 @@
     <script src="js/Paginaprincipal.js"></script>
 </head>
 
-<body>
+<body onload="mostrarcantidadcarrito()">
+
+    
 
     <div class="container-fluid">
+        <!-- modal para confirmar retiro y eliminacion del carrito -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de regresar a la Pagina Principal?
+                    se eliminaran todos los productos del carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="noretiro()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- buscador -->
         <div class="row icon-container">
+<<<<<<< HEAD
             <a href="/" class="col-2 d-flex justify-content-end">
+=======
+            <a href="/" class="col-2 d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            onclick="validacioncarrito()">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 <img src="img/bikeParts.png" alt="" class="img-responsive">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
@@ -36,6 +63,13 @@
                 <hr class="vertical-line text-primary" />
                 <a href="carrito" class="text-black">
                     <i class="fa-solid fa-cart-shopping" style="height: 35px;cursor: pointer;"></i>
+<<<<<<< HEAD
+=======
+                    <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger"
+                        id="cantidadItems">
+                        0
+                <span class="visually-hidden">unread messages</span>
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 </a>
             </div>
         </div>
@@ -58,11 +92,18 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <!--Inicio carrusel -->
+=======
+        <!-- carrusel-->
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
         <div class="row mt-3">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide position-relative" data-bs-ride="carousel">
+
+                <!-- Contenedor de las imágenes -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
+<<<<<<< HEAD
                         <img src="https://motorepuestos.com.co/wp-content/uploads/2022/12/amortiguador-para-moto-repuestos-para-moto.webp"
                          class="d-block w-100" alt="...">
                     </div>
@@ -73,20 +114,36 @@
                     <div class="carousel-item">
                         <img src="https://www.yamaha-motor.com.ar/bundles/frontend/css/img/bgs/bg-repuestos.jpg"
                             class="d-block w-100" alt="...">
+=======
+                        <img src="img/carrusel1.jpg" class="d-block w-100 object-fit-cover" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carrusel2.jpg" class="d-block w-100 object-fit-cover" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/carrusel3.jpg" class="d-block w-100 object-fit-cover" alt="...">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <button type="button" class="dot" data-bs-target="#carouselExampleIndicators"
+
+                <!-- Botones de desplazamiento -->
+                <div class="d-flex justify-content-center position-absolute w-100 bottom-0">
+                    <button type="button" class="dot bg-light border-black" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="0"></button>
-                    <button type="button" class="dot" data-bs-target="#carouselExampleIndicators"
+                    <button type="button" class="dot bg-light border-black" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="1"></button>
-                    <button type="button" class="dot" data-bs-target="#carouselExampleIndicators"
+                    <button type="button" class="dot bg-light border-black" data-bs-target="#carouselExampleIndicators"
                         data-bs-slide-to="2"></button>
                 </div>
+
             </div>
         </div>
+<<<<<<< HEAD
         <!--Fin carrusel -->
 
+=======
+        <!-- fin del codigo carrusel -->
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
         <!-- lines azul sin sentido -->
         <div class="row mt-3">
@@ -97,9 +154,14 @@
             <h2>NUESTRAS CATEGORIAS</h2>
         </div>
         <!-- categorias -->
+<<<<<<< HEAD
         <div id="mostrarCategorias" class="row justify-content-center p-5"
             style="background-color: rgb(212, 212, 212);">
 
+=======
+        <div id="mostrarCategorias" class="row justify-content-center p-5" style="background-color: rgb(212, 212, 212);">
+            
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
         </div>
 
         <!-- lines azul sin sentido -->
@@ -131,7 +193,11 @@
             </div>
             <div id="productosAleatorios" class="d-flex justify-content-around mt-3 flex-wrap">
                 <!-- tarjetas de productos -->
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             </div>
             <div class="d-flex justify-content-center mt-3 mb-3">
                 <a href="productos" class="btn btn-primary">VER TODOS LOS PRODUCTOS</a>
@@ -170,6 +236,7 @@
         </div>
 
         <!--  fin Preguntas frecuentes -->
+<<<<<<< HEAD
 
         <!-- footer -->
         <div class="row bg-black text-white mt-3">
@@ -178,16 +245,15 @@
                 <p>Teléfono: +123456789</p>
                 <p>Email: info@example.com</p>
                 <p>Dirección: 123 Calle Principal</p>
+=======
+        <!-- footer -->
+        <div class="row bg-black text-white mt-3">
+            <div class="col-lg-4 col-12 mt-3 mb-3 d-flex justify-content-center">
+                <img src="img/bikeParts.png" style="width: 30%;" alt="">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             </div>
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Redes Sociales</h3>
-                <ul>
-                    <li><a href="https://web.facebook.com/profile.php?id=100041777677632"
-                            style="text-decoration: none;">Facebook</a></li>
-                    <li><a href="#" style="text-decoration: none;">Twitter</a></li>
-                    <li><a href="https://www.instagram.com/jaime_montoya08/"
-                            style="text-decoration: none;">Instagram</a></li>
-                </ul>
+            <div class="col-lg-4 col-12 mt-3 mb-3" id="footer">
+                
             </div>
             <div class="col-lg-4 col-12 mt-3 mb-3">
                 <h3>Quejas y Reclamaciones</h3>

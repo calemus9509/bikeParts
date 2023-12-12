@@ -69,6 +69,7 @@
 // Función para agregar un archivo al FormData si está presente
 
 function registrar() {
+<<<<<<< HEAD
   axios.post("producto", {
       nombre: txtNombre.value,
       cantidad: txtCantidad.value,
@@ -88,6 +89,37 @@ function registrar() {
   });
 
   alert("Producto Creado!");
+=======
+    const formData = new FormData();
+    const files = document.getElementById("txtImagenes").files;
+
+    // Agregar imágenes al formulario solo si hay imágenes seleccionadas
+    if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+            formData.append("imagenes[]", files[i]);
+        }
+    }
+
+    formData.append("nombre", txtNombre.value);
+    formData.append("cantidad", txtCantidad.value);
+    formData.append("descripcion", txtDescripcion.value);
+    formData.append("precio", txtPrecio.value);
+    formData.append("marca", txtMarca.value);
+    formData.append("categoriaF", txtCategoria.value);
+    formData.append("empresa_id", txtEmpresa.value);
+
+    axios
+        .post("producto", formData, {})
+        .then(function (response) {
+            console.log(response);
+            alert("Producto Creado!");
+
+            clear();
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 }
 
 

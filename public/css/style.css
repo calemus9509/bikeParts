@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 body {
     
     /* font-family: 'Josefin Sans', sans-serif; */
 }
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 .fondo {
     position: relative;
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
     height: 70vh;
+=======
+    height: 90vh;
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     background-image: url('https://w0.peakpx.com/wallpaper/871/787/HD-wallpaper-carretera-bosque-dark-viajar.jpg');
     background-size: cover;
     background-position: center;
@@ -15,12 +22,20 @@ body {
 
 .nueva-imagen {
     position: absolute;
+<<<<<<< HEAD
     top: 60%;
+=======
+    top: 65%;
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     /*  posición vertical */
     left: 50%;
     /*  posición horizontal  */
     transform: translate(-50%, -50%);
+<<<<<<< HEAD
     max-width: 70%;
+=======
+    max-width: 55%;
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     /* Ajusta el ancho máximo según tus necesidades */
     height: auto;
 }

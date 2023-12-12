@@ -28,10 +28,7 @@ class Producto extends Model
         'empresa_id',
         'estado',
         'marca',
-        'imagenUno',
-        'imagenDos',
-        'imagenTres',
-        'imagenCuatro',
+        'imagenes'
     ];
 
     protected $hidden = [

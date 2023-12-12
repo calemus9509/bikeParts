@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 
+=======
+// var myCarousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'), {
+//     interval: 2000 // Configura el intervalo en 3 segundos
+//   });
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 document.addEventListener('DOMContentLoaded', function () {
     // Obtén el input de búsqueda
     var searchInput = document.getElementById("searchInput");
@@ -97,6 +103,7 @@ function mostrarResultadosAutocompletado(resultados) {
 function mostrarCategorias() {
     axios.get("/categorias")
         .then(res => {
+<<<<<<< HEAD
             
             var cardsHTML = "";
             res.data.forEach(element => {
@@ -104,6 +111,15 @@ function mostrarCategorias() {
             <div class="col-md-2 mb-5 mt-2 d-flex justify-content-center">
                 <div class="d-flex flex-column align-items-center p-3 mb-5"
                     style="height: 200px; width: 350px; position: relative;">
+=======
+            console.log(res);
+            var cardsHTML = "";
+            res.data.forEach(element => {
+                cardsHTML += `
+            <div class="col-md-4 mb-5 mt-2 d-flex justify-content-center">
+                <div class="d-flex flex-column align-items-center p-3 mb-5"
+                    style="height: 250px; width: 350px; position: relative;">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 
                     <div class="card text-bg-dark border-primary border-3 rounded">
                     <a onclick="mostrarId(${element.idcategorias})" >
@@ -130,8 +146,11 @@ function mostrarCategorias() {
         });
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 function mostrarId(categoriaId) {
     localStorage.setItem('idCategory', categoriaId);
     window.location.href = "/productos"
@@ -145,7 +164,11 @@ function mostrarProductosAleatorios(){
  
      axios.get(`/obtener-productos?empresa=${empresaId}`)
          .then(res => {
+<<<<<<< HEAD
            
+=======
+             console.log(res);
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
              var productos = res.data; // Solo la información de paginación
              var card = "";
  
@@ -170,7 +193,60 @@ function mostrarProductosAleatorios(){
 
 mostrarProductosAleatorios()
 
+<<<<<<< HEAD
 function mostrarDetalle(idproducto) {
     // Guarda el ID en el localStorage
     localStorage.setItem('productoId', idproducto);
+=======
+
+function nosotros() {
+    const empresaId = localStorage.getItem('empresaSeleccionada');
+    axios.get(`/empresas/${empresaId}`)
+        .then(res => {
+            console.log(res);
+            footer = "";
+
+            footer += `<h3>Información de Contacto</h3>
+            <p>Teléfono: +57-${res.data.telefono}</p>
+            <p>Email: ${res.data.correo}</p>
+            <p>Dirección: ${res.data.direccion}</p>
+            <a href="${res.data.instagram}" style="text-decoration: none;">Instagram</a>`;
+
+            document.getElementById("footer").innerHTML = footer;
+        })
+        .catch(err => {
+            console.error(err);
+        })
+}
+nosotros();
+
+function mostrarDetalle(idproducto) {
+    // Guarda el ID en el localStorage
+    localStorage.setItem('productoId', idproducto);
+}
+
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamañocarrito = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamañocarrito);
+}
+setInterval(mostrarcantidadcarrito, 500)
+
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 }

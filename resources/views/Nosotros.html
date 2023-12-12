@@ -18,11 +18,37 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
-<body>
+<body onload="mostrarcantidadcarrito()">
+    <!-- modal para confirmar retiro y eliminacion del carrito -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmacion de retiro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Esta seguro de regresar a la Pagina Principal?
+                    se eliminaran todos los productos del carrito
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        onclick="noretiro()">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="retirodepagina()">Si, seguro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-fluid">
         <!-- buscador -->
         <div class="row icon-container">
+<<<<<<< HEAD
             <a href="/" class="col-2 d-flex justify-content-end">
+=======
+            <a href="/" class="col-2 d-flex justify-content-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            onclick="validacioncarrito()">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 <img src="img/bikeParts.png" alt="" class="img-responsive">
             </a>
             <div class="col-8 d-flex justify-content-center p-4">
@@ -39,6 +65,13 @@
                 <hr class="vertical-line text-primary" />
                 <a href="carrito" class="text-black">
                     <i class="fa-solid fa-cart-shopping" style="height: 35px;cursor: pointer;"></i>
+<<<<<<< HEAD
+=======
+                    <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger"
+                        id="cantidadItems">
+                        0
+                <span class="visually-hidden">unread messages</span>
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 </a>
             </div>
         </div>
@@ -67,11 +100,21 @@
             </div>
 
 
+<<<<<<< HEAD
             <div class="d-md-flex justify-content-center align-items-center mt-5 mb-5 align-content-center" id="descripcion">
+=======
+            <div id="descripcion" class="d-md-flex justify-content-center align-items-center mt-5 mb-5 align-content-center">
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 
             </div>
             <div id="mision" class="d-flex justify-content-around mb-2 mt-5" style="background-color: rgb(212, 212, 212);">
                 
+<<<<<<< HEAD
+=======
+            </div>
+            <div id="vision" class="d-flex justify-content-around mt-2" style="background-color: rgb(212, 212, 212);">
+                
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             </div>
             <div id="vision" class="d-flex justify-content-around mt-2" style="background-color: rgb(212, 212, 212);">
                
@@ -92,23 +135,12 @@
         </div>
 
         <!-- footer -->
-        <div class="row bg-black text-white mt-4">
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Información de Contacto</h3>
-                <p>Teléfono: +123456789</p>
-                <p>Email: info@example.com</p>
-                <p>Dirección: 123 Calle Principal</p>
+        <div class="row bg-black text-white mt-3">
+            <div class="col-lg-4 col-12 mt-3 mb-3 d-flex justify-content-center">
+                <img src="img/bikeParts.png" style="width: 30%;" alt="">
             </div>
-            <div class="col-lg-4 col-12 mt-3 mb-3">
-                <h3>Redes Sociales</h3>
-                <ul>
-                    <li><a href="https://web.facebook.com/profile.php?id=100041777677632"
-                            style="text-decoration: none;">Facebook</a></li>
-                    <li><a href="#" style="text-decoration: none;">Twitter</a></li>
-                    <li><a href="https://www.instagram.com/jaime_montoya08/"
-                            style="text-decoration: none;">Instagram</a>
-                    </li>
-                </ul>
+            <div class="col-lg-4 col-12 mt-3 mb-3" id="footer">
+                
             </div>
             <div class="col-lg-4 col-12 mt-3 mb-3">
                 <h3>Quejas y Reclamaciones</h3>
@@ -120,6 +152,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 
 

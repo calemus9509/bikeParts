@@ -22,7 +22,10 @@ function readI(url = "producto") {
             productos += `<td>${element.precio}</td>`;
             productos += `<td>${element.marca}</td>`;
             productos += `<td>${element.nombreCategoria}</td>`;
+<<<<<<< HEAD
             productos += `<td>${element.imagenUno}</td>`;
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
             productos += `</tr>`;
           }
         });

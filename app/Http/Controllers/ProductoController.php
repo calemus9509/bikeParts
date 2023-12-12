@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
+<<<<<<< HEAD
 
     
    
+=======
+    /**
+     * Display a listing of the resource.
+     */
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     public function obtenerProductos(Request $request)
     {
         // Obtén el ID de la empresa desde la solicitud
@@ -45,8 +53,11 @@ class ProductoController extends Controller
     }
 
 
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     public function obtenerProductosPorCategoria(Request $request, $categoriaId)
     {
         $empresaId = $request->input('empresa');
@@ -64,8 +75,11 @@ class ProductoController extends Controller
         return response()->json($productos);
     }
 
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     public function index(Request $request)
     {
         // Obtener la información del usuario desde la sesión
@@ -123,21 +137,84 @@ class ProductoController extends Controller
 
 
 
+
+    public function buscarAutocompletado(Request $request)
+    {
+        $termino = $request->input('termino');
+        $empresaId = $request->input('empresa');
+
+        // Divide la cadena en términos
+        $terminos = explode(' ', $termino);
+
+        // Inicializa la consulta
+        $query = Producto::where('empresa_id', $empresaId);
+
+        // Realiza la búsqueda en la base de datos para cada término
+        foreach ($terminos as $termino) {
+            $query->where(function ($query) use ($termino) {
+                $query->where('nombre', 'LIKE', "%$termino%")
+                    ->orWhere('marca', 'LIKE', "%$termino%")
+                    ->orWhere('descripcion', 'LIKE', "%$termino%");
+            });
+        }
+
+        // Obtiene los resultados
+        $resultados = $query->get();
+
+        return response()->json($resultados);
+    }
+
+
+
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $producto = Producto::create($request->all());
+        // Almacenar las imágenes en el sistema de archivos y obtener las rutas
+        $uploadedFiles = [];
 
-        // Asociar el producto a la categoría existente
-        $categoria = Categoria::findOrFail($request->categoriaF);
-        $producto->categoria()->associate($categoria);
-        $producto->save();
+        // Verificar si $request->file('imagenes') no es null y es un array antes de intentar recorrerlo
+        $imagenes = $request->file('imagenes');
+        if (!is_null($imagenes) && is_array($imagenes)) {
+            foreach ($imagenes as $imagen) {
+                $rutaImagen = $imagen->store('public/img');
+                $uploadedFiles[] = Storage::url($rutaImagen);
+            }
+        }
 
-        return response()->json($producto, 201);
+        // Crear el producto con los datos del formulario y las imágenes almacenadas
+        $producto = Producto::create([
+            'nombre' => $request->nombre,
+            'cantidad' => $request->cantidad,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'marca' => $request->marca,
+            'imagenes' => json_encode($uploadedFiles),
+        ]);
 
+<<<<<<< HEAD
       
+=======
+        try {
+            // Verificar si se proporcionó una categoría en la solicitud
+            if ($request->has('categoriaF')) {
+                // Buscar la categoría por el ID proporcionado
+                $categoria = Categoria::findOrFail($request->categoriaF);
+                $producto->categoria()->associate($categoria);
+            }
+
+            // Guardar el producto
+            $producto->save();
+
+            // Devolver una respuesta JSON con el producto creado
+            return response()->json($producto, 201);
+        } catch (ModelNotFoundException $e) {
+            // Manejar el caso en que la categoría no fue encontrada
+            return response()->json(['error' => 'La categoría no fue encontrada.'], 404);
+        }
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     }
 
     /**
@@ -146,8 +223,11 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         Producto::findOrFail($request->idproducto)->update($request->all());
+<<<<<<< HEAD
 
       
+=======
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
     }
 
     /**
@@ -158,11 +238,35 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($producto->idproducto);
         $producto->estado = 'I';
         $producto->save();
-
-        // return response()->json(['mensaje' => 'Producto eliminado con éxito']);
     }
 
+<<<<<<< HEAD
     
 
+=======
+    public function obtenerProductosOrdenados(Request $request, $orden)
+    {
+        // Obtén el ID de la empresa desde la solicitud
+        $empresaId = $request->input('empresa');
+
+        // Filtra los productos por ID de empresa si está presente
+        $query = Producto::where('estado', 'A');
+        if ($empresaId) {
+            $query->where('empresa_id', $empresaId);
+        }
+
+        // Aplica el orden según el parámetro proporcionado
+        if ($orden === 'mayor') {
+            $query->orderBy('precio', 'desc');
+        } elseif ($orden === 'menor') {
+            $query->orderBy('precio', 'asc');
+        }
+
+        // Obtén los productos paginados directamente desde la base de datos
+        $productos = $query->paginate(6); // Cambia el número 6 según la cantidad deseada por página
+
+        return response()->json($productos);
+    }
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 }
 

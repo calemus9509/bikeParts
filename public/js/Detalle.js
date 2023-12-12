@@ -6,6 +6,7 @@ function mostrarDetalleProducto(id) {
             var producto = res.data.producto; // Accede al objeto producto
             // Aquí puedes usar la información del producto como desees
             console.log(producto);
+            var stock = producto.cantidad;
 
             // Actualiza el contenido de "detalle"
             var detalle = `<div class="row">
@@ -20,11 +21,19 @@ function mostrarDetalleProducto(id) {
                 <div class="mb-3 d-flex justify-content-start">
                     <h3>Precio: $${producto.precio}</h3>
                 </div>
+<<<<<<< HEAD
                 <div class="mt-5 mb-3 bg-primary text-center rounded">
                     <h2>STOCK DISPONIBLE</h2>
                 </div>
                 <div class="mt-3 mb-3 text-white">
                     <a class="btn btn-primary" style="width: 100%; font-weight: 600;">AGREGAR AL CARRITO</a>
+=======
+                <div id="stock">
+                  
+                </div>
+                <div class="mt-3 mb-3 text-white">
+                    <a class="btn btn-primary" style="width: 100%; font-weight: 600;" onclick="agregaralcarrito(${producto.idproducto})">AGREGAR AL CARRITO</a>
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
                 </div>
             </div>
             <div class="col-md-6">
@@ -50,6 +59,23 @@ function mostrarDetalleProducto(id) {
 
             // Asigna el contenido de "detalle" al elemento con id "detalles"
             document.getElementById("detalles").innerHTML = detalle;
+
+            if (stock < 15 && stock > 0) {
+                document.getElementById("stock").innerHTML = `
+                 <div class="mt-5 mb-5 bg-warning text-center rounded" >
+                 <h2>Stock Bajo</h2>
+                </div>`;
+            } else if (stock === 0) {
+                document.getElementById("stock").innerHTML = `
+                <div class="mt-5 mb-5 bg-danger text-center rounded">
+                <h2>Stock No Disponible</h2>
+               </div>`;
+            } else if (stock >= 15) {
+                document.getElementById("stock").innerHTML = `
+                <div class="mt-5 mb-5 bg-success text-center rounded" >
+                <h2>Stock  Disponible</h2>
+               </div>`;
+            }
         })
         .catch(err => {
             console.error(err);
@@ -165,4 +191,55 @@ function mostrarResultadosAutocompletado(resultados) {
         // Si no hay resultados, oculta el contenedor
         autocompleteResults.style.display = "none";
     }
+<<<<<<< HEAD
+=======
+}
+
+function mostrarcantidadcarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    tamañocarrito = `${carrito.length}+`
+    document.getElementById("cantidadItems").innerHTML = `${carrito.length}+`;
+    console.log(tamañocarrito);
+}
+setInterval(mostrarcantidadcarrito, 500)
+// onclicks del modal
+function retirodepagina() {
+    window.location.href = '/';
+    localStorage.removeItem('productos')
+}
+function noretiro() {
+    window.location.href = '/carrito';
+}
+function validacioncarrito() {
+    const carrito = JSON.parse(localStorage.getItem('productos')) || [];
+    if (carrito.length >= 1) {
+        $('#exampleModal').modal('show');
+    } else {
+        window.location.href = '/';
+    }
+}
+
+// funcion del carrito
+function agregaralcarrito(id) {
+    // Verificar si el ID ya está en el carrito
+    if (!carrito.includes(id)) {
+        carrito.push(id);
+
+        mostrarAlerta('Producto agregado al carrito');
+        localStorage.productos = JSON.stringify(carrito)
+    } else {
+        mostrarAlerta2('El producto ya está en el carrito');
+    }
+    console.log(carrito);
+}
+carrito = JSON.parse(localStorage.getItem('productos')) || [];
+
+function mostrarAlerta(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.success(mensaje, 3);
+}
+function mostrarAlerta2(mensaje) {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.error(mensaje, 3); // Duración de 3 segundos
+>>>>>>> b0f5f1fb141e1c2f21a860e50c0c14fde358aba8
 }
