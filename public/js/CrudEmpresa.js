@@ -123,7 +123,7 @@ function limpiar() {
     document.getElementById("txtVision").value = "";
     document.getElementById("txtMision").value = "";
     document.getElementById("txtAdmin").value = "";
-    document.getElementById("txtcorreo").value = "";
+    document.getElementById("txtCorreo").value = "";
     document.getElementById("txtInstagram").value = "";
 }
 
